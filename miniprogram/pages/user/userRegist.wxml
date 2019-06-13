@@ -1,0 +1,157 @@
+<view class="cus-container">
+  <view class="page-head container">
+    <view class="page-head-title" style='font-size:40rpx;margin-top:20rpx'>新用户注册</view>
+    <view class="page-head-line"></view>
+    <view wx:if="{{desc}}" class="page-head-desc">{{desc}}</view>
+  </view>
+  <view class="page-body">
+
+    <view class="page-section">
+      <view class="userinfo">
+        <view class='userinfo-avatar'>
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view class='userinfo-nickname'>
+          <open-data type="userNickName"></open-data>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="page-section">
+      <view class="weui-cells__title ">
+        <view class='cus-align-between'>
+          <view class='weui-flex__item' style="font-color:{{errorcolor}}">请输入厂牌号码 {{errmsg}} </view>
+          <block wx:if="{{userIdErr}}">
+            <icon class="icon-small" type="warn" size="18"></icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="number" maxlength="9" auto-focus placeholder="厂牌号码" bindinput='onUserIdValueChange' />
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title ">
+        <view class='cus-align-between'>
+          <view class='weui-flex__item'>请输姓名 </view>
+          <block wx:if="{{usernameErr}}">
+            <icon class="icon-small" type="warn" size="18"></icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" placeholder="姓名" bindinput='onUserNameValueChange' />
+        </view>
+      </view>
+    </view>
+
+
+    <view class="page-section">
+      <view class="weui-cells__title ">
+        <view class='cus-align-between'>
+          <view class='weui-flex__item'>请输入电话号码 </view>
+          <block wx:if="{{mobileErr}}">
+            <icon class="icon-small" type="warn" size="18"></icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type='number' maxlength="11" placeholder="电话" bindinput='onMobileValueChange' />
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title ">
+        <view class='cus-align-between'>
+          <view class='weui-flex__item'>请选择产线 </view>
+          <block wx:if="{{fabErr}}">
+            <icon class="icon-small" type="warn" size="18"></icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前选择</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="fabPickerChange" value="{{index}}" range="{{fabs}}">
+              <view class="weui-input">{{fabs[index]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title ">
+        <view class='cus-align-between'>
+          <view class='weui-flex__item'>请选择部门 </view>
+          <block wx:if="{{deptErr}}">
+            <icon class="icon-small" type="warn" size="18"></icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前选择</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="deptPickerChange" value="{{deptIndex}}" range="{{currDepts}}" range-key='deptdesc'>
+              <view class="weui-input">{{currDepts[deptIndex].deptdesc}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+
+   
+
+
+    <view class="page-section">
+      <view class="weui-cells__title ">
+        <view class='cus-align-between'>
+          <view class='weui-flex__item'>请选择职位 </view>
+          <block wx:if="{{roleErr}}">
+            <icon class="icon-small" type="warn" size="18"></icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前选择</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="rolePickerChange" value="{{roleIndex}}" range="{{roleInfo}}" range-key='roledesc'>
+              <view class="weui-input">{{roleInfo[roleIndex].roledesc}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+
+
+    <view class="page-section btn-area">
+      <button type="primary" style='mmargin-bottom: 60rpx;margin-top:60rpx' bindtap='onUserRegist'>提交注册</button>
+    </view>
+
+  </view>
+  <view class="page-foot">
+
+  </view>
+</view>
