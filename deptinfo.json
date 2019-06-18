@@ -1,0 +1,8 @@
+{"_id":"13d680ab-accc-473e-a2f3-8f369c8ee640","fabid":"OTHER","deptid":"cim","deptdesc":"CIM部","division":"ASD Division"}
+{"_id":"43b89363-09c9-4e23-a9b0-c9c0157efd3d","division":"ASD Division","fabid":"CELL","deptid":"manufacture","deptdesc":"CELL生产部"}
+{"_id":"dafa4fa3-742d-4fd8-bc7e-61ce8032e1fc","division":"ASD Division","fabid":"CF","deptid":"manufacture","deptdesc":"CF生产部"}
+{"_id":{"$oid":"5cecfb146b8f8082296171e2"},"division":"ASD Division","fabid":"CELL","deptid":"technology","deptdesc":"CELL技术部"}
+{"_id":{"$oid":"5cecfc6f6b8f80822961845c"},"division":"ASD Division","fabid":"ARRAY","deptid":"technology","deptdesc":"ARRAY技术部"}
+{"_id":{"$oid":"5cecfc706b8f80822961845f"},"division":"ASD Division","fabid":"ARRAY","deptid":"manufacture","deptdesc":"ARRAY生产部"}
+{"_id":{"$oid":"5cecfc706b8f808229618461"},"division":"ASD Division","fabid":"OTHER","deptid":"quanlity","deptdesc":"品质部"}
+{"_id":{"$oid":"5cecfc706b8f808229618463"},"division":"ASD Division","fabid":"OTHER","deptid":"equipment","deptdesc":"设备部"}

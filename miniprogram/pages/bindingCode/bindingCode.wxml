@@ -37,7 +37,7 @@
         </view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input class="weui-input" value="{{eqid}}" maxlength='7' placeholder="例:C1ODF01" bindinput='onEqidChange' />
+            <input class="weui-input" value="{{eqid}}" maxlength='11' placeholder="例:C1ODF01" bindinput='onEqidChange' />
           </view>
         </view>
       </view>
@@ -70,7 +70,7 @@
         </view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input" style='width:100%'>
-            <input class="weui-input" value="{{page}}" placeholder="例:/pages/dailyCheck" bindinput='onPageChange' />
+            <input class="weui-input" value="{{page}}" placeholder="例:/pages/dailyCheck/dailyCheck" bindinput='onPageChange' />
           </view>
         </view>
       </view>

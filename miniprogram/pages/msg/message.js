@@ -1,4 +1,5 @@
 // miniprogram/pages/msg/messsage.js
+const app = getApp()
 Page({
 
   /**
@@ -44,6 +45,39 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    let user = app.globalData.appUserInfo
+    console.log(user)
+    if (user.env == "prod") {
+
+      if (app.globalData.globalconfig != null) {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.prodnavcolor,
+          backgroundColor: app.globalData.globalconfig.prodnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.prodnavtitle,
+        })
+
+      }
+
+
+    } else {
+      if (app.globalData.globalconfig != null) {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.devnavcolor,
+          backgroundColor: app.globalData.globalconfig.devnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.devnavtitle,
+        })
+      }
+
+
+    }
+
 
   },
 

@@ -10,7 +10,7 @@
       <!-->
       </block>-->
 
-      <view url="" class="weui-grid" hover-class="weui-grid_active" bindtap='onScan'>
+      <view url="" class="weui-grid" hover-class="weui-grid_active" disabled='true'  bindtap='onScan'>
         <image class="weui-grid__icon" src="../images/scan.png" />
         <view class="weui-grid__label">扫一扫</view>
       </view>
@@ -18,7 +18,7 @@
         <image class="weui-grid__icon" src="../images/e2.png" />
         <view class="weui-grid__label">码位绑定</view>
       </view>
-      <view url="" class="weui-grid" hover-class="weui-grid_active" bindtap='onUserManager'>
+      <view wx:if="{{userManagerShow}}" url="" class="weui-grid" hover-class="weui-grid_active" bindtap='onUserManager'>
         <image class="weui-grid__icon" src="../images/userManagerIcon.png" />
         <view class="weui-grid__label">用户管理</view>
       </view>

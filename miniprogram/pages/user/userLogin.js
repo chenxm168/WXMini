@@ -155,6 +155,13 @@ Page({
               app.navigateToMessage("禁止使用！", "您的账号被管理员禁止使用，如有任何问题，请与部门负责人联系！", "warn")
               break
           }
+          case -3:
+          {
+            wx.navigateTo({
+              url: 'userRegist',
+            })
+            break
+          }
 
           default :
           {

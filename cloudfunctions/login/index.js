@@ -3,10 +3,18 @@
 
 const cloud = require('wx-server-sdk')
 
-// 初始化 cloud
+//dev env
+/*
 cloud.init({
   env: "asd-smart-cloud-dev-kwtq8"
-})
+}) */
+
+//prod env
+
+cloud.init({
+  env: "asd-smart-cloud-k2u5e"
+}) 
+
 
 /**
  * 这个示例将经自动鉴权过的小程序用户 openid 返回给小程序端
@@ -46,8 +54,8 @@ exports.main = (event, context) => {
           resolve(args)
         } else {
           arr = {
-            // _openid: wxContext.OPENID
-            _openid: "oeWJp5EI1EtpjSKjzuHYYVgaxED8"
+             //openid: wxContext.OPENID
+            openid: "oeWJp5EI1EtpjSKjzuHYYVgaxED8"
           }
           resolve(arr)
         }
@@ -60,7 +68,7 @@ exports.main = (event, context) => {
     var callReturnMessage = async function(res) {
       if (res.data == null || res.data.length < 1) {
         message = {
-          loginReturnCode: -1,
+          loginReturnCode: -3,
          loginReturnMessage: "Not Found User",
           dataCount: 0,
         }
@@ -156,174 +164,14 @@ exports.main = (event, context) => {
           reject(new Error(err))
        })
 
-   /*
-
-    callMakeArgs()
-
-      .then((res) => {
-        return await callReturnMessage(res)
-
-      })
-      .then((res) => {
-        resolve(res)
-      })
-      .catch((err) => {
-        reject(err)
-      }) */
-
-
-
-    /*
-
-       if (event.data != undefined && event.data != null && event.data.userId != undefined && event.data.userId != null & event.data.password != undefined && event.data.password != null) {
-         args = {
-           userid: event.data.userId,
-           password: event.data.password
-         }
-         call(args).then((res) => {
-
-
-             if (res.data == null || res.data.length < 1) {
-               message = {
-                 loginloginReturnCode: -1,
-                loginReturnMessage: "Not Found User",
-                 dataCount: 0,
-               }
-               resolve(message)
-             } else {
-               message = {
-                 loginloginReturnCode: 0,
-                 dataCount: res.data.length,
-                 rows: res.data
-               }
-               resolve(message)
-             }
-           }, (err) =>
-           reject(err))
-       } else {
-         arr = {
-           _openid: wxContext.OPENID
-           //_openid: "oeWJp5EI1EtpjSKjzuHYYVgaxED8"
-         }
-
-         call(arr).then((res) => {
-             if (res.data == null || res.data.length < 1) {
-               message = {
-                 loginReturnCode: -1,
-                loginReturnMessage: "Not Found User",
-                 dataCount: 0,
-               }
-               resolve(message)
-             } else {
-               message = {
-                 loginReturnCode: 0,
-                 dataCount: res.data.length,
-                 rows: res.data
-               }
-               resolve(message)
-             }
-           }, (err) =>
-           reject(err))
-       } //end else */
-
-
-
-
-
-
-
+  
 
   }) //end return Promise
 
 
-  /*
-   return new Promise(function(resolve, reject) {
-     let getArgs = async function() {
-       
-       var args = {}
-       if (event.data.userId != undefined && event.data.userId != null & event.data.password != undefined && event.data.password != null) {
-         args = {
-           userid: event.data.userId,
-           password: event.data.password
-         }
-         return args
-       } else {
-         args = {
-           // openid: wxContext.OPENID
-           openid: "testOpenid"
-         }
-         return args
-
-       }
-     } //end getArgs
-
-     let getUserInfo = async function(res) {
-       return new Promise(function(resolve,reject)
-       
-       {
-         db.collection("users").where(res).get({
-           success: (res) => {
-             if (res.data == null || res.data.length < 1) {
-               message = {
-                 loginReturnCode: -1,
-                loginReturnMessage: "Not Found User",
-                 dataCount: 0,
-               }
-               resolve(message)
-             } else {
-               message = {
-                 loginReturnCode: 0,
-                 dataCount: res.data.length,
-                 rows: res.data
-               }
-               resolve(message)
-             }
-           },
-           fail: (err) => {
-             reject(err)
-           }
-         })
-         
-
-
-       }
-       )
-       
-       
-       getArgs().then((res)=>
-       {
-         return getUserInfo(res)
-       }).then((res)=>
-       {
-         resolve(res)
-       },(err)=>
-       {
-         reject(err)
-       })
-     }
-
-     
+  
 
 
 
 
-
-
-
-
-
-
-   })
-   */
-
-
-
-  /*
-    return {
-      event,
-      openid: wxContext.OPENID,
-      appid: wxContext.APPID,
-      unionid: wxContext.UNIONID,
-      
-    } */
 }

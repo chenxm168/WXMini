@@ -1,7 +1,16 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+//dev env
+//cloud.init()
+
+//prod env
+
+cloud.init({
+  env: "asd-smart-cloud-k2u5e"
+}) 
+
+
 
 // 云函数入口函数
 exports.main = async(event, context) => {

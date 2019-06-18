@@ -1,19 +1,65 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-//dev env
-cloud.init({
-  env: "asd-smart-cloud-dev-kwtq8"
-})
+const envSet = {
+  dev: {
+    env: "asd-smart-cloud-dev-kwtq8"
+  },
 
-const db = cloud.database();
+  prod: {
+    env: "asd-smart-cloud-k2u5e"
+  }
+
+
+}
+
+
 
 // 云函数入口函数
 exports.main = async(event, context) => {
-  const wxContext = cloud.getWXContext()
+  console.log(event)
+  var wxContext = null
+  var user = null
+
+  const env = ((event.env != undefined && event.env != null) ? event.env : "dev")
 
   return new Promise(function(resolve, reject) {
-     var user=null
+
+    var message = {
+      data: null,
+      env: null,
+      returnCode: null,
+      returnText: null
+
+    }
+    message.env = ((event.env != null && event.env != null) ? event.env : "dev")
+    var isProd = false
+    let callInitEnv = async function() {
+      if (event.env != undefined && event.env != null) {
+
+        cloud.init(envSet[event.env])
+        //message.env = envSet[event.env]
+        isProd = (event.env == "prod") ? true : false
+        wxContext = cloud.getWXContext()
+        return Promise.resolve(null)
+      } else {
+        cloud.init(envSet["dev"])
+        // message.env = envSet["dev"]
+        wxContext = cloud.getWXContext()
+        return Promise.resolve(null)
+      }
+
+
+
+    } //end callIniEnv
+
+
+
+
+
+
+
+
     var callLogin = async function() {
       var arg = {}
       if (event.data != undefined & event.data != null) {
@@ -31,96 +77,105 @@ exports.main = async(event, context) => {
 
     } //end callLoging
 
-    var callHasCodeId= async function()
+
+    let callGetUserInfo=async function()
     {
-      /*
-        if (event.codeid == undefined || event.codeid == null) 
+      return await cloud.callFunction(
+        {
+          name:"getUserInfo",
+          data:
           {
-          return Promise.reject(new Error("Not codeid"))
-          }else
-          {
-         return await db.collection("codelocation").where({
-            codeid: event.codeid
-
-          }).count()
-          }*/
-
-      if (event.codeurl != undefined && event.codeurl != null)
-      {
-        return await db.collection("codelocation").where(
-          {
-            codeurl: event.codeurl
+            env:env
           }
-        ).remove()
-           
-        
-      }else{
-        return await db.collection("codelocation").where(
-          {
-            rodeid: event.codeid
-          }
-        ).remove()
-       
+        }
+      )
+
+    }
+
+    var callHasCodeId = async function() {
+
+      if (event.codeurl != undefined && event.codeurl != null) {
+        let db = cloud.database()
+        return await db.collection("codelocation").where({
+          codeurl: event.codeurl
+        }).remove()
+
+
+      } else {
+        return await db.collection("codelocation").where({
+          rodeid: event.codeid
+        }).remove()
+
       }
 
 
-      
-    }//end callHasCodeId
+
+    } //end callHasCodeId
 
 
 
     var callUpdateLocation = async function(res) {
-     
 
-        
-        
-            if (res.total > 0) {
-              let cmd = db.command
-              //return await db.collection('codelocation').where(
-              return db.collection('codelocation').where({
-                codeid: cmd.eq(event.codeid)
-              }).update({
-                data: {
-                  codeurl: event.codeurl,
-                  
-                  userid: user.userid,
-                  verifyaccuracy: event.verifyaccuracy,
-                  codepoint: event.point,
-                  lasteventtime: new Date(),
-                  page: event.page,
-                  category: event.category,
-                  verifyflag: true,
-                  eqid: event.eqid,
-                  args: event.args
-                }
-              })
-            } else {
 
-              return db.collection('codelocation').add({
-                data: {
-                  codeurl:event.codeurl,
-                  codeid: event.codeid,
-                  userid: user.userid,
-                  verifyaccuracy:event.verifyaccuracy,
-                  codepoint:event.point,
-                  lasteventtime: new Date(),
-                  page:event.page,
-                  category:event.category,
-                  verifyflag:true,
-                  eqid:event.eqid,
-                  args:event.args
-                }
-              })
-            }
 
-          
+
+      if (res.total > 0) {
+        let cmd = db.command
+        //return await db.collection('codelocation').where(
+        return db.collection('codelocation').where({
+          codeid: cmd.eq(event.codeid)
+        }).update({
+          data: {
+            codeurl: event.codeurl,
+
+            userid: user.userid,
+            verifyaccuracy: event.verifyaccuracy,
+            codepoint: event.point,
+            lasteventtime: new Date(),
+            page: event.page,
+            category: event.category,
+            verifyflag: true,
+            eqid: event.eqid,
+            args: event.args
+          }
+        })
+      } else {
+          let db = cloud.database()
+        return db.collection('codelocation').add({
+          data: {
+            codeurl: event.codeurl,
+            codeid: event.codeid,
+            userid: user.userid,
+            verifyaccuracy: event.verifyaccuracy,
+            codepoint: event.point,
+            lasteventtime: new Date(),
+            page: event.page,
+            category: event.category,
+            verifyflag: true,
+            eqid: event.eqid,
+            args: event.args
+          }
+        })
+      }
+
+
 
 
     } //end callUpdateLocation
 
-    callLogin(event.data)
+    callInitEnv()
+    .then((res)=>
+    {
+      return callGetUserInfo()
+    })
+    
+    /*
       .then((res) => {
-        switch (res.result.loginReturnCode) {
+        return callLogin(event.data)
+      }) 
+
+      .then((res) => {
+        switch (res.result.returnCode) {
           case -1:
             {
               return Promise.reject(new Error("用户待审核"))
@@ -143,26 +198,36 @@ exports.main = async(event, context) => {
             }
         }
 
-      })
+      }) */
       .then((res)=>
       {
-         return callHasCodeId()
+        if(res.result.returnCode==0)
+        {
+          user = res.result.data
+          return callHasCodeId()
+        }else
+        {
+          reject(res.result.returnText)
+        }
       })
       .then((res) => {
         return callUpdateLocation(0)
       })
       .then((res) => {
-        if(res.total!=undefined&&res.total!=null)
-        {
-          var rtn = { bindingReturnCode:res.total} 
-          resolve(rtn)
-        }
-        else
-          {
+         
+
+        if (res._id != undefined && res._id != null) {
+          
+          message.returnCode=0,
+          
+          
+          resolve(message)
+        } else {
           //var rtn = { bindingReturnCode: res.stats.updated }
-          rtn = { bindingReturnCode: 1 }
-          resolve(rtn)
-          }
+          message.returnCode=-1
+          message.returnText="绑定失败"
+          resolve(message)
+        }
       })
       .catch(
         (err) => {

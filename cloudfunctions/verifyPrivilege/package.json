@@ -1,5 +1,5 @@
 {
-  "name": "getdeptbaseinfo",
+  "name": "verifyPrivilege",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

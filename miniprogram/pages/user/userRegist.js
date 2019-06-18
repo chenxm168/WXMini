@@ -43,11 +43,11 @@ Page({
       username: null,
       disivion: 'ASD Division',
       deptid: null,
-      deptmanager:false,
+      deptmanager: false,
       fab: null,
       roleid: null,
       pmsid: null,
-      auth:false,
+      auth: false,
       blacklist: false,
       password: null,
       groupid: null,
@@ -73,7 +73,78 @@ Page({
       console.log(res.userInfo)
     }
 
-    
+    let num = (app.globalData.deptInfo == null ? 0 : 1) + (app.globalData.roleInfo == null ? 0 : 2)
+    switch (num) {
+      case 0:
+        {
+          app.getDeptInfo((res) => {
+            this.data.deptInfo = res.data
+            app.globalData.deptInfo = res.data
+            console.log(res)
+            app.getRoleInfo((res) => {
+              this.data.roleInfo = res.data;
+              app.globalData.roleInfo = res.data;
+              console.log(res)
+              this.setData({
+                roleInfo: res.data,
+                fabs:this.data.fabs
+              })
+            }, (err) => {
+              app.navigateToMessage("程序出错了", err, "warn")
+            });
+
+
+          }, (err) => {
+            app.navigateToMessage("程序出错了", err, "warn")
+          });
+
+          break
+        }
+
+      case 1:
+        {
+          app.getDeptInfo((res) => {
+            this.data.deptInfo = res.data
+            app.globalData.deptInfo = res.data
+            console.log(res)
+          }, (err) => {
+            app.navigateToMessage("程序出错了", err, "warn")
+          });
+          break
+        }
+
+      case 2:
+        {
+
+          app.getRoleInfo((res) => {
+            this.data.roleInfo = res.data;
+            app.globalData.roleInfo = res.data;
+            console.log(res)
+            this.setData({
+              roleInfo: res.data
+            })
+          }, (err) => {
+            app.navigateToMessage("程序出错了", err, "warn")
+          });
+          break
+        }
+
+        default :
+        {
+          this.data.deptInfo = app.globalData.deptInfo,
+          this.data.roleInfo=app.globalData.roleInfo
+          this.setData(
+            {
+              roleInfo:this.data.roleInfo
+            }
+          )
+          break
+        }
+
+
+    }
+
+
 
   },
 
@@ -81,57 +152,99 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    /*
+     let num = (app.globalData.deptInfo == null ? 0 : 1) + (app.globalData.roleInfo==null? 0: 2)
+     switch (num)
+     {
+         case 0:
+         {
+           app.getDeptInfo((res) => {
+             this.data.deptInfo = res.data
+             app.globalData.deptInfo = res.data
+             console.log(res)
+             app.getRoleInfo((res) => {
+               this.data.roleInfo = res.data;
+               app.globalData.roleInfo = res.data;
+               console.log(res)
+               this.setData({
+                 roleInfo: res.data
+               })
+             }, (err) => {
+               app.navigateToMessage("程序出错了", err, "warn")
+             });
+
+
+           }, (err) => {
+             app.navigateToMessage("程序出错了", err, "warn")
+           });
+
+           break
+         }
+
+         case 1:
+         {
+           app.getDeptInfo((res) => {
+             this.data.deptInfo = res.data
+             app.globalData.deptInfo = res.data
+             console.log(res)
+           }, (err) => {
+             app.navigateToMessage("程序出错了", err, "warn")
+           });
+          break
+         }
+
+         case 2:
+         {
+
+           app.getRoleInfo((res) => {
+             this.data.roleInfo = res.data;
+             app.globalData.roleInfo = res.data;
+             console.log(res)
+             this.setData({
+               roleInfo: res.data
+             })
+           }, (err) => {
+             app.navigateToMessage("程序出错了", err, "warn")
+           });
+           break
+         }
+
+
+     }
 
 
 
    
-    if (app.globalData.deptInfo == null) {
-      app.getDeptInfo((res) => {
-        this.data.deptInfo = res.data
-        app.globalData.deptInfo = res.data
-        console.log(res)
-      }, (err) => {
-        app.navigateToMessage("程序出错了", err, "warn")
-      });
-    } else {
-      this.data.deptInfo = app.globalData.deptInfo
-      if (app.globalData.roleInfo == null)
-      {
-        app.getRoleInfo((res) => {
-          this.data.roleInfo = res.data;
-          app.globalData.roleInfo = res.data;
-          console.log(res)
-          this.setData({
-            roleInfo: res.data
-          })
-        }, (err) => {
-          app.navigateToMessage("程序出错了", err, "warn")
-        });
-      }else{
-        this.data.roleInfo = app.globalData.roleInfo
-        this.setData({
-          roleInfo: this.data.roleInfo
-        })
-      }
-    }
-  /*
-    if (app.globalData.roleInfo == null) {
-      app.getRoleInfo((res) => {
-        this.data.roleInfo = res.data;
-        app.globalData.roleInfo = res.data;
-        console.log(res)
-        this.setData({
-          roleInfo: res.data
-        })
-      }, (err) => {
-        app.navigateToMessage("程序出错了", err, "warn")
-      });
-    } else {
-      this.data.roleInfo = app.globalData.roleInfo
-      this.setData({
-        roleInfo: res.data
-      })
-    }*/
+     if (app.globalData.deptInfo == null) {
+       app.getDeptInfo((res) => {
+         this.data.deptInfo = res.data
+         app.globalData.deptInfo = res.data
+         console.log(res)
+       }, (err) => {
+         app.navigateToMessage("程序出错了", err, "warn")
+       });
+     } else {
+       this.data.deptInfo = app.globalData.deptInfo
+       if (app.globalData.roleInfo == null)
+       {
+         app.getRoleInfo((res) => {
+           this.data.roleInfo = res.data;
+           app.globalData.roleInfo = res.data;
+           console.log(res)
+           this.setData({
+             roleInfo: res.data
+           })
+         }, (err) => {
+           app.navigateToMessage("程序出错了", err, "warn")
+         });
+       }else{
+         this.data.roleInfo = app.globalData.roleInfo
+         this.setData({
+           roleInfo: this.data.roleInfo
+         })
+       }
+     } */
+
 
 
 
@@ -479,7 +592,7 @@ Page({
       this.data.appUserInfo.permissiongroup = null
       this.data.appUserInfo.isonline = false
       this.data.appUserInfo.logintime = null
-      this.data.appUserInfo.creattime = new Date()
+      this.data.appUserInfo.creattime = null
       this.data.appUserInfo.appadmin = false
       this.data.appUserInfo.wxusrinfo = app.globalData.userInfo // this.data.userInfo;
       console.log(this.data.appUserInfo)
@@ -590,6 +703,7 @@ Page({
   }, //end userInfoHasErr
 
   sumitUserInfoToDB: function() {
+    /*
     const db = wx.cloud.database();
     db.collection('users').add({
       data: this.data.appUserInfo,
@@ -601,7 +715,42 @@ Page({
         app.navigateToMessage("资料提交失败", err, "warn")
       }
 
+    })*/
+    let userdata =
+    {
+      userinfo: this.data.appUserInfo
+    }
+    console.log(JSON.stringify(userdata))
+     
+    wx.cloud.callFunction({
+      name: "userRegist",
+      data: userdata,
+      success: (res) => {
+        var rtn = res.result
+        if (rtn.returnCode != 0) {
+          app.navigateToMessage("注册出错了", rtn.returnText, "warn")
+
+        } else {
+          var user = rtn.data.userinfo
+          app.globalData.appUserInfo = user
+          if (user.auth) {
+
+            wx.redirectTo({
+              url: '../main/main',
+            })
+
+            
+          } else {
+            app.navigateToMessage("资料提交成功", "您资料已成功提交，需等待部门负责人审核通过后方能正常登陆使用。如有任何问题，请与部门负责人联系！", "success")
+          }
+        }
+
+      },
+      fail: (err) => {
+        app.navigateToMessage("注册出错了", err, "warn")
+      }
     })
-  }
+
+  }, //end function
 
 })

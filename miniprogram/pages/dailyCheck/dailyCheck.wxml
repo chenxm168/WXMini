@@ -6,7 +6,7 @@
     <view class="page-head container">
       <view wx:if="{{checkdetail.eqid!=null}}" class="page-head-title" style='font-size:40rpx;margin-top:20rpx'>{{checkdetail.eqid}}</view>
       <view class="page-head-line"></view>
-      <view wx:if="{{false}}" class="page-head-desc">{{checkdetail.eqdesc}}</view>
+      <view wx:if="{{true}}" class="page-head-desc">{{checkdetail.eqdesc}}</view>
     </view>
 
 
@@ -95,8 +95,19 @@
                       <view class="weui-cell weui-cell_input">
                         <!-->
                         <input class="weui-input" style='font-size:25' type="digit" placeholder="是非类型：1:OK;2:NG" />-->
-                        <input class="weui-input" type="{{item.KEYBOARDTYPE}}" style='font-size:20' placeholder="{{(item.MINIMUM==item.MAXIMUM) ? '1表示OK；2表示NG' : '请输入点检值 '}} " data-index="{{item.ITEMINDEX}}" bindinput='onInputChange' value="{{item.INSPECTIONVALUE}}" maxlength='5'
+                        <input class="weui-input" type="{{item.KEYBOARDTYPE}}" style='font-size:20' placeholder="{{(item.MINIMUM==item.MAXIMUM) ? '请输入点检值' : '请输入点检值 '}} " data-index="{{item.ITEMINDEX}}" bindinput='onInputChange' value="{{item.INSPECTIONVALUE}}" maxlength='5'
                         />
+
+                        <checkbox-group data-index="{{item.ITEMINDEX}}" bindchange="checkboxChange">
+                          <label class="weui-cell weui-check__label">
+                            <checkbox class="weui-check" value="{{checkBoxItems[0].value}}" checked="{{checkBoxItems[0].checked}}" />
+                             <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.EQSTOP}}" ></icon>
+                             <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.EQSTOP}}"></icon>
+                            <view>
+                              停机</view>
+                          </label>
+                        </checkbox-group>
+
                       </view>
                     </view>
                     <!---->
@@ -104,10 +115,11 @@
                   </view>
                 </block>
                 <!--end block1-->
-            
-            </view><!--end sublist-->
+
+              </view>
+              <!--end sublist-->
             </block>
-            
+
           </view>
 
 
@@ -169,12 +181,12 @@
 
 
         <view class="page-section ">
-        <view class="btn-area"> 
-       <!--<view class='button-sp-area'> -->
-          <button class="weui-btn" type="primary"  bindtap='onSumit'>完成提交</button>
+          <view class="btn-area">
+            <!--<view class='button-sp-area'> -->
+            <button class="weui-btn" type="primary" bindtap='onSumit'>完成提交</button>
 
-       <!--   <button class="weui-btn" type="primary" size="mini" style='mmargin-bottom: 60rpx;margin-top:60rpx' bindtap='onSumit'>暂存本机</button> -->
-         </view>
+            <!--   <button class="weui-btn" type="primary" size="mini" style='mmargin-bottom: 60rpx;margin-top:60rpx' bindtap='onSumit'>暂存本机</button> -->
+          </view>
         </view>
 
       </block>

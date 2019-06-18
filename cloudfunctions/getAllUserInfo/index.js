@@ -1,9 +1,15 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-
+/* 
+//dev env
 cloud.init({
   env: "asd-smart-cloud-dev-kwtq8"
-})
+}) */
+
+//prod env
+cloud.init({
+  env: "asd-smart-cloud-k2u5e"
+}) 
 
 
 const MAX_LIMIT = 100

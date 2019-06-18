@@ -5,10 +5,19 @@ App({
       if (!wx.cloud) {
         console.error('请使用 2.2.3 或以上的基础库以使用云能力')
       } else {
+        /* develop env
         wx.cloud.init({
           env: 'asd-smart-cloud-dev-kwtq8',
           traceUser: true,
+        })*/
+   
+        //prod env
+        wx.cloud.init({
+          env: 'asd-smart-cloud-k2u5e',
+          traceUser: true,
         })
+
+        
 
         wx.getSetting({
           success: res => {
@@ -36,6 +45,36 @@ App({
 
       }
 
+     
+      let db = wx.cloud.database()
+      
+      db.collection('globalconfig').doc(
+         'asd2'
+        ).get( 
+/*
+        db.collection('globalconfig').where(
+          {
+            _id:'asd1'
+          }
+        ).get( */
+        {
+          success:(res)=>
+          {
+            console.log(res)
+            if(res!=undefined&res!=null)
+            {
+              this.globalData.globalconfig=res.data
+            }
+          },
+          fail:(err)=>
+          {
+            console.log("#############################\n")
+            console.log(err)
+          }
+        }
+      )
+
+
 
     },
     globalData: {
@@ -52,6 +91,8 @@ App({
         accessKey: null,
         expires_in: null
       },
+
+      globalconfig:null,
 
 
 
@@ -82,6 +123,18 @@ App({
         complete: function(res) {},
       })
     }, //end function
+
+
+
+  redirectToMessage: function (title, message, iconType) {
+
+    let str = "?title=" + title + "&message=" + message + "&iconType=" + iconType
+    wx.redirectTo({
+      url: '../msg/message' + str,
+    })
+    
+  }, //end function
+
 
     /**
      * get roleInfo from db
@@ -240,36 +293,48 @@ App({
 
     /**
      * 
-     * verify code 
+     * verify code 2
      * 
      */
 
     verifyCode: function(arg, resolve, reject) {
       var argData = arg
 
+      this.updateUserInfo((res)=>
+      {
 
-      this.getCurrentLocation(
-        (res) => {
-          argData.codepoint = res
+        this.getCurrentLocation(
+          (res) => {
+            argData.codepoint = res
+            argData.env=this.globalData.appUserInfo.env
+             console.log(JSON.stringify(argData))
+            wx.cloud.callFunction({
+              name: "verifyCodeLocation",
+              data: argData,
+              success: (res) => {
+                wx.hideLoading()
+                resolve(res)
+              },
+              fail: (err) => {
+                wx.hideLoading()
+                reject(new Error(err))
+              }
 
-          wx.cloud.callFunction({
-            name: "verifyCodeLocation",
-            data:argData,
-            success: (res) => {
-              wx.hideLoading()
-              resolve(res)
-            },
-            fail: (err) => {
-              wx.hideLoading()
-              reject(new Error(err))
-            }
+            })
+          }, (err) => {
+            wx.hideLoading()
+            reject(new Error("获取当前位置失败\n" + err))
+          }
+        )
+           
+      },
+      (err)=>
+      {
+          reject(err)
+      })
 
-          })
-        }, (err) => {
-          wx.hideLoading()
-          reject(new Error("获取当前位置失败\n" + err))
-        }
-      )
+
+      
 
     }, //end verifyCode
 
@@ -320,6 +385,49 @@ App({
       })
 
     }, //end get current loaction
+
+
+    updateUserInfo:function(resolve,reject)
+    {
+        let db= wx.cloud.database()
+        db.collection("users").where({
+          userid:this.globalData.appUserInfo.userid
+        }).get(
+          {
+            success:(res)=>
+            {
+               if(res.data.length>0)
+               {
+                 this.globalData.appUserInfo= res.data[0]
+                 resolve()
+               }else{
+
+                 this.navigateToMessage("用户不存在","您的用户已经不存在,无法继续使用","warn")
+
+               }
+
+            },
+            fail:(err)=>
+            {
+              this.navigateToMessage("读取用户信息失败", "读取用户信息失败，请稍后再试，如还存在问题,请与管理员联系" ,"warn")
+            }
+          }
+        )
+
+
+    },//end function
+
+  verifyCode2: function (arg, resolve, reject) {
+    
+     this.updateUserInfo(this.verifyCode2,null)
+     {
+       
+     }
+
+ 
+
+
+  },//end function
 
 
 

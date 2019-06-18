@@ -18,13 +18,14 @@ Page({
 
       workTimeIndex: 0,
       shiftIndex: 0,
+      result: true,
 
     },
     shifts: ["A", "B", "C"],
-   
+
 
     workTimes: ["DayTime", "Night"],
-   
+
 
 
     multiArray: [
@@ -36,7 +37,13 @@ Page({
 
     storagekey: null,
 
-    storagedata:null,
+    storagedata: null,
+
+    checkBoxItems:[{name:"停机",value:true,checked:false}]
+
+    
+
+
 
 
 
@@ -52,96 +59,129 @@ Page({
   onLoad: function(options) {
 
     var eqid = ((options.eqid != undefined && options.eqid != null) ? options.eqid : "") + ((options.eqId != undefined && options.eqId != null) ? options.eqId : "")
+    wx.showLoading({
+      title: '验证用户权限',
+    })
+    wx.cloud.callFunction({
+      name: "verifyPrivilege",
+      data: {
+        page:"dailyCheck",
+        eqid:eqid
+      },
+      success: (res) => {
+        wx.hideLoading()
+        let msg = res.result
 
-    if (options.locationok != undefined && options.locationok != null) {
+        if (msg.returnCode != 0) {
+           
+          //app.navigateToMessage("验证权限出错", msg.returnText, "warn")
+          switch(msg.returnCode)
+          {
+            case -3:
+            {
 
-      //加载点检项目的逻辑
-      if (eqid.length > 6) {
-        this.data.storagekey = "dailyCheck-" + eqid
-        this.data.checkdetail.eqid = eqid
-        //this.loadCheckList(eqid)
-        this.preLoadCheckList(eqid, this.loadOldData, this.loadNewData)
-      } else {
-        this.loadCheckList(null)
-      }
-      /*
-      if (options != undefined && options != null && options.eqid != undefined && options.eqid != null) {
-        this.data.storagekey = "dailyCheck-" + eqid
-        this.data.checkdetail.eqid = options.eqid;
-        this.loadCheckList(options.eqid)
-      } else {
-        if (options != undefined && options != null && options.eqId != undefined && options.eqId != null) {
-          this.data.storagekey = "dailyCheck-" + eqId
-          this.data.checkdetail.eqid = options.eqId;
-          this.loadCheckList(options.eqId)
+                app.redirectToMessage("权限验证失败",msg.returnText,"warn")
+              break
+            }
+            case -2:
+            {
+                app.redirectToMessage("权限验证失败", msg.returnText, "warn")
+              break
+            }
+            case -1:
+            {
+                app.redirectToMessage("权限验证失败", msg.returnText, "warn")
+                break
+            }
+            default:
+            {
+                app.redirectToMessage("权限验证失败", msg.returnText, "warn")
+                break
+            }
+          }
+          /*
+          wx.redirectTo({
+            url: '../user/userLogin',
+          }) */
+
         } else {
-          this.loadCheckList(null)
-        }
 
-      } */
-    } else {
-      var args = {
-        codeid: options.codeid,
-        codepoint: null
 
-      }
-      if (eqid.length > 6) {
-        this.data.storagekey = "dailyCheck-" + eqid
-        app.verifyCode(args, (res2) => {
-          if (res2 == undefined || res2.result == undefined || res2.result.codeInfo == undefined || res2.result.returnCode == undefined || res2 == null || res2.result == null || res2.result.codeInfo == null || res2.result.returnCode == null) {
-            app.navigateToMessage("二维码出错", "您扫描的二维码无效，或未经系统理注册！", "warn")
+          if (options.locationok != undefined && options.locationok != null) {
+
+            //加载点检项目的逻辑
+            if (eqid.length > 6) {
+              this.data.storagekey = "dailyCheck-" + eqid
+              this.data.checkdetail.eqid = eqid
+              //this.loadCheckList(eqid)
+              this.preLoadCheckList(eqid, this.loadOldData, this.loadNewData)
+            } else {
+              this.loadCheckList(null)
+            }
+
           } else {
-            if (res2.result.returnCode < 0) {
+            var args = {
+              codeid: options.codeid,
+              codepoint: null
 
-              app.navigateToMessage("当前位置出错", "您扫描的二维码位置与您所处的当前位置不一致！\n距离差别为：" + res2.result.defValue + "米", "warn")
+            }
+            if (eqid.length > 6) {
+              this.data.storagekey = "dailyCheck-" + eqid
+              app.verifyCode(args, (res2) => {
+                if (res2 == undefined || res2.result == undefined || res2.result.data.codeInfo == undefined || res2.result.data.returnCode == undefined || res2 == null || res2.result == null || res2.result.data.codeInfo == null || res2.result.returnCode == null) {
+                  app.navigateToMessage("二维码出错", "您扫描的二维码无效，或未经系统理注册！", "warn")
+                } else {
+                  if (res2.result.returnCode < 0) {
+
+                    app.navigateToMessage("当前位置出错", "您扫描的二维码位置与您所处的当前位置不一致！\n距离差别为：" + res2.result.defValue + "米", "warn")
+
+                  } else {
+
+
+                    this.preLoadCheckList(eqid, this.loadOldData, this.loadNewData)
+
+                  }
+
+                }
+
+              }, (err) => {
+                app.navigateToMessage("验证二维码出错", err, "warn")
+              })
 
             } else {
 
-               
-                  this.preLoadCheckList(eqid,this.loadOldData,this.loadNewData)
-
-               
-                
-             
-               
-              
-
-
-              /*
-              //加载点检项目的逻辑
-              if (options != undefined && options != null && options.eqid != undefined && options.eqid != null) {
-                this.data.storagekey = "dailyCheck-" + eqid
-                this.data.checkdetail.eqid = options.eqid;
-                this.loadCheckList(options.eqid)
-              } else {
-                if (options != undefined && options != null && options.eqId != undefined && options.eqId != null) {
-                  this.data.storagekey = "dailyCheck-" + eqId
-                  this.data.checkdetail.eqid = options.eqId;
-                  this.loadCheckList(options.eqId)
-                } else {
-                  this.loadCheckList(null)
-                }
-
-              }*/
-
-
-
+              this.loadCheckList(null)
 
             }
 
-          }
+          } //end else
 
-        }, (err) => {
-          app.navigateToMessage("验证二维码出错", err, "warn")
-        })
 
-      } else {
 
-        this.loadCheckList(null)
+
+
+
+
+
+
+        }
+
+      },
+
+      fail: (err) => {
+        wx.hideLoading()
+
+        app.navigateToMessage("验证权限出错了", err, "warn")
 
       }
 
-    } //end else
+
+
+
+    })
+
+
+
 
   },
 
@@ -157,7 +197,38 @@ Page({
    */
   onShow: function() {
 
+   wx.hideLoading()
+    let user = app.globalData.appUserInfo
+    console.log(user)
+    if (user.env == "prod") {
 
+      if (app.globalData.globalconfig != null) {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.prodnavcolor,
+          backgroundColor: app.globalData.globalconfig.prodnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.prodnavtitle,
+        })
+
+      }
+
+
+    } else {
+      if (app.globalData.globalconfig != null) {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.devnavcolor,
+          backgroundColor: app.globalData.globalconfig.devnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.devnavtitle,
+        })
+      }
+
+
+    }
 
 
 
@@ -263,27 +334,38 @@ Page({
 
       name: 'getDailyCheckData', //测试
       data: {
-        eqid: machine
+        eqid: machine,
+        env: app.globalData.appUserInfo.env
       },
       success: (res) => {
         console.log(res)
-        var rs = res.result
+        var rs = res.result.data  //cxm change
         //var rs=res.result.data //test 
-        if (rs == null) {
+        if (rs == null||rs.length<1||res.result.returnCode!=0) {
           if (reject != undefined && reject != null) {
-            reject(new Error("Not find Check Items!"))
+            if(res.result.returnText!=null)
+            {
+              reject(new Error(res.result.returnText))
+              this.data.errMsg = res.result.returnText
+            }
+            else
+            {
+              reject(new Error("Not find Check Items!"))
+            }
+            
 
 
           }
           // res = []
-        }
+        }else{
         for (let i = 0; i < rs.length; i++) {
 
 
           var checkIt = {
             "ACTIVATESTATE": rs[i].ACTIVATESTATE,
             "INSPECTIONID": rs[i].INSPECTIONID,
-            "INSPECTIONSTATE": rs[i].INSPECTIONSTATE,
+           // "INSPECTIONSTATE": rs[i].INSPECTIONSTATE,
+            "INSPECTIONSTATE": "Entering",
             "INSPECTIONUNIT": rs[i].INSPECTIONUNIT,
             "ITEMNAME": rs[i].ITEMNAME,
             "LASTEVENTUSER": rs[i].LASTEVENTUSER,
@@ -303,7 +385,8 @@ Page({
             "WORKTIME": "DayTime",
             "SHIFT": "A",
             "KEYBOARDTYPE": "digit",
-            "CHECKRESULTFLAG": true
+            "CHECKRESULTFLAG": true,
+            "EQSTOP":false
           }
 
 
@@ -391,6 +474,8 @@ Page({
         if (resolve != undefined && resolve != null) {
           resolve()
         }
+
+      }
 
 
         //resolve(res.result.data)
@@ -733,7 +818,7 @@ Page({
       for (let j = 0; j < data.subeqlist[i].itemlist.length; j++) {
         data.subeqlist[i].itemlist[j].SHIFT = this.data.shifts[this.data.checkdetail.shiftIndex],
           data.subeqlist[i].itemlist[j].WORKTIME = this.data.workTimes[this.data.checkdetail.workTimeIndex]
-        if (data.subeqlist[i].itemlist[j].INSPECTIONVALUE.length < 1) {
+        if (data.subeqlist[i].itemlist[j].INSPECTIONVALUE.length < 1 && (! data.subeqlist[i].itemlist[j].EQSTOP)) {
           data.subeqlist[i].itemlist[j].ISOK = false
           data.subeqlist[i].spacecnt++
             spaceerrcnt++
@@ -903,33 +988,7 @@ Page({
 
           }
 
-          /*
-                    if (item.INSPECTIONVALUE.length > 0) {
-                      if (item.MINIMUM != undefined && item.MINIMUM != null && item.MAXIMUM != undefined && item.MAXIMUM != null) {
 
-                        let max = parseFloat(item.MAXIMUM)
-                        let min = parseFloat(item.MINIMUM)
-                        let v = parseFloat(item.INSPECTIONVALUE)
-                        if (max == min) {
-                          if (v == min) {
-                            item.INSPECTIONRESULT = "OK"
-                          } else {
-                            item.INSPECTIONRESULT = "NG"
-                          }
-
-
-
-                        } else {
-
-
-                        }
-
-
-                      } else {
-
-
-                      }
-                    } */
 
         } catch (e) {
           console.log(e)
@@ -944,7 +1003,7 @@ Page({
       checkdetail: this.data.checkdetail
     })
 
-      this.storageToMobile()
+    this.storageToMobile()
     let innernum = (checkerrcnt < 1 ? 0 : 1) + (spaceerrcnt < 1 ? 0 : 2)
 
     switch (innernum) {
@@ -980,54 +1039,7 @@ Page({
     }
 
 
-    /*
-    if (spaceerrcnt > 0) {
-      wx.showModal({
-        showCancel: false,
-        title: '输入错误',
-        content: '点检值不能为空',
-        success:(res)=>
-        {
-           
-        }
-      })
 
-      
-    } else {
-
-      if(checkerrcnt<1)
-      {
-      wx.showLoading({
-        title: '点检表提交中',
-      })
-     
-      }else
-      {
-        wx.hideLoading()
-        wx.showModal({
-          title: '点检存在超标',
-          content: '点检值存在超标的项目，是否继续提交？',
-          success:(res)=>
-          { 
-           if(res.cancel)
-           {
-             this.setData({
-               checkdetail: this.data.checkdetail
-             })
-           }else
-           {
-             
-
-           }
-          },
-          fail:(err)=>
-          {
-            wx.hideLoading()
-          }
-        })
-
-      }
-    } */
 
 
   }, //end sumit function
@@ -1043,14 +1055,26 @@ Page({
 
 
   sumitToPms: function(res) {
-    
+
     wx.showLoading({
       title: '点检表提交中',
     })
+    console.log(JSON.stringify(this.data.checkdetail))
+    let args=
+    {
+      env:app.globalData.appUserInfo.env,
+      checkdetail: this.data.checkdetail
+    }
+    console.log(JSON.stringify(args))
     wx.cloud.callFunction({
       name: "sumitDailyCheckData",
-      data: this.data.checkdetail,
+      data:args ,
       success: (res) => {
+        if(res.result.returnCode!=0)
+        {
+          wx.hideLoading()
+          app.navigateToMessage("提交错误", res.result.returnText , "warn")
+        }
         this.data.checkdetail = {
           eqid: null,
           eqdesc: null,
@@ -1065,7 +1089,7 @@ Page({
           key: this.data.storagekey,
           success: function(res) {},
         })
-        app.navigateToMessage("提交成功", "点检表已成功提交到PMS", "success")
+        app.redirectToMessage("提交成功", "点检表已成功提交到PMS", "success")
       },
       fail: (err) => {
         wx.hideLoading()
@@ -1091,7 +1115,7 @@ Page({
       title: '输入错误',
       content: '点检值不能为空',
       success: (res) => {
-        
+
         return
 
       },
@@ -1113,7 +1137,7 @@ Page({
       content: '点检值存在超标的项目，是否继续提交？',
       success: (res) => {
         if (res.cancel) {
-          
+
           this.setData({
             checkdetail: this.data.checkdetail
           })
@@ -1127,7 +1151,7 @@ Page({
         this.setData({
           checkdetail: this.data.checkdetail
         })
-        
+
         app.navigateToMessage("程序出错了", "出错了" + err, "warn")
       }
     })
@@ -1151,34 +1175,33 @@ Page({
   }, //end function
 
 
-  preLoadCheckList:function(eqid,loadOld,startNew)
-  {
-    
+  preLoadCheckList: function(eqid, loadOld, startNew) {
+
 
     wx.getStorage({
       key: this.data.storagekey,
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         //this.data.storagedata = res.data
         var eqdata = res.data
-       
-        
+
+
         wx.showModal({
           title: '存在未提交的记录',
-          content: '本机存上未完成提交的记录，是否继续上次未完成记录',
+          content: '本机存在未完成提交的记录，是否继续上次未完成记录',
           cancelText: "不继续",
           confirmText: "继续上次",
           success: (res) => {
             if (res.confirm) {
-                loadOld(eqdata)
-              
+              loadOld(eqdata)
+
             } else {
               startNew(eqid)
             }
 
           },
 
-        }) 
+        })
 
       },
       fail: (res) => {
@@ -1187,33 +1210,57 @@ Page({
       }
     })
 
+  }, //end function
+
+
+
+
+
+
+  loadOldData: function(data) {
+    this.data.checkdetail = data
+    this.setData({
+      checkdetail: this.data.checkdetail
+    })
+  }, //end function
+
+  loadNewData: function(eqid) {
+
+    this.loadCheckList(eqid)
   },//end function
 
-
-
-
-
-
-    loadOldData:function(data)
+  checkboxChange: function(e)
+  {
+    console.log(e)
+    if(e.detail.value.length>0)
     {
-      this.data.checkdetail=data
-      this.setData
-      (
-      {
-        checkdetail:this.data.checkdetail
-      }
+       console.log("CHECKED")
+       let itemIdx = e.currentTarget.dataset.index
+      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].EQSTOP=true
+      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE="Entering"
+      this.setData(
+        {
+          checkdetail:this.data.checkdetail
+        }
       )
-    },//end function
-
-    loadNewData: function(eqid)
+    }else
     {
-       
-      this.loadCheckList(eqid)
+      let itemIdx = e.currentTarget.dataset.index
+      console.log("No Checked")
+      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].EQSTOP = false
+      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE = "StopInspection"
+      this.setData(
+        {
+          checkdetail: this.data.checkdetail
+        }
+      )
     }
 
+  },
 
 
-    
+
+
 
 
 

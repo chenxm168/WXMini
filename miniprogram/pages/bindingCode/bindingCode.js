@@ -39,6 +39,38 @@ Page({
    */
   onShow: function() {
     wx.hideLoading()
+    wx.hideLoading()
+    let user = app.globalData.appUserInfo
+    console.log(user)
+    if (user.env == "prod") {
+
+      if (app.globalData.globalconfig != null) {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.prodnavcolor,
+          backgroundColor: app.globalData.globalconfig.prodnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.prodnavtitle,
+        })
+
+      }
+
+
+    } else {
+      if (app.globalData.globalconfig != null) {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.devnavcolor,
+          backgroundColor: app.globalData.globalconfig.devnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.devnavtitle,
+        })
+      }
+
+
+    }
   },
 
   /**
@@ -93,8 +125,7 @@ Page({
     })
   },
 
-  onEqidChange:function(e)
-  {
+  onEqidChange: function(e) {
     this.data.eqid = e.detail.value.toUpperCase()
 
     this.setData({
@@ -133,57 +164,9 @@ Page({
 
   onScan: function() {
 
-    wx.scanCode({
-      onlyFromCamera: false,
-      success: (res) => {
-        // this.sumitCodeLocation(res.result)
-        this.data.codeurl = res.result
-        this.data.readySumit = true
-        var db = wx.cloud.database()
-        db.collection("codelocation").where({
-          codeurl: res.result
-        }).get({
-          success: (res) => {
-            if (res.data.length > 0) {
-              this.data.readySumit = true,
-                this.data.verifyflag = res.data[0].verifyflag,
-                this.data.codeid = res.data[0].codeid,
-                this.data.args = res.data[0].args,
-                this.data.page = res.data[0].page,
-                this.data.verifyaccuracy = res.data[0].verifyaccuracy,
-                this.data.eqid = res.data[0].eqid,
-                this.data.category = res.data[0].category,
-                this.setData({
-                  readySumit: this.data.readySumit,
-                  verifyflag: this.data.verifyflag,
-                  codeid: this.data.codeid,
-                  args: this.data.args,
-                  page: this.data.page,
-                  verifyaccuracy: this.data.verifyaccuracy,
-                  eqid: this.data.eqid,
-                  category: this.data.category,
+    //verify privilege success, excute this.scanCode
+    this.verifyPrivilege(this.scanCode, null)
 
-
-                })
-            } else {
-              this.setData({
-                readySumit: true
-              })
-            }
-
-          },
-          fail: (err) => {
-            this.setData({
-              readySumit: true
-            })
-
-          }
-
-        })
-
-
-      }
-    })
 
   }, //end function
 
@@ -236,23 +219,26 @@ Page({
     wx.showLoading({
       title: '位置信息绑定中',
     })
+    let env = (app.globalData.appUserInfo != null) ? app.globalData.appUserInfo.env : "dev"
+    let data = {
+      codeid: this.data.codeid,
+      point: null,
+      codeurl: arg,
+      verifyaccuracy: this.data.verifyaccuracy,
+      page: this.data.page,
+      category: this.data.category,
+      verifyflag: this.data.verifyflag,
+      eqid: this.data.eqid,
+      args: this.data.args,
+      env: env
+    }
+
     app.getCurrentLocation(res => {
+      data.point = res
+      console.log(JSON.stringify(data))
       wx.cloud.callFunction({
         name: "bindingCodeLocation",
-        data: {
-          codeid: this.data.codeid,
-          point: res,
-          codeurl: arg,
-          verifyaccuracy: this.data.verifyaccuracy,
-          page: this.data.page,
-          category: this.data.category,
-          verifyflag: this.data.verifyflag,
-          eqid: this.data.eqid,
-          args: this.data.args
-
-
-        },
-
+        data: data,
         success: (res) => {
           this.resetValues()
           app.navigateToMessage("绑定成功", "二维码位置已成功绑定", "success")
@@ -271,6 +257,144 @@ Page({
 
 
   }, //end function
+
+  verifyPrivilege: function(resolve, reject) {
+
+    wx.showLoading({
+      title: '权限验证中',
+    })
+    wx.cloud.callFunction({
+      name: "verifyPrivilege",
+      data: {
+        page: "bindingCode"
+      },
+      success: (res) => {
+        wx.hideLoading()
+       
+        if (res.result.returnCode < 0) {
+          app.navigateToMessage("权限验证失败", res.result.returnText, "warn")
+        } else {
+          if (res.result.userinfo != undefined && res.result.userinfo != null) {
+            app.globalData.appUserInfo = res.result.userinfo
+          }
+          resolve(res)
+        }
+      },
+      fail: (err) => {
+        wx.hideLoading()
+        app.navigateToMessage("权限验证出错", err, "warn")
+      }
+    })
+
+
+  }, //end function
+
+
+  scanCode: function(arg) {
+
+    wx.scanCode({
+      onlyFromCamera: false,
+      success: (res) => {
+        this.data.codeurl = res.result
+        this.data.readySumit = true
+        let data = {
+
+          env: app.globalData.appUserInfo.env,
+          codeurl: res.result
+
+        }
+
+        console.log(JSON.stringify(data))
+        wx.showLoading({
+          title: '加载中',
+        })
+        wx.cloud.callFunction({
+          name: "getCodeInfo",
+          data: data,
+          /*  }
+          )
+
+          // this.sumitCodeLocation(res.result)
+        
+          var db = wx.cloud.database()
+          db.collection("codelocation").where({
+            codeurl: res.result
+          }).get({ */
+          success: (res) => {
+            wx.hideLoading()
+            if (res.result != null&&res.result.data!=null) {
+              let resdata = res.result.data
+              this.data.readySumit = true,
+                this.data.verifyflag = resdata.verifyflag,
+                this.data.codeid = resdata.codeid,
+                this.data.args = resdata.args,
+                this.data.page = resdata.page,
+                this.data.verifyaccuracy = resdata.verifyaccuracy,
+                this.data.eqid = resdata.eqid,
+                this.data.category = resdata.category,
+                this.setData({
+                  readySumit: this.data.readySumit,
+                  verifyflag: this.data.verifyflag,
+                  codeid: this.data.codeid,
+                  args: this.data.args,
+                  page: this.data.page,
+                  verifyaccuracy: this.data.verifyaccuracy,
+                  eqid: this.data.eqid,
+                  category: this.data.category,
+
+
+                })
+            } else {
+              this.data.readySumit = true,
+              app.get2DCodeUrlArgs(this.data.codeurl,(res)=>
+              {
+                this.data.args= (res.eqid==undefined||res.eqid==null||res.eqid.length<1)? "?eqid=" :"?eqid="+res.eqid
+                this.data.verifyflag=true
+                this.data.codeid = (res.codeid != undefined && res.codeid != null && res.codeid.length > 0) ? res.codeid : "" 
+                this.data.eqid = (res.eqid != undefined && res.eqid != null &&res.eqid.length >0) ? res.eqid : "" 
+                this.data.verifyaccuracy = (res.verifyaccuracy != undefined && res.verifyaccuracy != null && res.verifyaccuracy.length > 0) ? res.verifyaccuracy : 30
+                this.data.page = (res.page != undefined || res.page != null && res.page.length > 0) ? res.page : "/pages/dailyCheck/dailyCheck" 
+                this.setData({
+                  readySumit: this.data.readySumit,
+                  verifyflag: this.data.verifyflag,
+                  codeid: this.data.codeid,
+                  args: this.data.args,
+                  page: this.data.page,
+                  verifyaccuracy: this.data.verifyaccuracy,
+                  eqid: this.data.eqid,
+                  category: this.data.category,
+
+
+                })
+
+              },(err)=>
+              {
+                this.setData({
+                  readySumit: true
+                })
+
+              })
+
+              
+            }
+
+          },
+          fail: (err) => {
+            wx.hideLoading()
+            this.setData({
+              readySumit: true
+            })
+
+          }
+
+        })
+
+
+      }
+    })
+
+
+  }, //end scan2DCode
 
 
 })

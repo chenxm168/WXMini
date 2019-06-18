@@ -1,0 +1,9 @@
+{"_id":"0","roleid":0,"roledesc":"操作员"}
+{"_id":"1","roleid":1,"roledesc":"领班"}
+{"_id":"10","roleid":10,"roledesc":"经理"}
+{"_id":"12","roleid":12,"roledesc":"高级经理"}
+{"_id":"14","roleid":14,"roledesc":"副部长"}
+{"_id":"16","roleid":16,"roledesc":"部长"}
+{"_id":"2","roleid":2,"roledesc":"组长"}
+{"_id":"6","roleid":6,"roledesc":"工程师"}
+{"_id":"8","roleid":8,"roledesc":"科长"}

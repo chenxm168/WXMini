@@ -7,13 +7,21 @@ Page({
    */
   data: {
     grids: [0, 1, 3],
-    scanStr: ""
+    scanStr: "",
+    userManagerShow:true,
+    isOnScanNow:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    
+
+    
+
+     
 
   },
 
@@ -28,7 +36,47 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.data.isOnScanNow=false
     wx.hideLoading()
+    let user = app.globalData.appUserInfo
+    console.log(user)
+    if (user.env == "prod") {
+
+      if(app.globalData.globalconfig!=null)
+      {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.prodnavcolor,
+          backgroundColor: app.globalData.globalconfig.prodnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.prodnavtitle,
+        })
+
+      }
+      
+
+    }else
+    {
+      if(app.globalData.globalconfig!=null)
+      {
+        wx.setNavigationBarColor({
+          frontColor: app.globalData.globalconfig.devnavcolor,
+          backgroundColor: app.globalData.globalconfig.devnavbackcolor,
+        })
+
+        wx.setNavigationBarTitle({
+          title: app.globalData.globalconfig.devnavtitle,
+        })
+      }
+     
+
+    }
+
+
+
+
+
   },
 
   /**
@@ -73,6 +121,10 @@ Page({
    */
 
   onScan: function() {
+    if (this.data.isOnScanNow)
+    {
+      return
+    }
 
     wx.scanCode({
       success:(res)=>
@@ -80,23 +132,25 @@ Page({
         var args=
         {
           codeurl: res.result,
-         codepoint:null
+         codepoint:null,
+         env:null
 
         }
         app.verifyCode(args,(res2)=>
         {
-          if (res2 == undefined || res2.result == undefined || res2.result.codeInfo == undefined || res2.result.returnCode == undefined || res2 == null || res2.result == null || res2.result.codeInfo == null || res2.result.returnCode == null)
+          console.log(res2)
+          if (res2 == undefined || res2.result == undefined || res2.result.data.codeInfo == undefined || res2.result.returnCode == undefined || res2 == null || res2.result == null || res2.result.data.codeInfo == null || res2.result.returnCode == null)
           {
             app.navigateToMessage("二维码出错", "您扫描的二维码无效，或未经系统理注册！", "warn")
           }else
           {
             if (res2.result.returnCode <0){
 
-              app.navigateToMessage("当前位置出错", "您扫描的二维码位置与您所处的当前位置不一致！\n距离差别为：" + res2.result.defValue+"米", "warn")
+              app.navigateToMessage("当前位置出错", "您扫描的二维码位置与您所处的当前位置不一致！\n距离差别为：" + res2.result.data.defValue+"米", "warn")
 
             }else
             {
-            let url1 = res2.result.codeInfo.page + res2.result.codeInfo.args+"&locationok=Y"
+              let url1 = res2.result.data.codeInfo.page + res2.result.data.codeInfo.args+"&locationok=Y"
             
             wx.navigateTo({
               url: url1,
@@ -112,76 +166,59 @@ Page({
       }
     })
 
-    /*
-    wx.scanCode({
-      onlyFromCamera: false,
-      success: (res) => {
-
-        console.log(res)
-        this.data.scanStr = res.result
-
-        app.get2DCodeUrlArgs(res.result,
-          (res) => {
-            if (res.codeId != undefined && res.eqId != undefined && res.codeCategory != undefined && res.codeId != null && res.eqId != null && res.codeCategory != null) {
-              let url = "../" + res.codeCategory + "/" + res.codeCategory + "?"
-              let args = "";
-              for (let key in res) {
-                console.log(key + "=" + res[key])
-                args = args + "&" + key + "=" + res[key];
-
-              }
-              url = url + args
-              wx.navigateTo({
-                url: url,
-              })
-
-            } else {
-              app.navigateToMessage("二维码出错！", "请确认所扫二维码是否正确", "warn")
-            }
-          },
-          (err) => {
-
-          })
-
-        /*
-        try {
-          var cd = JSON.parse(res.result)
-          console.log(cd);
-          if (cd != null) {
-            var ulrStr = cd.url + cd.args
-            wx.navigateTo({
-              url: ulrStr
-
-            })
-          }
-         
-        } catch (err) {
-
-        }
-         
-        this.setData({
-          scanStr: this.data.scanStr
-        })
-      },
-      fail: (err) => {
-        console.log(err)
-      }
-    }) */
+   
 
   },//end onScan
 
   onUserManager: function() {
+   
+   let eqid ="A1CVD01"
+   
+   if(eqid.length<8)
+   {
+     let fab= eqid.substring(0,2)
+     let eqtype= eqid.substring(2,5)
+     let eqnum = eqid.substring(5,7)
+     let str2= "/(^"+fab+"$)|(^"+fab+eqtype+"$)|(^"+fab+eqtype+eqnum+")/i"
+     console.log(str2)
+     let str = "(^A1)|(^A1CVD)|(^A1CVD01)"
+     let reg = new RegExp(str2)
 
-     wx.getStorage({
-       key: 'xx',
-       success: function(res) {
-          console.log("success:"+res)
-       },
-       fail:(err)=>
-       {
-         console.log("fail:"+err)
-       }
-     })
+      let rs = reg.test("A1CDV")
+      console.log(rs)
+    
+      let db = wx.cloud.database()
+      console.log(eqid)
+        db.collection("pageprivilege").where(
+          {
+            userid:"99052728",
+            eqid:new db.RegExp(
+              {
+                regexp:str2,
+                options:'i'
+              }
+            ),
+            page:"dailyCheck"
+          }
+        ).get(
+          {
+            success:(res)=>
+            {
+              console.log(res)
+            }
+          }
+        )
+
+   }else
+   {
+
+   }
+
+   wx.showModal({
+     title: '暂未开放使用',
+     content: '开发测试中，暂未开放用户使用',
+     showCancel:false,
+   })
     
 
 /*
@@ -279,40 +316,44 @@ Page({
   },
 
   onBinding: function(e) {
-    let user = app.globalData.appUserInfo
-    //user not login
-    if (user == null) {
-      wx.redirectTo({
-        url: '../user/userLogin',
-      })
-    } else {
-      //user is black list
-      if (user.blacklist) {
-        app.navigateToMessage("禁止使用！", "您的账号被管理员禁止使用，如有任何问题，请与部门负责人联系！", "warn")
-      } else {
-        //user not pas auth
-        if (!user.auth) {
-          app.navigateToMessage("您的用户审核中", "您提交的资料等待部门负责人审核中，如有任何问题，请与部门负责人联系！", "waiting")
-        } else {
-          if (user.appadmin) {
-            //normal processs
-            /*
-            wx.scanCode({
-              onlyFromCamera: false,
-              success: (res) => {
-                this.sumitCodeLocation(res.result)
-              }
-            }) */
-            wx.navigateTo({
-              url: '../bindingCode/bindingCode',
-            })
-          } else {
-            app.navigateToMessage("权限不足!", "您的用户权限不足！", "warn")
-          }
+    
+    wx.navigateTo({
+      url: '../bindingCode/bindingCode',
+    })
 
-        }
-      }
-    }
+     /* 权限验证证放到下级页面
+     wx.cloud.callFunction(
+       {
+         
+         
+         name:"verifyPrivilege",
+         data:
+         {
+           page:"bindingCode"
+         },
+         success:(res)=>
+         {
+           if(res.result.userinfo!=undefined&&res.result.userinfo!=null)
+           {
+             app.globalData.appUserInfo=res.result.userinfo
+           }
+           if(res.result.returnCode<0)
+           {
+             app.navigateToMessage("权限验证失败",res.result.returnText,"warn")
+           }else
+           {
+             wx.navigateTo({
+               url: '../bindingCode/bindingCode',
+             })
+           }
+         },
+         fail:(err)=>
+         {
+           app.navigateToMessage("权限验证出错", err, "warn")
+         }
+       }
+     )*/
+ 
 
   },
 

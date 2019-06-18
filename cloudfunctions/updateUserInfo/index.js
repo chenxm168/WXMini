@@ -2,10 +2,16 @@
 const cloud = require('wx-server-sdk')
 
 //cloud.init()
-
+/*
 cloud.init({
   env: "asd-smart-cloud-dev-kwtq8"
 }) //develop
+*/
+//prod env
+
+cloud.init({
+  env: "asd-smart-cloud-k2u5e"
+}) 
 
 // 云函数入口函数
 exports.main = async (event, context) => {
