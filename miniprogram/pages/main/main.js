@@ -172,6 +172,48 @@ Page({
 
   onUserManager: function() {
    
+   
+   wx.cloud.getTempFileURL(
+     {
+             
+       //fileList: ['cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e/scan.png'],
+          success: res=>{
+            console.log(res);
+          },
+
+          fail:(res)=>
+          {
+            console.log(res);
+          }
+
+     }
+   ) 
+   
+   wx.navigateTo({
+     url: '../exam/exam',
+   })
+
+   /*
+   wx.chooseImage({
+     success: function(res) {
+       console.log(res);
+       
+       wx.cloud.uploadFile(
+         {
+           cloudPath: 'my-photo.png',
+           // 指定要上传的文件的小程序临时文件路径
+           filePath: res.tempFilePaths[0],
+           // 成功回调
+           success: res => {
+             console.log('上传成功', res)
+           }
+         }
+       ) 
+     },
+   }) */
+
+
+   /* privilege test 
    let eqid ="A1CVD01"
    
    if(eqid.length<8)
@@ -219,6 +261,8 @@ Page({
      content: '开发测试中，暂未开放用户使用',
      showCancel:false,
    })
+
+    */
     
 
 /*

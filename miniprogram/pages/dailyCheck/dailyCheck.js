@@ -1237,7 +1237,8 @@ Page({
        console.log("CHECKED")
        let itemIdx = e.currentTarget.dataset.index
       this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].EQSTOP=true
-      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE="Entering"
+      //this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE="Entering"
+      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE = "StopInspection"
       this.setData(
         {
           checkdetail:this.data.checkdetail
@@ -1248,7 +1249,8 @@ Page({
       let itemIdx = e.currentTarget.dataset.index
       console.log("No Checked")
       this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].EQSTOP = false
-      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE = "StopInspection"
+      //this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE = "StopInspection"
+      this.data.checkdetail.subeqlist[itemIdx[0]].itemlist[itemIdx[1]].INSPECTIONSTATE = "Entering"
       this.setData(
         {
           checkdetail: this.data.checkdetail

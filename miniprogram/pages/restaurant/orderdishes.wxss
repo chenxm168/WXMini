@@ -1,0 +1,89 @@
+/* pages/restaurant/orderdishes.wxss */
+.page{
+
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+}
+.swiper-image
+{ 
+
+ 
+  border-radius: 5rpx;
+}
+
+.swiper-contianer
+{
+ display: flex;
+
+  flex-direction: column;
+
+  justify-content:   flex-end;
+
+  padding: 10rpx;
+ /* border: 5rpx dotted green; */
+}
+
+.swiper-item-contianer
+{
+ 
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content:   flex-end;
+  align-items: center;
+  padding: 5px 5px;
+  
+  /*  border: 4rpx solid red;*/
+}
+
+.swiper-image
+{ 
+
+ /* border: 5rpx solid blue; */
+  border-radius: 5rpx;
+}
+
+.dd
+{
+  
+  padding: 10rpx;
+ 
+   justify-content:center;
+   border: 5rpx solid red;
+   
+}
+
+.dishes-cells-container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content:  flex-start;
+}
+
+.dishes-category-cells
+{
+  width: 60px;
+  border-top-right-radius: 5rpx;
+  
+  
+}
+
+.dishes-category-cells-cell
+{
+  /*margin-bottom: 10rpx; */
+  padding: 5px;
+  height: 60px;
+  display: flex;
+  color: grey;
+  flex-direction: column;
+  justify-content:  space-between;
+  background-color: rgb(245, 243, 243);
+  border-top-right-radius: 5rpx;
+  border-bottom-right-radius: 5rpx;
+  align-items: center;
+  font-size:  10px;
+}

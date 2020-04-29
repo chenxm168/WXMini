@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/restaurant/orderdishes",
     "pages/user/userLogin",
     "pages/main/main",
     "pages/user/userManager",
@@ -14,7 +15,10 @@
     "pages/openapi/openapi",
     "pages/msg/message",
     "pages/dailyCheck/dailyCheck",
-    "pages/bindingCode/bindingCode"
+    "pages/bindingCode/bindingCode",
+    "pages/exam/exam",
+    "pages/exam/scolview"
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
