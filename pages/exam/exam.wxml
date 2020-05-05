@@ -1,0 +1,9 @@
+<!--miniprogram/pages/exam/exam.wxml-->
+<text>{{ms}}:{{ts}}</text>
+<view>
+   <!--<image src="cloud://asd-smart-cloud-dev-kwtq8.6173-asd-smart-cloud-dev-kwtq8-1259294007/2DCODE-A1CVD01.png"></image>-->
+   
+   <button bindtap="onAddImage">Click</button>
+   <navigator url="/pages/exam/scolview" >to Scollview</navigator>
+
+</view>

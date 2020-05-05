@@ -1,0 +1,37 @@
+@import "../../style/weui.wxss";
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.page-section{
+  margin-bottom: 20rpx;
+}
+
+.asd-login-title
+{
+  font-size: 40rpx;
+  text-align: center;
+  margin-bottom: 50rpx;
+  margin-top: 30rpx;
+}
+
+.btn-area{
+  margin-top: 60rpx;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 30rpx;
+}

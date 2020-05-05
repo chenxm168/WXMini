@@ -1,0 +1,33 @@
+ <!--> 
+  <view style="height:30px">
+    <text>SCOLL-VIEW</text>
+   </view>
+  
+
+
+   <view class="scoll-container" style="height:100%">
+             <scroll-view scroll-y="true"  style="height:100%"  bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" data-="{{item.id}}" >
+        <block wx:for="{{scrollitems}}" wx:key="{{item.id}}">
+          <view id="{{item.id}}" class="scroll-view-item demo-text-1" >
+           <text>"{{item.id}}:{{item.text}}"</text>
+          </view>
+
+          </block>
+        </scroll-view>
+   
+
+</view>
+-->
+
+<view class="contianer">
+   <view class="swiper-contianer" style="height:{{swiperheight}}">
+     <swiper class="swiperplay">
+      <swiper-item>
+       </swiper-item>
+     </swiper>
+   
+   </view>
+
+
+
+</view>

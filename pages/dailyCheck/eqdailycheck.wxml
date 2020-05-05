@@ -1,0 +1,134 @@
+<!--miniprogram/pages/eqdailycheck.wxml
+<button bindtap='onDailyCheckDataRequest'>getCheckItemTest</button> 
+<view> {{checkdetail.eqdesc}}</view> -->
+<block wx:if="{{!errMsg.onError}}">
+  <view class="container">
+
+    <view class="page-body">
+      <!-- <block wx:if="{{checkdetail.eqid==null}}">-->
+      <block wx:if="{{false}}">
+        <view class="page-section page-section-gap ">
+          <view class="cus-cells ">
+            <view class="weui-cells__title ">
+              <view class='cus-align-between'>
+                <view class='weui-flex__item'>请选择设备 </view>
+                <block wx:if="{{fabErr}}">
+                  <icon class="icon-small" type="warn" size="18"></icon>
+                </block>
+              </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">当前选择</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                    <view class="weui-input">
+                      {{multiArray[0][multiIndex[0]]}}: {{multiArray[2][multiIndex[2]]}}
+                    </view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <!--end eq select-->
+
+      <block wx:if="{{checkdetail.subeqlist.length>0}}">
+        <block wx:for-items="{{checkdetail.subeqlist}}" wx:key="{{item.subeqid}}">
+
+          <view class="page-section page-section-gap " style='margin:10rpx 0'>
+
+            <view class="kind-list-item-hd {{item.showflag? 'kind-list-item-hd-show' : ''}}" data-="{{item.subeqid}}" bindtap='subeqclick'>
+              <view class="kind-list-text">{{item.subeqid}}:{{item.subeqdesc}}</view>
+              <image class="kind-list-img" src='../images/nav.png'></image>
+            </view>
+
+            <view class="kind-list-item-bd {{item.showflag ? 'kind-list-item-bd-show' : ''}}">
+
+              <!-- block 1-->
+              <block wx:for-items="{{item.itemlist}}" wx:key="{{item.INSPECTIONID}}">
+                <view style='margin:10rpx '>
+                  <view class='kind-check-item' style='font-size:25rpx'>项目：{{item.ITEMNAME}}</view>
+
+                  <view class='kind-item-block'>
+                    <view class='kind-check-unit'>单位： {{item.INSPECTIONUNIT}}</view>
+                    <!--<view class='kind-check-item'>标准： [{{item.MINIMUMFLAG}}{{item.MINIMUM}}] [{{item.MAXIMUMFLAG}}{{item.MAXIMUM}}]</view> -->
+                    <block wx:if="{{item.MINIMUM==item.MAXIMUM}}">
+                      <view class='kind-check-item'>标准： [等于:{{item.MINIMUM}}] </view>
+                    </block>
+                    <block wx:if="{{item.MINIMUM!=item.MAXIMUM}}">
+                      <view class='kind-check-item'>标准： [大于:{{item.MINIMUM}}] [小于:{{item.MAXIMUM}}]</view>
+                    </block>
+                  </view>
+
+
+                  <view class="input-cells-title" style='background-color: white'>点检值</view>
+                  <view class="weui-cells weui-cells_after-title">
+                    <view class="weui-cell weui-cell_input">
+                      <!-->
+                      <input class="weui-input" style='font-size:25' type="digit" placeholder="是非类型：1:OK;2:NG" />-->
+                      <input class="weui-input" style='font-size:25' type="digit" placeholder="{{(item.MINIMUM==item.MAXIMUM) ? '1表示OK；2表示NG' : '请输入点检值 '}} " />
+                    </view>
+                  </view>
+                  <!---->
+
+                </view>
+              </block>
+              <!--end block1-->
+            </view>
+          </view>
+
+
+
+
+
+
+
+
+
+        </block>
+        <!--end for-->
+
+      </block>
+      <!--end Subeqlist block-->
+
+
+    </view>
+    <!--<button bindtap='test'>test</button>-->
+
+
+  </view>
+</block>
+<block wx:if="{{errMsg.onError}}">
+  <view class='page'>
+    <view class="weui-msg">
+      <view class="weui-msg__icon-area">
+        <icon type="warn" size="93"></icon>
+      </view>
+      <view class="weui-msg__text-area">
+        <view class="weui-msg__title">程序出错了！</view>
+        <view class="weui-msg__desc">{{errMsg.errorText}}
+          <navigator url="" class="weui-msg__link"></navigator>
+        </view>
+      </view>
+      <view class="weui-msg__opr-area">
+
+        <view class="weui-btn-area">
+          <!--  <button class="weui-btn" type="primary">推荐操作</button> -->
+          <!-- <button class="weui-btn"  open-type="exit" target="miniProgram" type="default" bindtap="onExit">退出</button>-->
+        </view>
+      </view>
+      <view class="weui-msg__extra-area">
+        <view class="weui-footer">
+          <view class="weui-footer__links">
+            <!--  <navigator url="" class="weui-footer__link">底部链接文本</navigator>-->
+          </view>
+          <view class="weui-footer__text">ASD CIM Team</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

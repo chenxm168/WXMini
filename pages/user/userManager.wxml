@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <view class="cus-cells ">
+        <view class='cus-cell'>
+          <view class='cus-cell-bd'  bindtap='onWaitForAuthList'>
+            <view style='display:flex;align-items: center'>待审核用户
+            <view class="weui-badge" style="margin-left: 2rpx;">8</view>
+            </view>
+            <view>></view>
+          </view>
+        </view>
+        <view class='cus-cell'>
+          <view class='cus-cell-bd' bindtap='onBlackList'>
+            <view >黑名单用户</view>
+            <view>></view>
+          </view>
+        </view>
+      </view>
+    </view><!--end page section-->
+
+
+
+
+  </view>
+
+</view>

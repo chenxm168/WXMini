@@ -1,0 +1,154 @@
+<view class="cus-container">
+  <view class="page-head container">
+    <view class="page-head-title" style='font-size:40rpx;margin-top:20rpx'>二维码位置注册</view>
+    <view class="page-head-line"></view>
+    <view wx:if="{{desc}}" class="page-head-desc">{{desc}}</view>
+  </view>
+  <view class="page-body">
+
+
+    <block wx:if="{{readySumit}}">
+      <view class="page-section">
+        <view class="weui-cells__title ">
+          <view class='cus-align-between'>
+            <view class='weui-flex__item' style="font-color:{{errorcolor}}">二维码ID </view>
+            <block wx:if="{{userIdErr}}">
+              <icon class="icon-small" type="warn" size="18"></icon>
+            </block>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+           <!-- <input class="weui-input" type="number" maxlength="9" auto-focus placeholder="2D Code Id" bindinput='onCodeIdChange' /> -->
+          <input class="weui-input" value="{{codeid}}"  auto-focus placeholder="2D Code Id" bindinput='onCodeIdChange' />
+          </view>
+        </view>
+      </view>
+
+      
+      <view class="page-section">
+        <view class="weui-cells__title ">
+          <view class='cus-align-between'>
+            <view class='weui-flex__item'>设备ID </view>
+            <block wx:if="{{usernameErr}}">
+              <icon class="icon-small" type="warn" size="18"></icon>
+            </block>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input" value="{{eqid}}" maxlength='11' placeholder="例:C1ODF01" bindinput='onEqidChange' />
+          </view>
+        </view>
+      </view>
+
+      <view class="page-section">
+        <view class="weui-cells__title ">
+          <view class='cus-align-between'>
+            <view class='weui-flex__item'>请输入参数 </view>
+            <block wx:if="{{usernameErr}}">
+              <icon class="icon-small" type="warn" size="18"></icon>
+            </block>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input" value="{{args}}" placeholder="例:?eqid=C1ODF01" bindinput='onArgsChange' />
+          </view>
+        </view>
+      </view>
+
+
+      <view class="page-section">
+        <view class="weui-cells__title ">
+          <view class='cus-align-between'>
+            <view class='weui-flex__item'>请输入跳转页面 </view>
+            <block wx:if="{{usernameErr}}">
+              <icon class="icon-small" type="warn" size="18"></icon>
+            </block>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input" style='width:100%'>
+            <input class="weui-input" value="{{page}}" placeholder="例:/pages/dailyCheck/dailyCheck" bindinput='onPageChange' />
+          </view>
+        </view>
+      </view>
+
+
+      <view class="page-section">
+        <view class="weui-cells__title">是否需要验证位置</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">是否验证</view>
+            <view class="weui-cell__ft">
+              <switch checked bindchange='onSwitchChange' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <block wx:if="{{verifyflag}}">
+      <view  class="page-section">
+        <view class="weui-cells__title ">
+          <view class='cus-align-between'>
+            <view class='weui-flex__item'>请输入验证精度(单位：米) </view>
+            <block wx:if="{{usernameErr}}">
+              <icon class="icon-small" type="warn" size="18"></icon>
+            </block>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input" value="{{verifyaccuracy}}" type='number' maxlength="3" placeholder="20" bindinput='onVerifyAccuracyChange' />
+          </view>
+        </view>
+      </view>
+      </block>
+      <!-->
+      <view class="page-section">
+        <view class="weui-cells__title ">
+          <view class='cus-align-between'>
+            <view class='weui-flex__item'>是否验证位置 </view>
+            <block wx:if="{{usernameErr}}">
+              <icon class="icon-small" type="warn" size="18"></icon>
+            </block>
+          </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell weui-cell_switch">
+              <view class="weui-cell__bd">标题文字</view>
+              <view class="weui-cell__ft">
+                <switch checked />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view> -->
+
+
+
+
+
+
+
+    </block>
+
+
+
+
+
+
+
+
+    <view class="page-section btn-area">
+      <button wx:if="{{readySumit}}" type="primary" style='mmargin-bottom: 60rpx;margin-top:60rpx' bindtap='onSumitBinding'>提交绑定</button>
+      <button wx:if="{{!readySumit}}" type="primary" style='mmargin-bottom: 60rpx;margin-top:60rpx' bindtap='onScan'>扫描二维码</button>
+    </view>
+
+  </view>
+  <view class="page-foot">
+
+  </view>
+</view>
