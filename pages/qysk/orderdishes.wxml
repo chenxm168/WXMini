@@ -88,6 +88,13 @@
      
      <view class="page-foot-shoppingtrolley"  >
             <image class="page-foot-shoppingtrolley-image" src="/images/30.gif" style="height:30px;width:50px" mode="heightFix" ></image>
+
+            <text class="page-foot-shoppingtrolley-icon-text">9</text>
+             <view class="page-foot-shopping-total-text">
+                <text class="page-foot-shopping-total-text-2">￥</text>
+                <text class="page-foot-shopping-total-text-2">60.0</text>
+             </view>
+            
      </view>
 
      <view class="page-foot-order">
