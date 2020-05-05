@@ -1,0 +1,102 @@
+<view class="page" style="height:{{pageheight}}px;width:100%">
+  <view class="page-header" style="height:{{headerheight}}px">
+      <swiper class="swiperplay" indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{autoplayimages}}">
+         <swiper-item>
+           
+           <image class="swiper-image" style="width:100%" src="{{item.src}}" mode="scaleToFill">
+           
+           </image>
+           
+         </swiper-item>
+       </block>
+         
+     
+      </swiper>
+  </view>
+
+  <view class="page-body" style="height:{{bodyheight}}px">
+      <scroll-view class="gategory-scorll-view" scroll-y="true" style="height: 100%;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" data-="{{toView}}"  >
+        <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>1</view>
+         </view>
+
+        <view class="dishes-category-cells-cell" style="background-color:white">
+           <view>image</view>
+           <view style="fornt-size:10rpx">店长推荐</view>
+         </view>
+
+         <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>招  牌</view>
+         </view>
+
+          <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>4</view>
+         </view>
+
+          <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>5</view>
+         </view>
+
+          <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>6</view>
+         </view>
+
+          <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>7</view>
+         </view>
+
+         <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>8</view>
+         </view>
+
+         <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>9</view>
+         </view>
+
+         <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>10</view>
+         </view>
+
+         <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>11</view>
+         </view>
+
+         <view class="dishes-category-cells-cell">
+           <view>image</view>
+           <view>12</view>
+         </view>
+
+
+      </scroll-view>
+   
+  
+  </view>
+
+  <view class="page-foot" style="height:{{footheight}}px">
+     
+     <view class="page-foot-shoppingtrolley"  >
+            <image class="page-foot-shoppingtrolley-image" src="/images/30.gif" style="height:30px;width:50px" mode="heightFix" ></image>
+     </view>
+
+     <view class="page-foot-order">
+         <text class="page-foot-order-text" > 选好了  ></text>
+          
+         
+     </view>
+  
+  </view>
+
+
+</view>

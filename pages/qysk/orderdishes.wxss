@@ -1,0 +1,130 @@
+/* pages/qysk/orderdishes.wxss */
+
+.page
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 0;
+}
+
+.page-header
+{
+  /* height: 120px;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 2rpx;
+ /* border: 2px solid red;*/
+}
+.page-body
+{
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-grow: 0;
+ /* border: 2px solid black;*/
+  
+}
+.page-foot
+{
+ /* height: 50px;*/
+ /* border: 2px solid blue; */
+  flex-shrink: 0;
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-foot-shoppingtrolley
+{
+  width:70%;
+  background-color: #e43535;
+  padding-right: 2rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content:  flex-start;
+  align-items: center;
+}
+
+.page-foot-shoppingtrolley-image
+{
+  padding-left: 10px;
+}
+
+.page-foot-shoppingtrolley-image-cell
+{
+      display: flex;
+      flex-direction: row;
+      flex-grow: 0;
+      height: 40;
+      width: 40;
+     
+}
+
+.page-foot-order
+{
+  width: 30%;
+  background-color: #e43535;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-left: 2rpx solid white;
+}
+
+.page-foot-order-text
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  color: white;
+  font-size: 35rpx;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-style:   italic;
+  font-weight:    bolder;
+  text-align: center;
+  
+  /*border: 2rpx solid white;*/
+}
+
+
+.swiperplay
+{
+  display: flex;
+ 
+}
+
+.swiper-image
+{
+   
+}
+
+.gategory-scorll-view
+{
+ 
+   width: 60px;
+  border-top-right-radius: 2rpx;
+  overflow-anchor: initial;
+  scrollbar-arrow-color: red;
+}
+
+.dishes-category-cells-cell
+{
+  padding: 5px;
+  height: 60px;
+  display: flex;
+  color: grey;
+  flex-direction: column;
+  justify-content:  space-between;
+  background-color: #f5f3f3;
+  border-top-right-radius: 5rpx;
+  border-bottom-right-radius: 5rpx;
+  align-items: center;
+  font-size:  10px;
+}
