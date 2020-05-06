@@ -19,18 +19,19 @@ Page({
       autoplayimages: [{ name: "youhuijuan", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage06.jpg" },
     { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage03.jpg" }],
 
-      dishescategorylist:[{id:"dianzhangtuijian",desc:"店长推荐",image:"",ischoose:true},
-        { id: "jinritejia", desc: "今日特价", image: "", ischoose: false},
-        { id: "kaochuang", desc: "烧串", image: "", ischoose: false},
-        { id: "haixian", desc: "海鲜", image: "", ischoose: false },
-        { id: "4", desc: "4", image: "", ischoose: false },
+      dishescategorylist:[{id:"dianzhangtuijian",desc:"1店长推荐",image:"",ischoose:true},
+        { id: "jinritejia", desc: "2今日特价", image: "", ischoose: false},
+        { id: "kaochuang", desc: "3烧串", image: "", ischoose: false},
+        { id: "haixian", desc: "4海鲜", image: "", ischoose: false },
+        
         { id: "5", desc: "5", image: "", ischoose: false },
         { id: "6", desc: "6", image: "", ischoose: false },
         { id: "7", desc: "7", image: "", ischoose: false },
         { id: "8", desc: "8", image: "", ischoose: false },
         { id: "9", desc: "9", image: "", ischoose: false },
         { id: "10", desc: "10", image: "", ischoose: false },
-        { id: "11", desc: "11", image: "", ischoose: false } ],
+        { id: "11", desc: "11", image: "", ischoose: false },
+        { id: "12", desc: "12", image: "", ischoose: false }, ],
 
     testlist: [{ id: "1", name: "name1" }, { id: "2", name: "name2"}]
 
@@ -185,6 +186,9 @@ Page({
   },
   gategoryScroll:function(res)
   {
+    let h= res.detail.scrollTop;
+    let h2 = h/60+1;
+    console.log(h2);
     console.log(res);
   }
 
