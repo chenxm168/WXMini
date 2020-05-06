@@ -16,21 +16,23 @@
   </view>
 
   <view class="page-body" style="height:{{bodyheight}}px">
-    <scroll-view class="gategory-scorll-view" scroll-y="true" style="height: 100%;" bindscrolltoupper="upper" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-     <!-->
+
+    <!-- 菜品种类滚动-->
+    <scroll-view class="gategory-scorll-view" scroll-y="true" style="height: 100%;" bindscrolltoupper="gategoryUpper" bindscrolltolower="gategoryLower" scroll-into-view="{{gategoryToView}}" scroll-top="{{gategoryScrollTop}}"  bindscroll="gategoryScroll" >
+      <!-->
       <block wx:for="dishescategorylist" wx:key="id">
         <view id="{{item.id}}" class="dishes-category-cells-cell" data-="id:{{item.id}}" bindtap="dishescategoryclick">
           <view>image</view>
           <view>{{item.desc}}</view>
         </view>
 
-      </block>  -->
+      </block> -->
 
-       <view wx:for="{{dishescategorylist}}" wx:key="id" id="{{item.id}}" class="dishes-category-cells-cell" data-="{{item.id}}" bindtap="dishescategoryclick">
-          <view>image</view>
-          <view>{{item.desc}}</view>
-        </view>
-
+      <view wx:for="{{dishescategorylist}}" wx:key="id" id="{{item.id}}" class="dishes-category-cells-cell" data-="{{item.id}}" bindtap="dishescategoryclick" style="background-color:{{item.ischoose? 'white':'#f5f3f3'}}">
+        <view>image</view>
+        <view>{{item.desc}}</view>
+      </view>
+      <!--
       <view class="dishes-category-cells-cell">
         <view>image</view>
         <view>1</view>
@@ -90,10 +92,23 @@
         <view>image</view>
         <view>12</view>
       </view>
+       -->
+
+    </scroll-view>
+    <!-- 菜品种类滚动end -->
+
+    <scroll-view class="dishes-scroll-view">
+      <view class="dishes-list-form">
+        <view class="dishes-gategory-title">
+        </view>
+
+        <view class="dishes-cell"> 
+        </view>
+
+      </view>
 
 
     </scroll-view>
-
 
   </view>
 

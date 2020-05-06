@@ -15,10 +15,11 @@ Page({
       autoplay: true,
       interval: 5000,
       duration: 500,
+     gategoryToView:"",
       autoplayimages: [{ name: "youhuijuan", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage06.jpg" },
     { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage03.jpg" }],
 
-      dishescategorylist:[{id:"dianzhangtuijian",desc:"店长推荐",image:"",ischoose:false},
+      dishescategorylist:[{id:"dianzhangtuijian",desc:"店长推荐",image:"",ischoose:true},
         { id: "jinritejia", desc: "今日特价", image: "", ischoose: false},
         { id: "kaochuang", desc: "烧串", image: "", ischoose: false},
         { id: "haixian", desc: "海鲜", image: "", ischoose: false },
@@ -41,6 +42,8 @@ Page({
   onLoad: function (options) {
 
     try {
+
+      //获取手机象素
       const res = wx.getSystemInfoSync()
      
       // this.data.bodyheight=res.windowHeight-this.data.headerheight-this.data.footheight-8;
@@ -126,19 +129,63 @@ Page({
 
   },
   
+  /**
+   * 点击选好，跳转订单界面
+   */
   toOrder:function()
   {
     console.log("go to order");
   },
 
+  /**
+   * 轮播图象点击
+   */
   swiperclick:function(res)
   {
     console.log(res);
   },
+
+  /**
+   * 点击菜品种类
+   */
   dishescategoryclick:function(res)
   {
+    for(let i=0;i<this.data.dishescategorylist.length;i++)
+    {
+      if(this.data.dishescategorylist[i].id==res.currentTarget.id)
+      {
+        this.data.dishescategorylist[i].ischoose=true;
+      }else
+      {
+        this.data.dishescategorylist[i].ischoose=false;
+      }
+    }//end for
+
+
+    this.setData({ dishescategorylist: this.data.dishescategorylist });
+
     console.log(res);
    // console.log(this.data.dishescategorylist);
+  },
+
+  /**
+   * 菜品分类上划到顶
+   */
+  gategoryUpper:function()
+  {
+
+  },
+
+  /**
+   * 菜品分类下划到顶
+   */
+  gategoryLower:function()
+  {
+
+  },
+  gategoryScroll:function(res)
+  {
+    console.log(res);
   }
 
 })

@@ -148,12 +148,13 @@
   display: flex;
   color: grey;
   flex-direction: column;
-  justify-content:  space-between;
+  justify-content:   space-evenly;
   background-color: #f5f3f3;
   border-top-right-radius: 5rpx;
   border-bottom-right-radius: 5rpx;
   align-items: center;
   font-size:  10px;
+  border-bottom-style: 2rpx solid grey;
 }
 
 .page-foot-shoppingtrolley-icon-text
@@ -203,4 +204,10 @@
   padding-left: 4px;
   font-size: 20px;
   
+}
+
+.dishes-scroll-view
+{
+  width:100%;
+  border: 2px solid green;
 }
