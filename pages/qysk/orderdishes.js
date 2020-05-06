@@ -5,17 +5,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      
+      ordercount:1,
       pageheight:500,
       bodyheight:400,
       headerheight:120,
-      footheight:50,
+      footheight:70,
       indicatorDots: true,
       autoplay: true,
       interval: 5000,
       duration: 500,
       autoplayimages: [{ name: "youhuijuan", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage06.jpg" },
-    { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage03.jpg" }]
+    { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage03.jpg" }],
+
+      dishescategorylist:[{id:"dianzhangtuijian",desc:"店长推荐",image:"",ischoose:false},
+        { id: "jinritejia", desc: "今日特价", image: "", ischoose: false},
+        { id: "kaochuang", desc: "烧串", image: "", ischoose: false},
+        { id: "haixian", desc: "海鲜", image: "", ischoose: false },
+        { id: "4", desc: "4", image: "", ischoose: false },
+        { id: "5", desc: "5", image: "", ischoose: false },
+        { id: "6", desc: "6", image: "", ischoose: false },
+        { id: "7", desc: "7", image: "", ischoose: false },
+        { id: "8", desc: "8", image: "", ischoose: false },
+        { id: "9", desc: "9", image: "", ischoose: false },
+        { id: "10", desc: "10", image: "", ischoose: false },
+        { id: "11", desc: "11", image: "", ischoose: false } ],
+
+    testlist: [{ id: "1", name: "name1" }, { id: "2", name: "name2"}]
 
   },
 
@@ -30,8 +46,14 @@ Page({
       // this.data.bodyheight=res.windowHeight-this.data.headerheight-this.data.footheight-8;
       // this.setData({bodyheight:this.data.bodyheight});
       this.data.pageheight=res.windowHeight;
-      
-      this.data.bodyheight=res.windowHeight-this.data.headerheight-this.data.footheight;
+      if(this.data.ordercount>0)
+      {
+        this.data.bodyheight = res.windowHeight - this.data.headerheight - this.data.footheight;
+      }else
+      {
+        this.data.bodyheight = res.windowHeight - this.data.headerheight;
+      }
+      console.log(this.data.bodyheight);
       this.setData({ pageheight: this.data.pageheight,bodyheight:this.data.bodyheight,headerheight:this.data.headerheight,footheight:this.data.footheight });
     } catch (e) {
       // Do something when catch error
@@ -102,5 +124,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  
+  toOrder:function()
+  {
+    console.log("go to order");
+  },
+
+  swiperclick:function(res)
+  {
+    console.log(res);
+  },
+  dishescategoryclick:function(res)
+  {
+    console.log(res);
+   // console.log(this.data.dishescategorylist);
   }
+
 })
