@@ -15,9 +15,10 @@ Page({
       autoplay: true,
       interval: 5000,
       duration: 500,
+      dishescellheight:70,
      gategoryToView:"",
-      autoplayimages: [{ name: "youhuijuan", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage06.jpg" },
-    { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage03.jpg" }],
+    autoplayimages: [{ name: "youhuijuan", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/replayimage/001.jpg" },
+      { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/replayimage/002.jpg" }],
 
       dishescategorylist:[{id:"dianzhangtuijian",desc:"1店长推荐",image:"",ischoose:true},
         { id: "jinritejia", desc: "2今日特价", image: "", ischoose: false},
@@ -187,7 +188,7 @@ Page({
   gategoryScroll:function(res)
   {
     let h= res.detail.scrollTop;
-    let h2 = h/60+1;
+    let h2 = Math.round(h / 60 + 1) ;
     console.log(h2);
     console.log(res);
   }

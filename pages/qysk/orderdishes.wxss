@@ -129,7 +129,9 @@
 
 .swiper-image
 {
-   
+   display: flex;
+   height: 100%;
+   width: 100%;
 }
 
 .gategory-scorll-view
@@ -209,5 +211,85 @@
 .dishes-scroll-view
 {
   width:100%;
-  border: 2px solid green;
+  /* border: 2px solid green;*/
+  padding: 5px;
+}
+
+.dishes-list-form
+{
+   
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+}
+
+.dishes-gategory-title
+{
+   height: 15px;
+   padding: 2px;
+   background-color: #e43535;
+   color: white;
+   font-size: 12px;
+   font-style:  italic;
+   text-align: center;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   letter-spacing:  4px;
+}
+.dishes-cell
+{
+  
+  display: flex;
+  justify-content: space-between;
+  /* border: 2rpx solid yellow; */
+  border-bottom: 2px dotted #f5f3f3;
+ 
+}
+.dishes-cell-image
+{
+  display: flex;
+  height: 100%;
+  width:height;
+ /*  border: 2rpx solid red; */
+}
+.dishes-cell-text-box
+{
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   width: 100%;
+   justify-content:   space-between;
+   margin: 1px 10px;
+}
+
+.dishes-cell-tex-title
+{
+  font-weight: bolder;
+  color: black;
+  font-size:  12px;
+  text-align: left;
+  text-shadow:  2px;
+}
+.dishes-cell-tex-desc
+{
+   font-weight: normal;
+  color: grey;
+  font-size:  9px;
+  text-align: left;
+}
+
+.dishe-cell-tex-saleoff
+{
+  display: flex;
+  font-weight: normal;
+  color: #e43535;
+  font-size:  9px;
+  width:30px;
+  letter-spacing: 1px;
+  border: 1px solid #e43535; 
+  text-align: center;
 }

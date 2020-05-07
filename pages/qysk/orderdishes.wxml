@@ -97,12 +97,116 @@
     </scroll-view>
     <!-- 菜品种类滚动end -->
 
-    <scroll-view class="dishes-scroll-view">
+    <scroll-view class="dishes-scroll-view" scroll-y="true">
       <view class="dishes-list-form">
         <view class="dishes-gategory-title">
+            热销
         </view>
 
-        <view class="dishes-cell"> 
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+             <text class="dishes-cell-tex-desc" >主要原料：皮皮虾</text>
+             <label class="dishe-cell-tex-saleoff">9.5折</label>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-002-1.jpg" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-002-1.jpg" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
         </view>
 
       </view>
