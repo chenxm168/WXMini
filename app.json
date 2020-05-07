@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/common/test",
+    "pages/common/restaurant",
     "pages/qysk/orderdishes",
     "pages/restaurant/orderdishes2",
     "pages/restaurant/orderdishes",

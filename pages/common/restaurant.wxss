@@ -1,0 +1,7 @@
+/* pages/common/restaurant.wxss */
+.dishes-box
+{
+  border: 1px solid red;
+
+  height:  inherit;
+}

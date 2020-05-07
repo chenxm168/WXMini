@@ -1,0 +1,14 @@
+<!--pages/common/restaurant.wxml-->
+<template name="dishesBox">
+      
+  <view class="dishes-box" style="height:{{boxdatas.styles.boxheight}};width:{{boxdatas.pastylesram.boxwidth}}" bindtap="{{boxdatas.events.clickevent}}">
+
+  </view>
+  <image class="dishes-box-image" src="{{boxdatas.datas.imagesrc}}"></image>
+
+
+
+
+</template>
+
+<template is="dishesBox" data="{{boxdatas}}"></template>

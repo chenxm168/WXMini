@@ -1,0 +1,2 @@
+<import src="/pages/common/restaurant.wxml"/>
+<template is="dishesBox" data="{{boxdatas}}"></template>

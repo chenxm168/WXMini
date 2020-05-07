@@ -262,7 +262,7 @@
    flex-direction: column;
    height: 100%;
    width: 100%;
-   justify-content:   space-between;
+   justify-content:   flex-start;
    margin: 1px 10px;
 }
 
@@ -272,24 +272,40 @@
   color: black;
   font-size:  12px;
   text-align: left;
+  letter-spacing: 1rpx;
   text-shadow:  2px;
+  box-shadow: 2px;
 }
 .dishes-cell-tex-desc
 {
+  margin-top: 2px;
    font-weight: normal;
   color: grey;
-  font-size:  9px;
+  font-size:  8px;
   text-align: left;
 }
 
 .dishe-cell-tex-saleoff
 {
+  margin-top: 2px;
   display: flex;
-  font-weight: normal;
+  font-weight:  lighter;
   color: #e43535;
-  font-size:  9px;
-  width:30px;
+  font-size:  6px;
+  width:20px;
   letter-spacing: 1px;
-  border: 1px solid #e43535; 
+  border-width:  thin;
+  border: 1rpx solid #e43535; 
   text-align: center;
+  justify-content: center;
+}
+.dishes-cell-tex-price
+{
+  display: flex;
+  justify-items: flex-end;
+  align-items:  flex-end;
+  color: #e43535;
+  font-size: 12px;
+  font-weight:  bold;
+
 }
