@@ -6,9 +6,37 @@ Page({
    */
   data: {
 
-    param:{boxheight:"120rpx",
-             boxwidth:"100%",
-      clickevent:"caipingclick"},
+    param:{dishesBoxHeight:"120rpx",
+      dishesBoxWidth:"100%",
+      dishesBoxClass:"dishes-box",
+      dishesImageClass:"dishes-image",
+      dishesImageHeight:"",
+      dishesImageWidth:"40%",
+      dishesImageMode:"scaleToFill",
+      dishesDetailCellsClass:"dishes-detail-cells",
+      dishesDetailCellsHeight:"auto",
+      dishesDetailCellsWidth:"auto",
+
+      dishesDetailCellsTextCellClass:"dishes-detail-cells-text-cell",
+      dishesDetailCellsTextCellHeight: "70%",
+      dishesDetailCellsTextCellWidth: "auto",
+      
+      dishesTitleClass:"dishes-title",
+
+      dishesDescClass:"dishes-desc",
+      
+      dishesSaleClass:"dishes-sale"
+
+
+      
+      },
+
+      datas:
+      {
+        dishesBoxId:"",
+        dishesImageSrc:""
+
+      },
 
       boxdatas:
       {

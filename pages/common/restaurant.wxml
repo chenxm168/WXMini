@@ -1,14 +1,87 @@
-<!--pages/common/restaurant.wxml-->
-<template name="dishesBox">
+<!--pages/common/restaurant.wxml
+ use example:
+ wxml file:
+ <import src="/pages/common/restaurant.wxml" />
+<template is="dishesbox" data="{{param:param,dishesImageSrc:datas.dishesImageSrc,dishesTitle:'Title',dishesDesc:'dfsfd',dishesSale:'9.5折',dishesTitle:'',dishesPrice:'',dishesOldPrice:''，addBtnClick:''}}"></template>
+
+
+js file:
+
+    param: {
+      dishesBoxHeight: "220rpx",
+      dishesBoxWidth: "100%",
+      dishesBoxClass: "dishes-box",
+      dishesImageClass: "dishes-image",
+      dishesImageHeight: "auto",
+      dishesImageWidth: "40%",
+      dishesImageMode: "scaleToFill",
+      dishesDetailCellsClass: "dishes-detail-cells",
+      dishesDetailCellsHeight: "auto",
+      dishesDetailCellsWidth: "60%",
+
+      dishesTitleClass: "dishes-title",
+
+      dishesDescClass: "dishes-desc",
+
+      dishesSaleClass: "dishes-sale",
       
-  <view class="dishes-box" style="height:{{boxdatas.styles.boxheight}};width:{{boxdatas.pastylesram.boxwidth}}" bindtap="{{boxdatas.events.clickevent}}">
+      dishesPriceCellClass:"dishes-price-cell",
+
+      dishesPriceClass:"dishes-price-text",
+
+      dishesOldPriceClass:"dishes-old-price-text",
+
+      dishesAddBtnCellClass:"dishes-add-btn-cell",
+
+      dishesAddBtnClass:"dishes-add-btn"
+      
+    },
+
+
+wxss file:
+
+@import 'restaurant.wxss'
+
+  -->
+<!-- 单个菜品的盒子  -->
+<template name="dishesbox">
+  <view class="{{param.dishesBoxClass}}" id="{{dishesBoxId}}" style="height:{{param.dishesBoxHeight}};width:{{param.dishesBoxWidth}}" bindtap="caipingclick" data-="{{param}}">
+
+    <image class="{{param.dishesImageClass}}" style="height:{{param.dishesImageHeight}};width:{{param.dishesImageWidth}}" mode="{{param.dishesImageMode}}" src="{{dishesImageSrc}}"></image>
+
+    <view class="{{param.dishesDetailCellsClass}}" style="height:{{param.dishesDetailCellsHeight}};width:{{param.dishesDetailCellsWidth}}">
+
+      <label class="{{param.dishesTitleClass}}"> {{dishesTitle}}</label>
+      <text class="{{param.dishesDescClass}}">{{dishesDesc}}</text>
+      <label class="{{param.dishesSaleClass}}">{{dishesSale}}</label>
+
+
+      <view class="{{param.dishesPriceCellClass}}" style="height:{{param.dishesPriceCellHeight}};width:{{param.dishesPriceCellWidth}}">
+      
+        <label class="{{param.dishesPriceClass}}" >¥{{dishesPrice}}</label>
+        <label class="{{param.dishesOldPriceClass}}">¥{{dishesOldPrice}}</label>
+        <view class="{{param.dishesAddBtnCellClass}}">
+          <view class="{{param.dishesAddBtnClass}}" bindtap="{{addBtnClick}}" data-="{{dishesBoxId}}"  >+</view>
+
+        </view>
+       </view>
+    </view>
 
   </view>
-  <image class="dishes-box-image" src="{{boxdatas.datas.imagesrc}}"></image>
+</template>
 
 
+
+
+
+<template name="shoppingtrolleybox">
+  <block wx:if="{{orderCount >0}}">
+    <view class="{{param.shoppingTrolleyBoxClass}}" style="height:{{param.trolleyBoxHeight}};width:{{param.trolleyBoxWidth}}" >
+     
+  
+  </view>
+  </block>
+ 
 
 
 </template>
-
-<template is="dishesBox" data="{{boxdatas}}"></template>

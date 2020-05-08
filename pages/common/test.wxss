@@ -1,1 +1,10 @@
-@import 'restaurant.wxss'
+@import 'restaurant.wxss';
+
+.test-background-image
+{
+  border: 1px solid gold;
+  height: 130rpx;
+  width: 140rpx;
+  background-image: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/trolleyicon.gif";
+  background-color: Red;
+}

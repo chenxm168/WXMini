@@ -6,6 +6,43 @@ Page({
    */
   data: {
 
+    param: {
+      dishesBoxHeight: "220rpx",
+      dishesBoxWidth: "100%",
+      dishesBoxClass: "dishes-box",
+      dishesImageClass: "dishes-image",
+      dishesImageHeight: "auto",
+      dishesImageWidth: "40%",
+      dishesImageMode: "scaleToFill",
+      dishesDetailCellsClass: "dishes-detail-cells",
+      dishesDetailCellsHeight: "auto",
+      dishesDetailCellsWidth: "60%",
+
+      dishesTitleClass: "dishes-title",
+
+      dishesDescClass: "dishes-desc",
+
+      dishesSaleClass: "dishes-sale",
+      
+      dishesPriceCellClass:"dishes-price-cell",
+
+      dishesPriceClass:"dishes-price-text",
+
+      dishesOldPriceClass:"dishes-old-price-text",
+
+      dishesAddBtnCellClass:"dishes-add-btn-cell",
+
+      dishesAddBtnClass:"dishes-add-btn"
+      
+    },
+
+    datas:
+    {
+      dishesBoxId: "",
+      dishesImageSrc: ""
+
+    },
+
     boxdatas:
     {
       styles: {
@@ -18,7 +55,9 @@ Page({
       },
 
 
-    }
+    }, //end boxdatas
+
+     
 
   },
 
@@ -76,5 +115,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  caipingclick:function(res)
+  {
+    console.log(res)
   }
 })

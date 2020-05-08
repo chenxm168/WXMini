@@ -1,2 +1,4 @@
-<import src="/pages/common/restaurant.wxml"/>
-<template is="dishesBox" data="{{boxdatas}}"></template>
+<import src="/pages/common/restaurant.wxml" />
+<template is="dishesbox" data="{{param:param,dishesImageSrc:datas.dishesImageSrc,dishesTitle:'Title',dishesDesc:'dfsfd',dishesSale:'9.5折',dishesTitle:'',dishesPrice:'',dishesOldPrice:''}}"></template>
+
+<view class="test-background-image"></view>
