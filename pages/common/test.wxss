@@ -1,4 +1,6 @@
 @import 'restaurant.wxss';
+@import 'trolleyType1.wxss';
+
 
 .test-background-image
 {

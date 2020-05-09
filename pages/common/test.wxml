@@ -1,4 +1,8 @@
+<!-->
 <import src="/pages/common/restaurant.wxml" />
-<template is="dishesbox" data="{{param:param,dishesImageSrc:datas.dishesImageSrc,dishesTitle:'Title',dishesDesc:'dfsfd',dishesSale:'9.5折',dishesTitle:'',dishesPrice:'',dishesOldPrice:''}}"></template>
+<template is="dishesbox" data="{{param:param,dishesImageSrc:datas.dishesImageSrc,dishesTitle:'Title',dishesDesc:'dfsfd',dishesSale:'9.5折',dishesTitle:'',dishesPrice:'',dishesOldPrice:''}}"></template>  -->
 
-<view class="test-background-image"></view>
+
+<import src="/pages/common/trolleyType1.wxml" />
+<template is="shoppingtrolley" data="{{param:trolleyParam,orderCount:10,saleInfo:'dfsdlklflsfldslfds',trolleyIconSrc:'cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/trolleyicon.gif',toOderText:toOderText,totalPrice:totalPrice,toOrderEvent:toOrderEvent}}"></template>
+

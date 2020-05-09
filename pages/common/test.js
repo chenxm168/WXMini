@@ -7,7 +7,7 @@ Page({
   data: {
 
     param: {
-      dishesBoxHeight: "220rpx",
+      dishesBoxHeight: "160rpx",
       dishesBoxWidth: "100%",
       dishesBoxClass: "dishes-box",
       dishesImageClass: "dishes-image",
@@ -35,6 +35,52 @@ Page({
       dishesAddBtnClass:"dishes-add-btn"
       
     },
+
+    trolleyParam:
+    {
+      shoppingTrolleyBoxClass:"shopping-trolley-box",
+      trolleyBoxHeight:"120rpx",
+      trolleyBoxWidth:"auto",
+      
+      shoppingSaleOffInfoCellClass:"shopping-saleoff-info-cell",
+      saleOffCellHeight:"40rpx",
+      saleOffCellWidth:"auto",
+      
+      shoppingSaleOffTextClass:"shopping-saleoff-text",
+      shoppingSaleOffTextHeight:"auto",
+      shoppingSaleOffTextWidth:"auto",
+
+      troleyCellsClass:"trolley-cells",
+      troleyCellstHeight:"auto",
+      troleyCellsWidth:"auto",
+
+      trolleyInfoCellClass:"trolley-info-cell",
+      trolleyInfoCellHeight:"auto",
+      trolleyInfoCellWidth:"70%",
+
+      trolleyIconClass:"trolley-icon",
+      trolleyIconHeight:"40rpx",
+      trolleyIconWidth:"60rpx",
+
+      orderCountIconClass:"order-count-icon",
+      orderCountIconHeight:"40rpx",
+      orderCountIconWidth:"40rpx",
+
+      totalPriceClass:"total-price",
+      totalPriceHeight:"auto",
+      totalPriceWidth:"auto",
+         
+      toOrderClass:"to-order",
+      toOrderHeight:"100%",
+      toOrderWidth:"30%",    
+      
+      toOrderTextClass:"to-order-text",
+
+    },
+    
+    totalPrice:39.0,
+    toOderText:"选好了>",
+    toOrderEvent:"toOrderClick",
 
     datas:
     {
@@ -65,7 +111,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var total =39;
+    this.data.totalPrice= total.toFixed(1);
+    this.setData({totalPrice:this.data.totalPrice});
   },
 
   /**
@@ -119,5 +167,11 @@ Page({
   caipingclick:function(res)
   {
     console.log(res)
+  },
+  toOrderClick:function(res)
+  {
+    console.log(res);
+    let total = res.currentTarget.dataset.total;
+    console.log(total);
   }
 })

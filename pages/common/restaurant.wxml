@@ -57,14 +57,14 @@ wxss file:
 
 
       <view class="{{param.dishesPriceCellClass}}" style="height:{{param.dishesPriceCellHeight}};width:{{param.dishesPriceCellWidth}}">
-      
-        <label class="{{param.dishesPriceClass}}" >¥{{dishesPrice}}</label>
+
+        <label class="{{param.dishesPriceClass}}">¥{{dishesPrice}}</label>
         <label class="{{param.dishesOldPriceClass}}">¥{{dishesOldPrice}}</label>
         <view class="{{param.dishesAddBtnCellClass}}">
-          <view class="{{param.dishesAddBtnClass}}" bindtap="{{addBtnClick}}" data-="{{dishesBoxId}}"  >+</view>
+          <view class="{{param.dishesAddBtnClass}}" bindtap="{{addBtnClick}}" data-="{{dishesBoxId}}">+</view>
 
         </view>
-       </view>
+      </view>
     </view>
 
   </view>
@@ -74,14 +74,23 @@ wxss file:
 
 
 
-<template name="shoppingtrolleybox">
+<template name="shoppingtrolley">
   <block wx:if="{{orderCount >0}}">
-    <view class="{{param.shoppingTrolleyBoxClass}}" style="height:{{param.trolleyBoxHeight}};width:{{param.trolleyBoxWidth}}" >
-     
-  
-  </view>
+    <view class="{{param.shoppingTrolleyBoxClass}}" style="height:{{param.trolleyBoxHeight}};width:{{param.trolleyBoxWidth}}">
+          <view class="{{param.shoppingSaleOffInfoCellClass}}" style="height:{{param.saleOffCellHeight}};width:{{param.saleOffCellWidth}}" >
+             <text class="{{param.shoppingSaleOffTextClass}}" style="height:{{param.shoppingSaleOffTextHeight}};width:{{param.shoppingSaleOffTextWidth}}" >{{saleInfo}}</text>
+          </view>
+          <view class="{{param.trolleyInfoCellClass}}" style="height:{{param.trolleyInfoCellHeight}};width:{{param.trolleyInfoCellWidth}}">
+              <image class="{{param.trolleyIconClass}}" src="{{trolleyIconSrc}}" style="height:{{param.trolleyIconHeight}};width:{{param.trolleyIconWidth}}" mode="scaleToFill" >
+
+              
+              </image>
+              <view class="{{param.orderCountIconClass}}" style="height:{{orderCountIconHeight}};width:{{param.orderCountIconWidth}}">{{orderCount}}</view>
+              <view class="{{param.totalPriceClass}}" style="height:{{totalPriceHeight}};width:{{param.totalPriceWidth}}" ></view>
+          </view>
+    </view>
   </block>
- 
+
 
 
 </template>

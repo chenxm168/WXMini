@@ -1,0 +1,72 @@
+/***
+ * shopping trolley ccs
+ */
+
+ .shopping-trolley-box
+ {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   padding: 5rpx;
+   
+   border: 1rpx solid black;
+ }
+
+ .shopping-saleoff-info-cell
+ {
+   display: flex;
+   justify-content: flex-start;
+
+   border: 1rpx solid green;
+
+ }
+
+ .shoopping-saleoff-text
+ {
+   display: flex;
+   flex-grow: 1;
+   text-align: left;
+   font-style:  italic;
+   font-weight: lighter;
+   color: white;
+   background-color: #e9ac3c;
+   font-size: 18rpx;
+ }
+
+ .trolley-info-cell
+ {
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-start;
+   flex-grow: 1;
+   background-color: red;
+   border: 1rpx solid blue;
+
+ }
+
+ .trolley-icon
+ {
+   display: flex;
+   align-self: center;
+    background-color: red;
+  
+ }
+
+ .order-count-icon
+ {
+    background-color: #e9ac3c;
+    color: white;
+    font-size: 20rpx;
+    border-radius:20rpx; 
+
+    text-align: center;
+
+    position:  relative;
+    right: 20rpx;
+    top: 20rpx;
+ }
+
+ .total-price
+ {
+
+ }
