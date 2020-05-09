@@ -1,21 +1,14 @@
-<template name="autoPaly">
-  <view wx:if="{{autoPlayVisible}}" class="{{param.autoPalayBoxClass}}" style="height:{{autoPlayBoxHeight}},width:{{autoPlayBoxWidth}}">
-    <swiper class="{{param.swiperplayClass}}" indicator-dots="{{autopaly.IndicatorDots}}" autoplay="{{param.isAutoplay}}" interval="{{parma.autopalyInterval}}" duration="{{param.autopalyDuration}}">
+<template name="autoPlay">
+ <block wx:if="{{autoPlayVisible}}">
+  <view  class="{{param.autoPlayBoxClass}}" style="height:{{param.autoPlayBoxHeight}};width:{{param.autoPlayBoxWidth}}">
+    <swiper class="{{param.swiperPlayClass}}" indicator-dots="{{param.autoPalyIndicatorDots}}" autoplay="{{param.isAutoplay}}" interval="{{param.autoPlayInterval}}" duration="{{param.autoPlayDuration}}">
       <block wx:for="{{autoplayImages}}" wx:key="name">
-        <swiper-item>
-
-          <image class="{{param.autoPlayImageClass}}" style="width:{{param.autoPlayImageWidth}},height:{{param.autoPlayImageHeight}}" src="{{item.src}}" mode="scaleToFill" data-="{{item.name}}" bindtap="{{swiperClickEvent}}">
-
+        <swiper-item  >
+          <image class="{{param.autoPlayImageClass}}" style="width:{{param.autoPlayImageWidth}};height:{{param.autoPlayImageHeight}}" src="{{item.src}}" mode="scaleToFill" data-="{{item.name}}" bindtap="{{swiperClickEvent}}">
           </image>
-
         </swiper-item>
       </block>
-
-
     </swiper>
-
-
-
-
   </view>
+  </block>
 </template>

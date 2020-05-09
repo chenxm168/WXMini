@@ -1,5 +1,6 @@
 @import 'restaurant.wxss';
 @import 'trolleyType1.wxss';
+@import 'autoPlayType1.wxss';
 
 
 .test-background-image

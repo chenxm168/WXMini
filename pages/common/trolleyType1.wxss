@@ -68,8 +68,8 @@
  {
     background-color:#f7cb7a;
     color: white;
-    font-size: 20rpx;
-    border-radius:20rpx; 
+    font-size: 18rpx;
+    border-radius:15rpx; 
 
     text-align: center;
 

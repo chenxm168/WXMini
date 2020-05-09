@@ -39,7 +39,7 @@ Page({
     trolleyParam:
     {
       shoppingTrolleyBoxClass:"shopping-trolley-box",
-      trolleyBoxHeight:"120rpx",
+      trolleyBoxHeight:"100rpx",
       trolleyBoxWidth:"auto",
       
       shoppingSaleOffInfoCellClass:"shopping-saleoff-info-cell",
@@ -59,12 +59,12 @@ Page({
       trolleyInfoCellWidth:"70%",
 
       trolleyIconClass:"trolley-icon",
-      trolleyIconHeight:"40rpx",
-      trolleyIconWidth:"60rpx",
+      trolleyIconHeight:"50rpx",
+      trolleyIconWidth:"50rpx",
 
       orderCountIconClass:"order-count-icon",
-      orderCountIconHeight:"40rpx",
-      orderCountIconWidth:"40rpx",
+      orderCountIconHeight:"34rpx",
+      orderCountIconWidth:"34rpx",
 
       totalPriceClass:"total-price",
       totalPriceHeight:"auto",
@@ -81,6 +81,32 @@ Page({
     totalPrice:39.0,
     toOderText:"选好了>",
     toOrderEvent:"toOrderClick",
+
+
+
+    autoPlayParam:
+    {
+      autoPlayBoxClass:"auto-play-box",
+      autoPlayBoxHeight:"90px",
+      autoPlayBoxWidth:"100%",
+
+      swiperPlayClass:"swiper-play",
+      autoPalyIndicatorDots:true,
+      isAutoplay:true,
+      autoPlayInterval:5000,
+      autoPlayDuration:500,
+      
+      autoPlayImageClass:"auto-play-image",
+      autoPlayImageWidth:"100%",
+      autoPlayImageHeight:"100%",
+      swiperClickEvent:"swiperClick"
+    },
+     
+    autoPlayVisible:true,
+    autoplayimages: [{ name: "youhuijuan", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/replayimage/001.jpg" },
+    { name: "xinchangping", src: "cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/replayimage/002.jpg" }],
+
+
 
     datas:
     {
