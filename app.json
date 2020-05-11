@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/canguna/diancai",
     "pages/common/test",
     "pages/common/restaurant",
     "pages/qysk/orderdishes",

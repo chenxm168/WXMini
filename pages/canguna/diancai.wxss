@@ -1,0 +1,18 @@
+@import '/pages/common/autoPlayType1.wxss';
+
+.page
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid black;
+}
+
+.page-body
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  
+
+}

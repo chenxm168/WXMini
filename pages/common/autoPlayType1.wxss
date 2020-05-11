@@ -6,7 +6,7 @@
   justify-content: flex-start;
   flex-shrink: 0;
   flex-grow: 0;
-  border: 1rpx solid blue;
+ /*  border: 1rpx solid blue; */
 
 }
 
@@ -22,5 +22,5 @@
 .auto-play-image
 {
   display: flex;
-  border: 1rpx solid green;
+ /* border: 1rpx solid green; */
 }

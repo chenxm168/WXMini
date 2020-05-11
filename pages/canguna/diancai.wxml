@@ -1,0 +1,17 @@
+<import src="/pages/common/autoPlayType1.wxml" />
+<view class="page" style="height:{{pageHeight}};width:{{pageWidth}}">
+  <template is="autoPlay" data="{{param:autoPlayParam,autoplayImages:autoplayimages,autoPlayVisible:autoPlayVisible}}">
+</template>
+
+<view class="page-body" style="height:{{pageBodyHeigh}};width:{{pageBodyWidth}}">
+
+
+
+
+
+
+</view>
+
+
+
+</view>
