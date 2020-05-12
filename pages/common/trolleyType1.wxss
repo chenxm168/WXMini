@@ -8,8 +8,8 @@
    flex-direction: column;
    justify-content: flex-start;
    padding: 5rpx;
-   
-  /* border: 1rpx solid black; */
+   caption-side:  bottom;
+   /* border: 1rpx solid black; */
  }
 
  .shopping-saleoff-info-cell
@@ -68,14 +68,14 @@
  {
     background-color:#f7cb7a;
     color: white;
-    font-size: 18rpx;
-    border-radius:15rpx; 
+    font-size: 9px;
+    border-radius:9px; 
 
     text-align: center;
 
     position:  relative;
-    right: 20rpx;
-    top: 20rpx;
+    right: 10px;
+    top: 5px;
  }
 
  .total-price

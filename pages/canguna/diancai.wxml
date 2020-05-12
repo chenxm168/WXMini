@@ -1,17 +1,36 @@
 <import src="/pages/common/autoPlayType1.wxml" />
+<import src="/pages/common/trolleyType1.wxml" />
 <view class="page" style="height:{{pageHeight}};width:{{pageWidth}}">
   <template is="autoPlay" data="{{param:autoPlayParam,autoplayImages:autoplayimages,autoPlayVisible:autoPlayVisible}}">
 </template>
 
-<view class="page-body" style="height:{{pageBodyHeigh}};width:{{pageBodyWidth}}">
+<view class="page-body" style="height:{{pageBodyHeight}};width:{{pageBodyWidth}}">
+
+  <scroll-view class="caiping-zhonglei"  scroll-y="true" style="width: {{zhongleiWidth}};height:{{zhongleiHeight}}" bindscrolltoupper="gategoryUpper" bindscrolltolower="gategoryLower" scroll-into-view="{{gategoryToView}}" scroll-top="{{gategoryScrollTop}}"  bindscroll="gategoryScroll" >
+  
+    <view wx:for="{{dishescategorylist}}" wx:key="id" id="{{item.id}}" class="dishes-category-cells-cell"  data-="{{item.id}}" bindtap="dishescategoryclick" style="background-color:{{item.ischoose? 'white':'#f5f3f3'}};height:{{zhongleiCellHeight}}" hover-class="dishes-category-cells-cell-hover">
+        <image class="zhonglei-image" style="height:30px;width:30px" mode="scaleFill" src="{{item.image}}"></image>
+        <view class="zhonglei-text">{{item.desc}}</view>
+      </view>
+  
+  
+  
+  </scroll-view>
+
+  <scroll-view class="caiping-dang" style="height:{{caidangHeight}};width:{{caidangWidth}}">
+  
+    
+  
+  
+  
+  </scroll-view>
 
 
+</view>
 
-
+ <template is="shoppingtrolley" data="{{param:trolleyParam,orderCount:diancaishu,saleInfo:'dfsdlklflsfldslfds',trolleyIconSrc:'cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/trolley2.svg',toOderText:toOderText,totalPrice:totalPrice,toOrderEvent:toOrderEvent}}"></template>
 
 
 </view>
 
 
-
-</view>
