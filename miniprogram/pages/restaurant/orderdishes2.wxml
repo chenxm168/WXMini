@@ -1,0 +1,72 @@
+<view class="page" style="height:{{pageheight}}px;">
+  
+  <!--
+    <view class="swiper-container" style="height:{{swiperheight}}">
+       <swiper class="swiperplay" indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+         
+          <block wx:for="{{autoplayimages}}" wx:key="{{item.name}}">
+            <swiper-item >
+              <image class="swiper-image" style="width:100%" src="{{item.src}}" mode="scaleToFill"/>
+            </swiper-item>
+
+          
+          </block>
+       
+       
+       </swiper>
+      
+    
+    </view> end swiper-container-->
+
+    <view class="page-header" >
+       herder
+    
+    </view>
+
+
+    <view class="page-body" >
+    
+     
+       <!-->
+        <view>1</view>
+       <view>2</view>
+       <view>3</view>
+       <view>4</view>
+       <view>5</view>
+       <view>6</view>
+       <view>7</view>
+       <view>8</view>
+       <view>9</view>
+       <view>10</view>
+       <view>11</view>
+       <view>12</view>
+       <view>13</view>
+       <view>14</view>
+       <view>15</view>
+       <view>16</view>
+       <view>17</view>
+       <view>18</view>
+       <view>19</view>
+       <view>20</view>
+       <view>21</view>
+       <view>22</view>
+       <view>23</view> -->
+     <scroll-view class="dishes-scroll-view"  scroll-y="true" >
+     </scroll-view>
+
+       
+    </view>
+
+
+    <view class="page-foot" style="height:{{footheight}}px">
+    
+      foot
+    
+    </view>
+
+
+
+
+
+</view>

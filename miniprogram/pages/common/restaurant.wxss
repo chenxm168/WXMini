@@ -1,0 +1,182 @@
+/* pages/common/restaurant.wxss */
+
+/*
+* 菜品大框
+*/
+.dishes-box
+{
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content:  space-between;
+  padding: 3rpx;
+  border-bottom: 1rpx dotted grey;
+  flex-shrink: 0;
+  flex-grow: 0;
+  
+}
+
+/*
+* 菜品图象
+*/
+.dishes-image
+{
+  display: flex;
+  border: 1px solid black;
+  justify-content: flex-start;
+  
+  padding: 2rpx;
+  flex-grow: 0;
+}
+
+/*
+* 图象右侧的外框
+*/
+.dishes-detail-cells
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+ /* border: 1px solid #552fff; */
+  padding: 3rpx;
+}
+
+/*
+* 标题、描述、打折外框
+*/
+.dishes-price-cell
+{
+  display: flex;
+  justify-content: flex-start;
+  align-items:  flex-end;
+  flex-grow: 1;
+   margin-left: 15rpx;
+  /* border: 1px solid black; */
+}
+
+/**
+* 菜品的名字、标题
+*/
+.dishes-title
+{
+  text-align:  start;
+  color: black;
+  font-weight:  bold;
+ /* border: 1rpx solid green; */
+  font-size: 30rpx;
+  margin-left: 5rpx;
+}
+
+/**
+* 菜品的辅助描述
+*/
+.dishes-desc
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap:  wrap;
+  text-align:  start;
+  color: grey;
+  font-weight:   lighter;
+ /* border: 1rpx solid gold;*/
+  font-size: 22rpx;
+  margin-left: 5rpx;
+  width: 80%;
+  text-overflow:  ellipsis; /*自动换行*/
+  word-wrap:   break-word; /*自动换行*/
+  word-break:  break-all; /*自动换行*/
+  
+}
+
+
+/**
+* 价格折扣，加外框
+*/
+.dishes-sale
+{
+   text-align:  start;
+  color: red;
+  font-weight:  bold;
+  border: 1rpx solid red;
+  font-size: 18rpx;
+  margin-left: 5rpx;
+  align-self:  flex-start;
+  padding-left: 2rpx;
+  padding-right: 2rpx;
+}
+
+/**
+* 菜品的价格样式
+*/
+.dishes-price-text
+{
+  display:  flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items:  flex-end;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: red;
+  margin-right: 10rpx;
+  align-self:  flex-end;
+ /* border: 1px solid green; */
+  text-align:   end;
+  vertical-align:  text-bottom;
+}
+
+/**
+* 菜品打折前的样式
+*/
+.dishes-old-price-text
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 28rpx;
+  text-decoration-line:  line-through;
+  color: grey;
+  margin-left: 10rpx;
+  text-align:  end;
+  vertical-align:  text-bottom;
+  align-self:    flex-end;
+
+  /* border: 1px solid #801a00; */
+}
+
+
+/**
+* 小圆加号按钮外层的框
+*/
+.dishes-add-btn-cell
+{
+  display: flex;
+  justify-content: flex-end;
+ /*  border: 1rpx solid goldenrod; */
+  width:100%;
+}
+
+/**
+* 小圆加号按钮样式
+*/
+.dishes-add-btn
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  height:30px;
+  width:30px;
+  border-radius: 15px;
+  color: white;
+  font-size:15px;
+  font-weight:  bold;
+  background-color: red;
+  text-align: center;
+  margin-right: 20rpx;
+  
+}
+
+
+

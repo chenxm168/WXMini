@@ -1,12 +1,12 @@
 <!--pages/restaurant/orderdishes.wxml -->
-<view class="contianer" style="width:100%">
-   <view class="swiper-contianer" style="height:{{swiperheight}}rpx;">
+<view class="container1" style="width:100%">
+   <view class="swiper-container" style="height:{{swiperheight}}rpx;">
      <swiper class="swiperplay" indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
 
         <block wx:for="{{autoplayimages}}" wx:key="{{item.name}}">
          <swiper-item>
-           <view class="swiper-item-contianer">
+           <view class="swiper-item-container">
            <image class="swiper-image" style="width:100%" src="{{item.src}}" mode="scaleToFill">
            
            </image>
@@ -14,11 +14,8 @@
          </swiper-item>
        </block>
      </swiper>
-   <!--
-   <view class="dd" >
-   <image class="swiper-image" style="width:100%;" mode="scaleToFill" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/testimage06.jpg"></image>
-   </view>  -->   
-   </view>
+  
+    </view> <!--end swiper-container -->
     
     <view class="dishes-cells-container" >
        
@@ -75,11 +72,24 @@
 
       </view>
       <view class="dishes-list-cells">
+       <view class="dishes-list-cell">
+          
+
+       </view>
+     
+
       </view>
     
     
     
     </view>
+
+    <view class="dishes-shopping-trolley">
+       <view>image</view>
+       <view>总计40元</view>
+       <view>选好了</view>
+
+     </view>
 
 
 

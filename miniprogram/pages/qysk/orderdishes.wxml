@@ -1,0 +1,253 @@
+<view class="page" style="height:{{pageheight}}px;width:100%">
+  <view class="page-header" style="height:{{headerheight}}px">
+    <swiper class="swiperplay" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{autoplayimages}}" wx:key="name">
+        <swiper-item>
+
+          <image class="swiper-image" style="width:100%" src="{{item.src}}" mode="scaleToFill" data-="{{item.name}}" bindtap="swiperclick">
+
+          </image>
+
+        </swiper-item>
+      </block>
+
+
+    </swiper>
+  </view>
+
+  <view class="page-body" style="height:{{bodyheight}}px">
+
+    <!-- 菜品种类滚动-->
+    <scroll-view class="gategory-scorll-view" scroll-y="true" style="height: 100%;" bindscrolltoupper="gategoryUpper" bindscrolltolower="gategoryLower" scroll-into-view="{{gategoryToView}}" scroll-top="{{gategoryScrollTop}}"  bindscroll="gategoryScroll" >
+      <!-->
+      <block wx:for="dishescategorylist" wx:key="id">
+        <view id="{{item.id}}" class="dishes-category-cells-cell" data-="id:{{item.id}}" bindtap="dishescategoryclick">
+          <view>image</view>
+          <view>{{item.desc}}</view>
+        </view>
+
+      </block> -->
+
+      <view wx:for="{{dishescategorylist}}" wx:key="id" id="{{item.id}}" class="dishes-category-cells-cell" data-="{{item.id}}" bindtap="dishescategoryclick" style="background-color:{{item.ischoose? 'white':'#f5f3f3'}}">
+        <view>image</view>
+        <view>{{item.desc}}</view>
+      </view>
+      <!--
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>1</view>
+      </view>
+
+      <view class="dishes-category-cells-cell" style="background-color:white">
+        <view>image</view>
+        <view style="fornt-size:10rpx">店长推荐</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>招 牌</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>4</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>5</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>6</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>7</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>8</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>9</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>10</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>11</view>
+      </view>
+
+      <view class="dishes-category-cells-cell">
+        <view>image</view>
+        <view>12</view>
+      </view>
+       -->
+
+    </scroll-view>
+    <!-- 菜品种类滚动end -->
+
+    <scroll-view class="dishes-scroll-view" scroll-y="true">
+      <view class="dishes-list-form">
+        <view class="dishes-gategory-title">
+            热销
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+             <text class="dishes-cell-tex-desc" >主要原料：皮皮虾</text>
+             <label class="dishe-cell-tex-saleoff">9.5折</label>
+             <label class="dishes-cell-tex-price">￥38.0</label>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-002-1.jpg" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-002-1.jpg" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+        <view class="dishes-cell" style="height:{{dishescellheight}}px"> 
+          <image class="dishes-cell-image" src="cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/caipin/caiping-001-1.gif" mode="scaleToFill"></image>
+          <view class="dishes-cell-text-box" >
+             <text class="dishes-cell-tex-title">盐焗皮皮虾</text>
+          </view>
+           
+        </view>
+
+      </view>
+
+
+    </scroll-view>
+
+  </view>
+
+
+  <block wx:if="{{ordercount>0}}">
+    <view class="page-foot" style="height:{{footheight}}px">
+
+      <view class="page-foot-youhui">
+        拆扣信息：满99减3；满199减8；满299减18；
+      </view>
+
+      <view class="page-foot-orderinfo">
+
+
+
+
+        <view class="page-foot-shoppingtrolley">
+          <image class="page-foot-shoppingtrolley-image" src="/images/30.gif" style="height:30px;width:50px" mode="heightFix"></image>
+
+          <text class="page-foot-shoppingtrolley-icon-text">{{ordercount}}</text>
+          <view class="page-foot-shopping-total-text">
+            <text class="page-foot-shopping-total-text-2">￥</text>
+            <text class="page-foot-shopping-total-text-2">60.0</text>
+          </view>
+
+        </view>
+
+        <view class="page-foot-order">
+          <text class="page-foot-order-text" bindtap="toOrder"> 选好了  ></text>
+
+
+        </view>
+      </view>
+    </view>
+  </block>
+
+</view>

@@ -1,0 +1,36 @@
+<!-->
+<import src="/pages/common/restaurant.wxml" />
+<template is="dishesbox" data="{{param:param,dishesImageSrc:datas.dishesImageSrc,dishesTitle:'Title',dishesDesc:'dfsfd',dishesSale:'9.5折',dishesTitle:'',dishesPrice:'',dishesOldPrice:''}}"></template>  -->
+<!--
+<import src="/pages/common/autoPlayType1.wxml" />
+<import src="/pages/common/trolleyType1.wxml" />
+<template is="autoPlay" data="{{param:autoPlayParam,autoplayImages:autoplayimages,autoPlayVisible:autoPlayVisible}}">
+</template>
+-->
+
+<!--
+<template is="shoppingtrolley" data="{{param:trolleyParam,orderCount:10,saleInfo:'dfsdlklflsfldslfds',trolleyIconSrc:'cloud://asd-smart-cloud-k2u5e.6173-asd-smart-cloud-k2u5e-1259294007/TestImages/trolley2.svg',toOderText:toOderText,totalPrice:totalPrice,toOrderEvent:toOrderEvent}}"></template>
+-->
+
+<view class="test-page">
+
+
+   
+  <view class="test-block1">
+     block1
+  </view>
+    
+ 
+
+   <view class="test-block3" bindtap="openMask">
+      mask
+ </view>
+
+  <view class="test-block2" wx:if="{{isMask}}" bindtap="closeMask">CloseMask</view>
+
+
+ <view class="mask" wx:if="{{isMask}}">
+ 
+ </view>
+
+</view>
