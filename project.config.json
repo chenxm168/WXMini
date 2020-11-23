@@ -1,69 +1,88 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"autoAudits": false,
-		"checkInvalidKey": true,
-		"nodeModules": true
-	},
-	"appid": "wx8d95d0efac32322b",
-	"projectname": "ASDMiniProgram",
-	"libVersion": "2.2.5",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"miniprogram": {
-			"current": 3,
-			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "dailyCheck",
-					"pathName": "pages/user/dailyCheck",
-					"query": "codeId=wxC1ODF01001&eqid=C1ODF01&category=dailyCheck",
-					"scene": 1011
-				},
-				{
-					"id": -1,
-					"name": "dailyCheck",
-					"pathName": "pages/dailyCheck/dailyCheck",
-					"query": "codeId=wxC1ODF01001&eqid=C1ODF01&category=dailyCheck",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "dailyCheck",
-					"pathName": "pages/dailyCheck/dailyCheck",
-					"query": "codeId=wxC1ODF01&eqId=C1ODF01&category=dailyCheck",
-					"scene": null
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "appid": "wx8d95d0efac32322b",
+  "projectname": "ASDMiniProgram",
+  "libVersion": "2.2.5",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "dailyCheck",
+          "pathName": "pages/user/dailyCheck",
+          "query": "codeId=wxC1ODF01001&eqid=C1ODF01&category=dailyCheck",
+          "scene": 1011
+        },
+        {
+          "id": -1,
+          "name": "dailyCheck",
+          "pathName": "pages/dailyCheck/dailyCheck",
+          "query": "codeId=wxC1ODF01001&eqid=C1ODF01&category=dailyCheck",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "dailyCheck",
+          "pathName": "pages/dailyCheck/dailyCheck",
+          "query": "codeId=wxC1ODF01&eqId=C1ODF01&category=dailyCheck",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

@@ -54,8 +54,8 @@ exports.main = (event, context) => {
           resolve(args)
         } else {
           arr = {
-             //openid: wxContext.OPENID
-            openid: "oeWJp5EI1EtpjSKjzuHYYVgaxED8"
+             openid: wxContext.OPENID
+            //openid: "oeWJp5EI1EtpjSKjzuHYYVgaxED8"
           }
           resolve(arr)
         }

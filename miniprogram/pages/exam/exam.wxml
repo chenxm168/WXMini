@@ -1,9 +1,108 @@
 <!--miniprogram/pages/exam/exam.wxml-->
+<!--
 <text>{{ms}}:{{ts}}</text>
 <view>
-   <!--<image src="cloud://asd-smart-cloud-dev-kwtq8.6173-asd-smart-cloud-dev-kwtq8-1259294007/2DCODE-A1CVD01.png"></image>-->
+  
    
-   <button bindtap="onAddImage">Click</button>
+   <button bindtap="soterAuth">Click</button>
    <navigator url="/pages/exam/scolview" >to Scollview</navigator>
+
+</view> -->
+
+<view class="container">
+
+   <view class="page-header"> </view>
+   <view class="page-body">
+      <!--未下载完成前不显示-->
+      <block wx:if="{{true}}">
+         <view class="dianjian-eqid">A1CVD01</view>
+         <view class="dianjian-eqdesc">CVD成膜设备#1</view>
+         <block wx:for="{{2}}">
+            <view class="subeq-cells">
+               <view class="subeq-desc">A1CVD01 SUB EQUIPMENT</view>
+               <block wx:for="{{5}}">
+                  <view class="form-table1" wx:if="{{true}}">
+                     <view class="cell-title1">项目:A1CVD01(15）二楼主设备 水流量 CHD RPSC</view>
+                     <view class="cell-tingji-cells">
+                        <switch class="tingji-switch" checked="{{false}}" style='zoom:.6;'>停机跳过</switch>
+                     </view>
+                     <!--如果停机跳过，此部份不显示-->
+                     <block>
+                        <view class="cell-biaozhun-cells">
+                           <view class="cell-biaozhun-cell">标准值(Mpa): [45>值>25] </view>
+                           <icon class=".cell-biaozhun-icon" wx:if="{{true}}" type="{{'warn'}}" size="15"> </icon>
+                        </view>
+                        <view class="dianjianzhhi-cells">
+                           <view class="dianjianzhi-title">点检值: </view>
+                           <input class="weui-input" type="number" placeholder="输入点检值" maxlength="5"
+                              confirm-type="done" />
+                        </view>
+
+                     </block>
+
+                  </view>
+               </block>
+               <!--subeq dianjian items wx:for -->
+            </view>
+         </block>
+         <!--subeq itmes wx:for-->
+         <!-- strart select shift-->
+         <view class="page-section">
+            <view class="weui-cells__title ">
+               <view class='cus-align-between'>
+                  <view class='weui-flex__item'>请选择班次 </view>
+               </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+               <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                     <view class="weui-label">当前选择</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                     <picker bindchange="shiftPickerChange" value="{{checkdetail.shiftIndex}}" range="{{shifts}}">
+                        <view class="weui-input">{{shifts[checkdetail.shiftIndex]}}</view>
+                     </picker>
+                  </view>
+               </view>
+            </view>
+         </view>
+         <!--end select shift-->
+
+         <!-- start select daytime or night-->
+         <view class="page-section">
+            <view class="weui-cells__title ">
+               <view class='cus-align-between'>
+                  <view class='weui-flex__item'>请选工作时间 </view>
+               </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+               <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                     <view class="weui-label">当前选择</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                     <picker bindchange="workTimePickerChange" value="{{checkdetail.workTimeIndex}}"
+                        range="{{workTimes}}">
+                        <view class="weui-input">{{workTimes[checkdetail.workTimeIndex]}}</view>
+                     </picker>
+                  </view>
+               </view>
+            </view>
+         </view>
+         <!--end select daytime or night-->
+
+         <!--输入备注-->
+         <textarea class="dianjian-beizhu" placeholder="输入备注" type="text" auto-height="true"/>
+         <!--end 输入备注-->
+         <view class="dianjian-btn-cells">
+            <button class="mini-btn" type="primary" size="18px">保存草稿</button>
+            <button class="mini-btn" type="primary" size="18px">完成提交</button>
+         </view>
+
+
+      </block>
+      <!--dianjian itmes display flag block-->
+   </view>
+   <!--end page-body-->
 
 </view>

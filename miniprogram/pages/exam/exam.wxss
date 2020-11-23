@@ -1,1 +1,102 @@
+
 /* miniprogram/pages/exam/exam.wxss */
+/* @import "../../style/weui.wxss"; */
+@import "../../style/asd.wxss";
+
+/*
+.form-table1
+{
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 3px;
+  margin:2px;
+  margin-bottom: 5px;
+  
+  
+  align-items: center;
+  text-align: center;
+  border-collapse: unset;
+  border-color: gray;
+  box-shadow: grey;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items:stretch;
+  align-self: stretch;
+}
+.cell-title1
+{
+ 
+  
+  font-size: 28;
+  font-weight: bold;
+  background-color:lightseagreen;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 5px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  margin-bottom: 2px;
+  
+  
+}
+.cell-title-bottom-line
+{
+  box-shadow: grey;
+  border-width: 1px;
+  border-bottom-color: grey;
+  border-bottom-style: double;
+  margin: 1,0;
+  height: 1px;
+}
+.cell-tingji-cells
+{
+  margin: 2;
+  text-align: left;
+  padding-left: 3px;
+  border-bottom-style:dotted;
+  border-width: 1px;
+  height: 32;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+.cell-biaozhun-cells
+{
+  margin: 2;
+  text-align: left;
+  padding-left: 3px;
+  border-bottom-style:dotted;
+  border-width: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 32;
+  
+}
+
+.cell-biaozhun-icon
+{
+  margin-right: 10px;
+  text-align: center;
+}
+
+.tingji-switch
+{
+  font-size: 25px;
+  size: 8px;
+  margin: 3px;
+  text-align: center;
+}
+.dianjianzhhi-cells
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 32;
+  display: flex;
+}  */

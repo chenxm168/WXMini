@@ -1,0 +1,219 @@
+/* miniprogram/pages/exam/exam.wxss */
+@import "weui.wxss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  justify-content: space-between;
+  font-size: 30rpx;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+
+.page-body {
+  width: 100%;
+  flex-grow: 1;
+  overflow-x: hidden;
+   background-color: #F8F8F8;
+}
+
+.subeq-desc
+{
+  
+  height: 20px;
+  font-weight: 600;
+  background-color: lightsalmon;
+  color: white;
+}
+
+.subeq-cells
+{
+  margin: 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  text-align: center;
+  
+}
+
+.form-table1
+{
+ /*
+  border-top-left-radius: 5px;
+  border-top-right-radius: 3px;
+  margin:2px; */
+  /*margin-bottom: 5px;*/
+  
+  
+  align-items: center;
+  text-align: center;
+  border-collapse: unset;
+  border-color: gray;
+  box-shadow: grey;
+  border-width: 1px;
+  /*border-style: solid; */
+  border-top-style: double;
+  border-top-width: 1px;
+  border-bottom-style: solid;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items:stretch;
+  align-self: stretch;
+}
+.cell-title1
+{
+ 
+  
+  font-size: 20;
+  font-weight: bold;
+  background-color:lightseagreen;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 5px;
+  border-bottom-style: dotted;
+  border-width: 1px;
+  margin-bottom: 2px;
+  
+  
+}
+.cell-title-bottom-line
+{
+  box-shadow: grey;
+  border-width: 1px;
+  border-bottom-color: grey;
+  border-bottom-style: double;
+  margin: 1,0;
+  height: 1px;
+}
+.cell-tingji-cells
+{
+  margin: 2;
+  text-align: left;
+  padding-left: 3px;
+  border-bottom-style:dotted;
+  border-width: 1px;
+  height: 32;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+.cell-biaozhun-cells
+{
+  margin: 2;
+  text-align: left;
+  padding-left: 3px;
+  border-bottom-style:dotted;
+  border-width: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 32;
+  
+}
+
+.cell-biaozhun-icon
+{
+  margin-right: 10px;
+  text-align: center;
+}
+
+.tingji-switch
+{
+  font-size: 25px;
+  size: 8px;
+  margin: 3px;
+  text-align: center;
+}
+.dianjianzhhi-cells
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 32;
+  display: flex;
+  margin: 0px,2px;
+}
+
+.shebeishuru-cells
+{
+  border-style: solid;
+  border-color: black;
+  border-radius: 15px;
+  border-width: 2px;
+  height: 40px;
+  display: flex;
+  flex: row;
+  justify-content: flex-start;
+  margin: 2px;
+  align-items: center;
+}
+.dianjianzhi-title
+{
+  margin-left: 2px;
+}
+.shebeishuru-ipt
+{
+  font-size: 30;
+  size: 32;
+  display: flex;
+  text-align: left;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+.shebeishuru-btn
+{
+  /*
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: gray; */
+  background-color:lightgray;
+  display: flex;
+  width: 32;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+}
+.shebeishuru-scan
+{
+  width: 32;
+  height: 32;
+  display: flex;
+  flex-grow: 0;
+  margin-right: 15px;
+}
+
+.shebeishuruxiazhai-btn
+{
+  margin: 2px;
+}
+.dianjian-eqid
+{
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+.dianjian-eqdesc
+{
+  text-align: center;
+}
+
+.dianjian-beizhu
+{
+  
+  margin: 10px;
+  font-size: 15px;
+  
+}
+
+.dianjian-btn-cells
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin:15px;
+}

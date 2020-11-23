@@ -1,16 +1,11 @@
 {
   "pages": [
-    "pages/common/test",
-    "pages/canguna/diancai",
-    
-    "pages/common/restaurant",
-    "pages/qysk/orderdishes",
-    "pages/restaurant/orderdishes2",
-    "pages/restaurant/orderdishes",
+    "pages/exam/exam",
+    "pages/exam/exam2",
+    "pages/user/userRegist",
     "pages/user/userLogin",
     "pages/main/main",
     "pages/user/userManager",
-    "pages/user/userRegist",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -22,20 +17,21 @@
     "pages/msg/message",
     "pages/dailyCheck/dailyCheck",
     "pages/bindingCode/bindingCode",
-    "pages/exam/exam",
-    "pages/exam/scolview"
+    "pages/exam/scolview",
+    "pages/common/test",
+    "pages/canguna/diancai",
+    "pages/common/restaurant",
+    "pages/qysk/orderdishes",
+    "pages/restaurant/orderdishes2",
+    "pages/restaurant/orderdishes"
     
   ],
   "window": {
-    
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "ASD掌上智能",
     "navigationBarTextStyle": "black"
-
-    
-
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

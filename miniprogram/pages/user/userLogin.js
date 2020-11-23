@@ -163,6 +163,11 @@ Page({
             break
           }
 
+          case -4:
+            {
+              
+            }
+
           default :
           {
             app.globalData.appUserInfo =res.result.rows[0]

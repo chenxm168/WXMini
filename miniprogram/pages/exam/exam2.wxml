@@ -1,0 +1,19 @@
+<!--miniprogram/pages/exam/exam2.wxml-->
+<view class="container">
+  <view class="page-body">
+
+
+    <block wx:if="{{true}}">
+      <form >
+      <view class="shebeishuru-cells">
+        <input class="shebeishuru-ipt"  type="defeault" placeholder="请输入设备ID" confirm-type="done" name="ipnuteqid" />
+        <!-- <view class="shebeishuru-scan"></view> -->
+        <image class="weui-grid__icon shebeishuru-scan" src="../images/scan.png"/>
+        <!-- <button class="shebeishuru-btn">GO</button> -->
+      </view>
+      <button class="shebeishuruxiazhai-btn" type="default" form-type="submit">确定下载</button>
+    </form>
+    </block>
+
+  </view>
+</view>

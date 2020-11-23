@@ -135,6 +135,37 @@ Page({
       },
     })
     console.log("ddd");
+  },
+  soterAuth:function()
+  {
+      wx.getSystemInfo({
+        success: (result) => {
+          if(result.enviroment==undefined)
+          {
+            console.log("weichart environment");
+          }
+         
+         // console.log(result)
+        },
+      })
+
+       wx.checkIsSupportSoterAuthentication({
+         success: (res) => {
+           if(res.supportMode!=[])
+           {
+            wx.startSoterAuthentication({
+              requestAuthModes: ['fingerPrint'],
+              challenge: '123456',
+              authContent: '请用指纹解锁',
+              success(res) {
+                console.log(res)
+              }
+           })
+           }
+          console.log(res )
+
+         },
+       })
   }
 
 })
