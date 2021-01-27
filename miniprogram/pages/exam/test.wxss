@@ -1,0 +1,15 @@
+/* miniprogram/pages/exam/test.wxss */
+.c1
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 450px;
+  border-style: solid;
+}
+.p-b
+{
+  flex-grow: 1;
+  border-style: groove;
+}

@@ -1,0 +1,90 @@
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <view class="page-header"></view>
+  <view class="page-body ">
+    <view class=" asd-scan-cell" bind:touchstart="scanClick">
+      <view class="asd-scan-text">扫一扫设备二维码</view>
+      <image class="weui-grid__icon asd-scan-icon" src="../../images/scan.png" bindtap="scanClick" />
+    </view>
+    <!--
+    <view class="asd-item-cell">
+        <view class="asd-ridio-cell-flex-row">
+          <radio-group bindchange="selectTypeChange">
+            <label class="asd-radio-label">
+              <radio class="asd-radio" checked="true" value="1"></radio>按设备子单元筛选
+            </label>
+            <label class="asd-radio-label">
+              <radio class="asd-radio" value="2"></radio>按设备及楼层筛选
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      -->
+    <view class="asd-condition-select-celss">
+      <view class="asd-item-cell">
+
+        <view class="asd-checkbox-view">
+          <switch disabled="{{!locationok}}" type="checkbox" class="asd-radio" bindchange="manualChange" />手动选择设备</view>
+      </view>
+
+
+      <view class="eqgroup-select asd-item-cell" wx:if="{{unitname==null}}">
+        <view class="asd-picker-title">设备组</view>
+        <picker class="asd-picker" disabled="{{(!locationok)||(machinegroup.length<1)}}" range="{{machinegroup}}" range-key="DESCRIPTION"
+          value="{{index}}" bindchange="eqgroupChange">
+          <view class="picker">当前选择: {{machinegroup[machinegroupidx].MACHINEGROUPNAME}}</view>
+        </picker>
+      </view>
+      <!--
+      <view class="asd-item-cell" wx:if="{{selecttype==2}}">
+        <view class="asd-picker-title">设备列表</view>
+        <radio-group bindchange="eqListChange">
+          <view class="asd-table">
+
+            <view class="asd-table-col" style="padding:5px 15px;">
+              <block wx:for="{{machines}}">
+                <view class="asd-checkbox-view" wx:if="{{index%2==0}}">
+                  <radio class="asd-radio" value="{{item.MACHINENAME}}" />{{item.MACHINENAME}}</view>
+              </block>
+            </view>
+
+            <view class="asd-table-col" style="padding:5px 15px;">
+              <block wx:for="{{machines}}">
+                <view class="asd-checkbox-view" wx:if="{{index%2!=0}}">
+                  <radio class="asd-radio" value="{{item.MACHINENAME}}" />{{item.MACHINENAME}}</view>
+              </block>
+            </view>
+
+
+          </view>
+        </radio-group>
+      </view>  -->
+
+      <view class="eq-select asd-item-cell" wx:if="{{selecttype==1}}">
+        <view class="asd-picker-title">设备</view>
+        <picker class="asd-picker" disabled="{{(!locationok)||(machines.length<1)}}" range="{{machines}}" range-key="DESCRIPTION"
+          value="{{index}}" bindchange="eqChange">
+          <view class="picker">当前选择: {{machines[machineidx].MACHINENAME}}</view>
+        </picker>
+      </view>
+      <view class="unit-select asd-item-cell" wx:if="{{selecttype==1}}">
+        <view class="asd-picker-title">单元</view>
+        <picker class="asd-picker" range="{{machines[machineidx].UNIT}}" range-key="DESCRIPTION" value="{{index}}"
+          bindchange="unitChange">
+          <view class="picker">当前选择: {{machines[machineidx].UNIT[unitidx].MACHINENAME}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="asd-item-cell">
+      <view class="asd-picker-title">楼层</view>
+      <picker class="asd-picker" disabled="{{!locationok}}" range="{{level}}" range-key="DESCRIPTION" value="{{index}}"
+        bindchange="levelChange">
+        <view class="picker">当前选择: {{level[levelidx].DESCRIPTION}}</view>
+      </picker>
+
+    </view>
+  </view>
+
+  <view class="asd-btn-cell">
+    <button class="task-go-btn" disabled="{{boxdata[0].row.length<1}}" type="primary" bindtap="goClick">G O</button>
+  </view>
+</view>

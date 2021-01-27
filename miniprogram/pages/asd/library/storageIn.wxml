@@ -1,0 +1,81 @@
+<!--miniprogram/pages/asd/library/storageIn.wxml-->
+<view class="container" style="min-height:{{wHeight-40}}px">
+  <view class="page-header"></view>
+  <view class="page-body ppbox-cells">
+    <view class=" asd-scan-cell" bind:touchstart="scanClick">
+      <view class="asd-scan-text">扫一扫PPBOX条形码</view>
+      <image class="weui-grid__icon asd-scan-icon" src="../../images/scan.png" />
+    </view>
+    <view class="libraryarea-cell libraryslot-title">
+      <view>{{factoryname=='CELL'? '车间仓库':'仓库'}}：{{machinename}}：{{libraryslot}}</view>
+
+    </view>
+    <form catchsubmit="addPPBOX">
+      <view class="ppbox-ipt-cell">
+        <input class="ppbox-ipttext" name="ppboxlabel" placeholder="请输入PPBOX标签ID" bindinput="ppboxLabelChange"
+          maxlength="25" />
+        <button class="mini-btn ppbox-add-btn" disabled="{{addbtndisable}}" type="primary" size="mini"
+          formType="submit">添加</button>
+
+      </view>
+    </form>
+    <view class="ppbox-cells">
+      <view class="ppbox-list-title">PPBOX列表</view>
+      <view class="ppbox-cell">
+        <scroll-view class="ppbox-scroll " scroll-x="true" style="width: 100%">
+          <view class="asd-table ppboxinfo-table" style="min-width:760px;max-width:1500px">
+            <block wx:for="{{boxdata}}" wx-key="col" wx:for-item="colitem">
+              <view class="asd-table-col {{index>8? 'grow-col':''}}">
+                <view class="ppbox-header-item ">{{colitem.col}} </view>
+                <block wx:for="{{colitem.row}}" wx-key="IDX">
+                  <view class="ppbox-item-default {{item.hold=='Y' ? 'hold-backcolor':''}}">{{item.value}} </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+
+      </view>
+
+
+    </view>
+    <view class="ppbox-btn-cell">
+      <button class="mini-btn ppbox-submit-btn" disabled="{{boxdata[0].row.length<1}}" type="primary"
+        bindtap="changeStorageArea">确定入库</button>
+    </view>
+
+  </view>
+  <view class="page-foot">
+
+  </view>
+
+
+</view>
+
+<view class="pop-mask" wx:if="{{maskshow}}">
+  <view class="pop-container">
+    <view class="page-body"  bind:touchstart="scanAgainClick">
+
+
+
+      <view class="asd-item-cell"style="align-items: center;height:35px">
+        <image class="weui-grid__icon " src="../../images/scan.png" />
+      </view>
+      <view class="asd-item-cell" style="align-items: center;height:25px">
+        <view style="text-align:center;">白色区域任意点击扫描</view>
+      </view>
+      <view class="asd-item-cell">
+        <view class="asd-picker-title scanbox-list-title">PPBOX列表：</view>
+      <view class="asd-list-flex-row">
+        <block wx:for="{{scanlist}}">
+        <view class="box-item">{{item.PACKINGLABELID}}</view>
+      </block>
+      </view>
+    </view>
+    </view>
+    <view class="page-header" style="width:100%">
+      <button type="primary" bindtap="completeScan">完成扫描</button>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,119 @@
+<block wx:if="{{!errMsg.onError}}">
+  <view class="container" style="min-height:{{wHeight-5}}px">
+
+    <view class="page-header"> </view>
+    <view class="page-body"  wx:if="{{checkdetail.subeqlist.length>0}}">
+      <form bindsubmit="submitclick">
+      <!--未下载完成前不显示-->
+      <!--<block style="flex-grow:1;border-style:solid" wx:if="{{checkdetail.subeqlist.length>0}}">--> 
+        <view class="asd-content-cells" >
+          <view class="dianjian-eqid">{{checkdetail.eqid}}</view>
+          <view class="dianjian-eqdesc" wx:if="{{checkdetail.eqdesc!=null}}">{{checkdetail.eqdesc}}</view>
+          <block wx:for-items="{{checkdetail.subeqlist}}" wx:key="subeqid">
+            <view class="subeq-cells">
+              <view class="subeq-desc">{{item.subeqid}}:{{item.subeqdesc}}</view>
+              <block wx:for-items="{{item.itemlist}}" wx:key="UNIQUE">
+                <view class="form-table1" wx:if="{{true}}">
+                  <view class="cell-title1">项目：{{item.ITEMNAME}}</view>
+                  <view class="cell-tingji-cells" wx:if="{{true}}">
+                    <switch class="tingji-switch" data-index="{{item.ITEMINDEX}}" checked="{{item.EQSTOP}}"
+                      bindchange="tingjichange" style='zoom:.6;'>单项停机免点</switch>
+                  </view>
+                  <!--如果停机跳过，此部份不显示-->
+                  <block>
+                    <view class="cell-biaozhun-cells" wx:if="{{!item.EQSTOP}}">
+                      <view class="cell-biaozhun-cell">参考标准({{item.INSPECTIONUNIT}}):
+                        {{item.MAXIMUMFLAG==null? "":item.MAXIMUM+item.MAXIMUMFLAG}}值{{item.MINIMUMFLAG}}{{item.MINIMUM}}
+                      </view>
+                      <icon class=".cell-biaozhun-icon" wx:if="{{item.INSPECTIONVALUE!=null&&item.INSPECTIONVALUE!=''}}"
+                        type="{{item.INSPECTIONRESULT!='OK' ? 'warn':'success'}}" size="15"> </icon>
+                    </view>
+                    <view class="dianjianzhhi-cells" wx:if="{{!item.EQSTOP}}">
+                      <view class="dianjianzhi-title">点检值: </view>
+                      <input class="weui-input dianjianzhi-ipt" type="{{item.KEYBOARDTYPE}}" placeholder="输入点检值"
+                        maxlength="5" confirm-type="done" adjust-position="true" data-index="{{item.ITEMINDEX}}"
+                        value="{{item.INSPECTIONVALUE}}" maxlength='5' bindblur="dianjianzhiblur" />
+                    </view>
+
+                  </block>
+
+                </view>
+              </block>
+              <!--subeq dianjian items wx:for -->
+            </view>
+          </block>
+          <view class="asd-item-cell">
+
+            <view class="asd-checkbox-view" style="font-size:15px">
+              <switch type="checkbox" class="asd-radio" bindchange="alltingjichange" />停机免点</view>
+          </view>
+
+          <view class="asd-item-cell">
+            <view class="asd-picker-title dj-item-font-size">请选择班次</view>
+            <picker class="asd-picker" range="{{shifts}}" value="{{checkdetail.shiftIndex}}" adjust-position="true"
+              bindchange="shiftPickerChange" name="shifts">
+              <view class="picker dj-item-font-size">当前选择: {{shifts[checkdetail.shiftIndex]}}</view>
+            </picker>
+
+          </view>
+          <view class="asd-item-cell">
+            <view class="asd-picker-title dj-item-font-size">请选择工作时间</view>
+            <picker class="asd-picker" range="{{workTimes}}" value="{{checkdetail.workTimeIndex}}"
+              adjust-position="true" bindchange="workTimePickerChange" >
+              <view class="picker dj-item-font-size">当前选择: {{workTimes[checkdetail.workTimeIndex]}}</view>
+            </picker>
+
+          </view>
+          <view class="asd-item-cell">
+            <view class="asd-picker-title dj-item-font-size">备注</view>
+            <input class="dj-item-font-size asd-picker" type="text" adjust-position="true" name="comment"
+              placeholder="请输入备注" bindchange></input>
+          </view>
+        </view>
+        <view class="dianjian-btn-cells" >
+          <button class="mini-btn" type="primary" size="18px" bindtap="baochunclick">保存草稿</button>
+          <button class="mini-btn" type="primary" formType="submit" size="18px">完成提交</button>
+        </view>
+      <!-- </block>-->
+      <!--dianjian itmes display flag block-->
+      </form>
+    </view>
+    <!--end page-body-->
+
+
+  </view>
+</block>
+<!--dianjian 界面-->
+
+
+<!--Error show-->
+<block wx:if="{{errMsg.onError}}">
+  <view class='page'>
+    <view class="weui-msg">
+      <view class="weui-msg__icon-area">
+        <icon type="warn" size="93"></icon>
+      </view>
+      <view class="weui-msg__text-area">
+        <view class="weui-msg__title">程序出错了！</view>
+        <view class="weui-msg__desc">{{errMsg.errorText}}
+          <navigator url="" class="weui-msg__link"></navigator>
+        </view>
+      </view>
+      <view class="weui-msg__opr-area">
+
+        <view class="weui-btn-area">
+          <!--  <button class="weui-btn" type="primary">推荐操作</button> -->
+          <!-- <button class="weui-btn"  open-type="exit" target="miniProgram" type="default" bindtap="onExit">退出</button>-->
+        </view>
+      </view>
+      <view class="weui-msg__extra-area">
+        <view class="weui-footer">
+          <view class="weui-footer__links">
+            <!--  <navigator url="" class="weui-footer__link">底部链接文本</navigator>-->
+          </view>
+          <view class="weui-footer__text">ASD CIM Team</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

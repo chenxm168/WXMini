@@ -1,0 +1,65 @@
+/* miniprogram/pages/asd/library/selectPage.wxss */
+@import "../../../style/asd.wxss";
+.library-rd
+{
+ transform:scale(0.8);
+ /* 
+ height: 10px;
+  width: 10px;   */
+}
+.library-cells
+{
+  padding: 3px;
+ 
+}
+.libraryarea-cells
+{
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+  
+}
+.libraryarea-cell
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.libary-scan-icon
+{
+  width: 20;
+  height: 20;
+  display: flex;
+  flex-grow: 0;
+  margin-right: 15px;
+}
+
+.librarymachine-radio-cell{
+  display: flex;
+  width: inherit;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  /*align-items:space-between; */
+
+  padding-left: 5px;
+ 
+}
+.libararyslot-radio-cell
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+.library-btn-cell
+{
+  
+  margin:5px;
+}
+.library-col
+{
+  flex-grow: 0.5;
+}

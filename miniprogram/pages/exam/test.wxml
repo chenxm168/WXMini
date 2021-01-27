@@ -1,0 +1,10 @@
+<!--miniprogram/pages/exam/test.wxml-->
+<view class="c1">
+    <view class="p-h">
+      P-h
+    </view>
+    <view class="p-b">
+     p-b
+    </view>
+    <view class="p-f"> p-f</view>
+  </view>

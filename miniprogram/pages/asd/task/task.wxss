@@ -1,0 +1,81 @@
+/* miniprogram/pages/asd/task/task.wxss */
+@import "../../../style/asd.wxss";
+.table
+{
+  display: table;
+  flex-flow: 1;
+}
+.table-row
+{
+  display: table-row;
+  margin-bottom: 2px;
+
+}
+
+.table-cell
+{
+  display: table-cell;
+  
+  text-align: center;
+  border-left-style: dotted;
+  border-color: white;
+  border-width: 1px;
+}
+.table-header
+{
+  background-color: #147ea1;
+  color:#ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.table-content
+{
+  font-size:11px;
+}
+.warning-item
+{
+  background-color: #f08080;
+  color: white;
+}
+.checked-item
+{
+   background-color: #d660bd ;
+   color:white;
+}
+.select-item
+{
+  background-color: lightgreen
+  
+}
+.btn-cell
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: center;
+  width: 100%;
+  background-color: #faf4f4;
+  margin:2px
+}
+.btn-mini
+{
+  width:90px;
+  
+  
+}
+.btn-large
+{
+  width:95%
+}
+.clean-container
+{
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  width: 100%;
+ 
+  position: relative;
+  align-items: flex-end;
+  
+}

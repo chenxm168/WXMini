@@ -1,0 +1,73 @@
+<!--pages/asd/login/userLogin.wxml-->
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <view class="page-header"></view>
+  <view class="page-body">
+    <form catchsubmit="userLoginSubmit">
+      <view class="login-cells">
+        <view class="login-cells-title"></view>
+        <view class="login-cells-body">
+          <view class="login-pmsoroic-cell">
+            <view class="login-pmsoroic-pms login-pmsoroic-cell-item {{pmsoroic==1 ? 'login-pmsoroic-active':'' }}"
+              bindtap="pmsoroicPmsClick">PMS</view>
+            <view class="login-pmsoroic-oic login-pmsoroic-cell-item {{pmsoroic==2 ? 'login-pmsoroic-active':'' }}"
+              bindtap="pmsoroicOicClick">OIC</view>
+          </view>
+          <view class="login-cell-body-items">
+            <view class="login-division-cell login-cell">
+              <view class="login-division-title login-item-title">环境</view>
+              <picker class="login-divsion-picker login-picker " bindchange="envChange" name="env" range="{{envs}}"
+                value="envidx">
+                <view class="picker">
+                  当前选择：{{envs[envidx]}}
+                </view>
+              </picker>
+            </view>
+            <view class="login-division-cell login-cell" wx:if="{{pmsoroic==1}}">
+              <view class="login-division-title login-item-title">事业部</view>
+              <picker class="login-divsion-picker login-picker " disable="{{divisions.length<1}}" bindchange="divisionChange" name="division"
+                range="{{divisions}}" value="divisionsidx">
+                <view class="picker">
+                  当前选择：{{divisions[divisionsidx]}}
+                </view>
+              </picker>
+            </view>
+            <view class="login-usergroup-cell login-cell" wx:if="{{pmsoroic==1}}">
+              <view class="login-usergroup-title login-item-title">部门</view>
+              <picker class="login-usergroup-picker login-picker" disable="{{usergroups.length<1}}" bindchange="usergroupChange" range="{{usergroups}}"
+                value="usergroupsidx">
+                <view class="picker">
+                  当前选择：{{usergroups[usergroupsidx]}}
+                </view>
+              </picker>
+            </view>
+            <view class="login-factory-cell login-cell">
+              <view class="login-factory-title login-item-title">工厂</view>
+              <picker class="login-factory-picker login-picker" bindchange="factoryChange" range="{{factories}}"
+                value="factoriesidx">
+                当前选择：{{factories[factoriesidx]}}
+              </picker>
+            </view>
+            <view class="login-userid-cell login-cell">
+              <view class="login-userid-title login-item-title">用户名</view>
+              <input class="login-userid-ipt login-picker" type="text" adjust-position="true"
+                disabled="{{pmsoroic==1&&(divisionsidx==null||usergroupsidx==null)}}" name="userid"
+                placeholder="请输入用户名"></input>
+            </view>
+            <view class="login-password-cell ">
+              <view class="login-password-title login-item-title">密码</view>
+              <input class="login-password-ipt login-picker"  placeholder="请输入密码" password="true" adjust-position="true"
+                disabled="{{pmsoroic==1&&(divisionsidx==null||usergroupsidx==null)}}" name="password"></input>
+            </view>
+          </view>
+        </view>
+        <view class="login-cells-foot">
+          <view class="login-cells-foot-title" style="color:{{labelcolor}}">{{labeltext}}</view>
+        </view>
+      </view>
+      <view class="login-btn-cell">
+        <button class="mini-btn" type="primary" formType="submit">登 陆</button>
+      </view>
+    </form>
+  </view>
+  <!--end page body-->
+</view>

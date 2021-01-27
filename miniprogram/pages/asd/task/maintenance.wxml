@@ -1,0 +1,24 @@
+<!--miniprogram/pages/asd/task/maintenance.wxml-->
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <view class="page-header"></view>
+
+  <view class="page-body ">
+    <view class="ppbox-cells">
+      <view class="ppbox-list-title">维护列表</view>
+      <view class="ppbox-cell">
+        <scroll-view class="ppbox-scroll " scroll-x="true" style="width: 100%">
+          <view class="asd-table ppboxinfo-table" style="min-width:1260px;max-width:3500px">
+            <block wx:for="{{tasktable}}" wx-key="col" wx:for-item="colitem">
+              <view class="asd-table-col">
+                <view class="ppbox-header-item ">{{colitem.col}} </view>
+                <block wx:for="{{colitem.row}}" wx-key="ID">
+                  <view class="ppbox-item-default ">{{item.value}} </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

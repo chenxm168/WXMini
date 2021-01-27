@@ -1,0 +1,56 @@
+<view class="container" style="min-height:{{pageheight}}px" >
+  <view class="page-header main-header">
+    <view class="asd-title-cells">
+    <view class="asd-title-truly" >TRULY</view>
+    <view class="asd-title-division">ASD DIVISION</view>
+  </view>
+  </view>
+  <view class="page-body">
+  <view class="asd-table">
+   <view class="asd-col main-col">
+     <view class="main-rows"  bind:touchstart="inspectionClick">
+       
+      <image class="weui-grid__icon " src="../../images/Inspetion.png" />
+      <view class="memu-title">设备点检</view>
+     </view>
+        
+    <view class="main-rows" bind:touchstart="balanceClick">
+      <image class="weui-grid__icon " src="../../images/balance.png"  />
+      <view class="memu-title">CELL平衡表</view>
+     </view>
+   
+     
+
+   </view>
+   <view class="asd-col main-col">
+    <view class="main-rows" bind:touchstart="libraryClick">
+      <image class="weui-grid__icon " src="../../images/userchange.png"  />
+      <view class="memu-title">入库管理</view>
+     </view>
+
+     <view class="main-rows" bind:touchstart="plantaskClick">
+      <image class="weui-grid__icon " src="../../images/plantask.png"  />
+      <view class="memu-title">定期项目</view>
+     </view>
+   </view>
+   <view class="asd-col main-col">
+    <view class="main-rows" bind:touchstart="userChangeCick">
+       
+       <image class="weui-grid__icon " src="../../images/user2.png" />
+       <view class="memu-title">用户切换</view>
+      </view>
+
+   </view>
+     <!--
+    <view class="main-rows">
+      <image class="weui-grid__icon " src="../../images/filter.png" bindtap="filterClick" />
+      <view class="memu-title">计划任务</view>
+     </view>
+   </view> -->
+  </view>
+  </view>
+  <view class="page-foot">
+    <view class="foot-cim">ASD CIM TEAM</view>
+  </view>
+  </view>
+

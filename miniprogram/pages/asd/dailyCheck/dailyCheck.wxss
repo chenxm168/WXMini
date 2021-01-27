@@ -1,0 +1,6 @@
+/* miniprogram/pages/asd/dailyCheck/dailyCheck.wxss */
+@import "../../../style/asd.wxss";
+.dj-item-font-size
+{
+  font-size:15px;
+}

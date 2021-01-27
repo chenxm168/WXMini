@@ -1,0 +1,53 @@
+/* miniprogram/pages/asd/task/planTask.wxss */
+@import "../../../style/asd.wxss";
+.task-picker
+{
+  background-color: rgb(241, 236, 236);
+  margin: 0px;
+  border-top-style: solid;
+  border-bottom-style:solid;
+  border-color: lightgrey;
+  border-width: 1px;
+  padding: 5px;
+
+}
+.item-cell
+{
+  padding-left: 5px;
+  margin:10px 0px;
+}
+.scan-icon
+{
+  width: 20;
+  height: 20;
+  display: flex;
+  flex-grow: 0;
+  margin-right: 15px;
+}
+.scan-cell
+{
+  display: flex;
+  flex-flow: row;
+  justify-content:space-between;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  margin:5px;
+  border-color:lightgray;
+}
+.scan-text
+{
+  text-align: center;
+  font-style: italic;
+  color: gray;
+  padding-left: 10px;
+  align-self: center;
+}
+.btn-cell
+{
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-style: italic;
+  font-weight: 600;
+}

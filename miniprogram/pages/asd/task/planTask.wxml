@@ -1,0 +1,51 @@
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <view class="page-header"></view>
+  <view class="page-body ">
+    <view class=" scan-cell" bind:touchstart="scanClick">
+       <view class="scan-text">扫一扫设备二维码</view>
+       <image class="weui-grid__icon scan-icon" src="../../images/scan.png"  />
+    </view>
+    <view class="condition-select-celss">
+      <view class="pmccleantype-select item-cell">
+        <view class="task-picker-title">项目类型</view>
+        <picker class="task-picker" range="{{cleantype}}" range-key="DESCRIPTION" value="{{index}}" bindchange="pmcCleanTypeChange">
+          <view class="picker">当前选择:  {{cleantype[cleantypeidx].DESCRIPTION}}</view>
+        </picker>
+      </view>
+      <view class="eqgroup-select item-cell">
+        <view class="task-picker-title">维护状态</view>
+        <picker class="task-picker" range="{{cleanstate}}"  range-key="DESCRIPTION" value="{{index}}" bindchange="cleanMainStateChange">
+          <view class="picker">当前选择:  {{cleanstate[cleanstateidx].DESCRIPTION}}</view>
+        </picker>
+      </view>
+      <view class="eqgroup-select item-cell" wx:if="{{unitname==null}}">
+        <view class="task-picker-title">设备组</view>
+        <picker class="task-picker" range="{{machinegroup}}"  range-key="DESCRIPTION" value="{{index}}" bindchange="eqgroupChange" disabled="{{!locationok}}">
+          <view class="picker">当前选择:  {{machinegroup[machinegroupidx].MACHINEGROUPNAME}}</view>
+        </picker>
+      </view>
+      <view class="eq-select item-cell" wx:if="{{unitname==null}}">
+        <view class="task-picker-title">设备</view>
+        <picker class="task-picker" range="{{machines}}"  range-key="DESCRIPTION" value="{{index}}" bindchange="eqChange" disabled="{{!locationok}}">
+          <view class="picker"  >当前选择:  {{machines[machineidx].MACHINENAME}}</view>
+        </picker>
+      </view>
+      <!--
+      <view class="unit-select item-cell" wx:if="{{unitname==null}}">
+        <view class="task-picker-title">单元</view>
+        <picker class="task-picker" range="{{machines[machineidx].UNIT}}"  range-key="DESCRIPTION" value="{{index}}" bindchange="unitChange">
+          <view class="picker">当前选择:  {{machines[machineidx].UNIT[unitidx].MACHINENAME}}</view>
+        </picker>
+      </view> -->
+    </view>
+    <view class="task-list-cells">
+
+    </view>
+    <view class="task-detai-cells">
+
+    </view>
+  </view>
+  <view class="btn-cell">
+    <button class="task-go-btn" disabled="{{machineidx==null}}" type="primary" bindtap="goClick">G O</button>
+  </view>
+</view>

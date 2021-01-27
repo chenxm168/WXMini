@@ -1,0 +1,122 @@
+<view class="container" style="min-height:{{wHeight}}px">
+  <view class="page-header"></view>
+  <view class="page-body">
+    <view class=" asd-scan-cell"  bind:touchstart="scanClick">
+      <view class="asd-scan-text">扫一扫库位二维码</view>
+      <image class="weui-grid__icon asd-scan-icon" src="../../images/scan.png"  />
+    </view>
+    <view class="library-cells">
+
+      <view class="libraryarea-cells">
+        <view class="libraryarea-cell">
+          <view>仓库类型</view>
+
+        </view>
+
+        <radio-group  bindchange="libraryTypeChange">
+          <label class="radio">
+            <radio class=" radio library-rd " disabled="{{!locationok}}" value="CELL" />车间仓库
+          </label>
+          <label class="radio">
+            <radio class="radio library-rd" value="FGI" disabled="{{!locationok}}" />仓库
+          </label>
+        </radio-group>
+      </view>
+      <view class="librarymachine-cells"></view>
+      <view>仓库区域</view>
+
+      <radio-group bindchange="libraryAreaChange">
+        <block wx:for="{{librarymachines}}" wx:key="IDX">
+          <label class="radio">
+            <radio class="radio library-rd" disabled="{{!locationok}}" value="{{item.MACHINENAME}}" />{{item.MACHINENAME}}
+          </label>
+
+        </block>
+      </radio-group>
+
+      <view class="libraryslot-cells" wx:if="{{libraryslots.length>0}}">
+        <view>仓库区域列表</view>
+        <view class="librarymachine-radio-cell">
+          <radio-group bindchange="librarySlotChange">
+            <view class="asd-table">
+              <view class="asd-table-col library-col">
+                <block wx:for="{{libraryslots}}" wx:key="IDX">
+                  <view class="libararyslot-radio-cell" wx:if="{{item.IDX%2==0}}"><label class="radio"
+                      style="font-size:26rpx">
+                      <radio class="radio library-rd" value="{{item.IDX}}" />{{item.LIBRARYSLOT}}
+                    </label></view>
+                </block>
+
+              </view>
+              <view class="asd-table-col library-col">
+                <block wx:for="{{libraryslots}}" wx:key="IDX">
+                  <view class="libararyslot-radio-cell" wx:if="{{item.IDX%2!=0}}"><label class="radio"
+                      style="font-size:26rpx">
+                      <radio class="radio library-rd" value="{{item.IDX}}" />{{item.LIBRARYSLOT}}
+                    </label></view>
+                </block>
+              </view>
+            </view>
+            <!--
+            <block wx:for="{{libraryslots}}" wx:key="IDX">
+              <view class="libararyslot-radio-cell"><label class="radio">
+                <radio class="radio library-rd" value="{{item.IDX}}" />{{item.LIBRARYSLOT}}
+              </label></view>
+             
+                
+              <label class="radio">
+                <radio class="radio library-rd" value="{{item.LIBRARYSLOT}}" />{{item.LIBRARYSLOT}}
+              </label>
+             
+            </block> -->
+          </radio-group>
+        </view>
+      </view>
+    </view>
+
+    <view class="library-btn-cell" wx:if="{{selectSlotidx!=null}}">
+      <button class="mini-btn" type="primary" disabled="{{selectSlotidx==null}}" bindtap="submit">确 定</button>
+    </view>
+
+  </view>
+  <view class="login-cells-foot"></view>
+</view>
+
+
+
+<!-- miniprogram/pages/asd/library/selectPage.wxml
+<view class="container">
+  <view class="page-header"></view>
+  <view class="page-body">
+    <view class="page-section">
+      <radio-group bindchange="libraryTypeChange">
+        <view class="page-section-title">选择仓库类型</view>
+        <label class="radio">
+          <radio value="FGI" checked="true" />仓库  
+        </label>
+        <label class="radio">
+          <radio value="CELL" />车间仓库
+        </label>
+      </radio-group>
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">仓库区域列表</view>
+      <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{libraryslots}}" wx:key="IDX">
+
+            <view class="weui-cell__hd">
+              <radio value="{{item.LIBRARYSLOT}}" checked="true" />
+            </view>
+            <view class="weui-cell__bd">{{item.LIBRARYSLOT}}</view>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+
+
+
+  </view>
+  <view class="login-cells-foot"></view>
+</view>
+-->

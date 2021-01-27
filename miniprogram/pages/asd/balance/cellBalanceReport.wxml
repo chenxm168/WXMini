@@ -1,0 +1,133 @@
+<view class="container" style="min-height:{{wHeight-5}}px">
+
+  <view class="page-header">
+
+  </view>
+  <view class="page-body">
+    <view class="asd-table"style="margin-left:35px">
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font" style="height:40px">
+          <view class="memu-title">开始时间</view>
+
+          <picker class="asd-picker " style="width:100px" mode="date" value="{{date}}" start="2019-09-01"
+            end="2029-09-01" bindchange="fromDateChange">
+            <view class="picker">{{fromdate}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">结束时间</view>
+
+          <picker class="asd-picker " style="width:100px" mode="date" value="{{date}}" start="2019-09-01" end="2029-09-01"
+            bindchange="endDateChange">
+            <view class="picker">{{enddate}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">生产类型</view>
+
+          <picker class="asd-picker " style="width:50px"  value="{{index}}" range="{{productiontype}}"
+            bindchange="productionTypeChange">
+            <view class="picker">{{type}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">生产型号</view>
+
+          <picker class="asd-picker " style="width:130px"  value="{{index}}" range="{{products}}"
+          range-key="TOPRODUCTSPECNAME"  bindchange="productChange">
+            <view class="picker">{{product}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+       <view class="filter-ok" style="height:55px" bindtap="queryClick">选 好 了 </view>
+      </view>
+    </view>
+    <!--END TABLE-->
+    <view class="table-cells" style="margin-left:35px;margin-bottom:10px">
+      <view class="table-title">待分配STB</view>
+      <view class="table-cell">
+        <scroll-view class="table-scroll " scroll-x="true" style="width:{{wWidth-35}}px">
+          <view class="asd-table" style="min-width:650px;max-width:1200px">
+            <block wx:for="{{waitstbs}}" wx-key="col" wx:for-item="colitem">
+              <view class="asd-table-col ">
+                <view class="table-header-item ">{{colitem.col}} </view>
+                <block wx:for="{{colitem.row}}" >
+                  <view class="table-item-default ">{{item}} </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+
+
+
+    <view class="table-cells" style="margin-left:35px">
+      <view class="table-title">平衡列表</view>
+      <view class="table-cell">
+        <scroll-view class="table-scroll " scroll-x="true" style="width:{{wWidth-35}}px">
+          <view class="asd-table" style="min-width:950px;max-width:1200px">
+            <block wx:for="{{balancelist}}" wx-key="col" wx:for-item="colitem">
+              <view class="asd-table-col ">
+                <view class="table-header-item ">{{colitem.col}} </view>
+                <block wx:for="{{colitem.row}}" >
+                  <view class="table-item-default ">{{item}} </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view class="table-cells" style="margin-left:35px">
+      <view class="table-title">配平信息</view>
+      <view class="table-cell">
+        <scroll-view class="table-scroll " scroll-x="true" style="width:{{wWidth-35}}px">
+          <view class="asd-table" style="min-width:950px;max-width:1200px">
+            <block wx:for="{{balanceinfo}}" wx-key="col" wx:for-item="colitem">
+              <view class="asd-table-col ">
+                <view class="table-header-item ">{{colitem.col}} </view>
+                <block wx:for="{{colitem.row}}" >
+                  <view class="table-item-default ">{{item}} </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view class="table-cells" style="margin-left:35px">
+      <view class="table-title">背镀信息</view>
+      <view class="table-cell">
+        <scroll-view class="table-scroll " scroll-x="true" style="width:{{wWidth-35}}px">
+          <view class="asd-table" style="min-width:950px;max-width:1200px">
+            <block wx:for="{{backitoinfo}}" wx-key="col" wx:for-item="colitem">
+              <view class="asd-table-col ">
+                <view class="table-header-item ">{{colitem.col}} </view>
+                <block wx:for="{{colitem.row}}" >
+                  <view class="table-item-default ">{{item}} </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+
+
+
+  </view>
+  <view class="page-foot"></view>
+</view>

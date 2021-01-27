@@ -1,0 +1,143 @@
+<!--miniprogram/pages/asd/task/task.wxml-->
+<view class="container" style="min-height:{{wHeight-8}}px">
+
+  <view class="page-header">
+
+  </view>
+  <view class="page-body">
+
+    <view class="asd-item-cell">
+
+      <view class="asd-checkbox-view" wx:if="{{cleanstate=='Created'}}">
+        <switch type="checkbox" class="asd-radio" bindchange="onlyshowwarningChange" />只看到期待执行项目</view>
+    </view>
+
+    <view class="table-cells">
+      <view class="table-title">{{setting.tasklisttitle}}</view>
+      <view class="table-cell"></view>
+      <scroll-view class="table-scroll " scroll-x="true" style="width:100&">
+        <view class="table"
+          style="min-width:{{cleanstate=='Created'? setting.creatstatetablewidth:setting.checkstatetablewidth}};max-width:2500px">
+          <view class="table-row table-header">
+            <block wx:for="{{header}}" wx:key="unique">
+              <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.header}}</view>
+            </block>
+          </view>
+          <block wx:for="{{rows}}" wx:for-item="row" wx:key="unique">
+            <view class="table-row table-content {{cleanstate=='Checked'? 'checked-item':''}} {{selectidx==index? 'select-item' : row.warning ? 'warning-item':''}}"
+              bindtap="rowClick" data-index="{{row.index}}" wx:if="{{onlyshowwarning==false? true:row.warning}}">
+              <block wx:for="{{row.row}}" wx:key="unique">
+                <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.value}}</view>
+              </block>
+            </view>
+          </block>
+
+
+        </view>
+
+      </scroll-view>
+    </view>
+
+
+  </view>
+  <view class="page-foot" style="width:100%">
+    <view class="btn-cell">
+      <button class="btn-large" type="primary" bindtap="executeClick"
+        wx:if="{{btns.execute.show&&cleanstate=='Created'}}" disabled="{{selectidx==null}}">{{btns.execute.text}}</button>
+      <button class="btn-large" type="primary" bindtap="checkClick"
+        wx:if="{{btns.check.show&&cleanstate=='Checked'}}" disabled="{{selectidx==null}}">{{btns.check.text}}</button>
+    </view><!--
+    <view class="btn-cell">
+      <button class="{{btns.showcnt>1? 'btn-mini':'btn-large'}}" type="primary" bindtap="executeClick"
+        wx:if="{{btns.execute.show}}" disabled="{{selectidx==null}}">{{btns.execute.text}}</button>
+      <button class="{{btns.showcnt>1? 'btn-mini':'btn-large'}}" type="primary" bindtap="modifyClick"
+        wx:if="{{btns.modify.show}}" disabled="{{selectidx==null}}">{{btns.modify.text}}</button>
+      <button class="{{btns.showcnt>1? 'btn-mini':'btn-large'}}" type="primary" bindtap="checkClick"
+        wx:if="{{btns.check.show}}" disabled="{{selectidx==null}}">{{btns.check.text}}</button>
+      <button class="{{btns.showcnt>1? 'btn-mini':'btn-large'}}" type="primary" bindtap="delayClick"
+        wx:if="{{btns.delay.show}}" disabled="{{selectidx==null}}">{{btns.delay.text}}</button>
+    </view>-->
+  </view>
+</view>
+
+<view class="pop-mask" wx:if="{{cleanexcuteshow}}">
+  <view class="clean-container">
+    
+      <view class="page-header" style="width:100%;background-color: #F8F8F8;">
+
+      </view>
+
+      <view class="page-body"  >
+        
+        <view class="table-cells" wx:if="{{cleanstate=='Created'&&partlist!=null&&partlist.rows.length>0}}" style="margin-top:2px">
+      <view class="table-title" style="font-size:{{partlist.setting.tabletitlefontsize}};color:{{partlist.setting.tabletitlefontcolor}};fontweight:{{partlist.setting.tabletitlefontweight}};margin-left:2px">{{partlist.setting.tabletitle}}</view>
+      <view class="table-cell"></view>
+      <scroll-view class="table-scroll " scroll-x="true" style="width:100&">
+        <view class="table"
+          style="min-width:{{partlist.setting.tableminwidth}}">
+          <view class="table-row table-header">
+            <block wx:for="{{partlist.header}}" wx:key="unique">
+              <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.header}}</view>
+            </block>
+          </view>
+          <block wx:for="{{partlist.rows}}" wx:for-item="row" wx:key="unique">
+            <view class="table-row table-content ">
+              <block wx:for="{{row.row}}" wx:key="unique">
+                <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.value}}</view>
+              </block>
+            </view>
+          </block>
+
+
+        </view>
+
+      </scroll-view>
+    </view>
+
+        <form style="display:inherit" catchsubmit="cleanSubmit">
+          <view class="item-cells" style="flex-grow:1">
+        <view class="asd-item-cell" style="margin-left:5px">
+          <view>执行结果</view>
+          <view>
+            <radio-group name="cleanresult" bindchange="cleanResultChange">
+              <label style="margin-left:15px">
+                <radio checked="true" value="OK"></radio>OK
+              </label>
+              <label style="margin-left:15px">
+                <radio value="NG"></radio>NG
+              </label>
+            </radio-group>
+          </view>
+        </view>
+
+        <view class="asd-item-cell" style="width:100%;" wx:if="{{cleanstate=='Created'}}">
+          <view class="asd-picker-title" style="margin-left:5px">执行时间</view>
+          <picker class="asd-picker " name="executedate" mode="date" value="{{date}}" start="2019-09-01" end="2029-09-01"
+            bindchange="cleanDateChange">
+            <view class="picker"   style="width:100%">{{nowstr}}</view>
+          </picker>
+        </view>
+
+        <view class="asd-item-cell" wx:if="{{cleanstate=='Created'}}">
+          <view class="asd-picker-title" style="margin-left:5px">执行描述</view>
+          <input class="dj-item-font-size asd-picker" type="text" adjust-position="true" name="description"
+            placeholder="请输入执行描述"></input>
+
+        </view>
+
+        <view class="asd-item-cell">
+          <view class="asd-picker-title" style="margin-left:5px">备注</view>
+          <input class="dj-item-font-size asd-picker" type="text" adjust-position="true" name="comment"
+            placeholder="请输入备注"></input>
+
+        </view>
+      </view>
+      <view class="btn-cell" style="margin-bottom:5px">
+          <button class="btn-mini" type="primary" bindtap="cleanexecuteCancel">取消</button>
+          <button class="btn-mini" type="primary" formType="submit">确定</button>
+        </view>
+      </form>
+      </view> <!--pop body-->
+    
+  </view>
+</view>
