@@ -1,0 +1,55 @@
+<!--miniprogram/pages/asd/prodlist.wxml-->
+<view class="container" style="min-height:{{wHeight-5}}px">
+
+  <view class="page-header">
+  </view>
+  <view class="page-body">
+    <view class="asd-table"style="margin-left:35px">
+
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">工厂</view>
+
+          <picker class="asd-picker " style="width:50px"  value="{{index}}" range="{{factories}}"
+            bindchange="factoryChange">
+            <view class="picker">{{factory}}</view>
+          </picker>
+        </view>
+      </view>
+ 
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">生产类型</view>
+
+          <picker class="asd-picker " style="width:50px"  value="{{index}}" range="{{productiontype}}"
+            bindchange="productionTypeChange">
+            <view class="picker">{{type}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">生产型号</view>
+
+          <picker class="asd-picker " style="width:130px"  value="{{index}}" range="{{products}}"
+            bindchange="productChange">
+            <view class="picker">{{product}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">生产制程</view>
+
+          <picker class="asd-picker " style="width:100px"  value="{{index}}" range="{{operationlist}}}"
+          range-key="TOPRODUCTSPECNAME"  bindchange="opeChange">
+            <view class="picker">{{operation}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="asd-col main-col">
+       <view class="filter-ok" style="height:55px" bindtap="queryClick">选 好 了 </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -17,10 +17,9 @@
     "pages/asd/task/maintenance",
     "pages/asd/dailyCheck/dailyCheck",
     "pages/exam/exam3",
-    "pages/asd/balance/cellBalanceReport"
+    "pages/asd/balance/cellBalanceReport",
+    "pages/asd/prodlist/prodlist"
     
-    
-  
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

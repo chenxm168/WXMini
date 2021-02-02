@@ -83,10 +83,10 @@ App({
     userperiod: { test: 200, prod: 12 },
     wifissid: null,
     wifissidlist: ['CIM_WIFI'],
-    wifibssidlist:[],
-    wifissidverify:true,
-    wifibssidverify:false,
-    requesturls:{'CIM_WIF':"",'ASD-guest':"http://172.28.64.21/"}
+    wifibssidlist: [],
+    wifissidverify: true,
+    wifibssidverify: false,
+    requesturls: { 'CIM_WIF': "", 'ASD-guest': "http://172.28.64.21/" }
 
 
 
@@ -198,7 +198,7 @@ App({
     })
 
   },
-  
+
   sendMsg: function (arg) {
     let msg = arg.msg
     let title = arg.title
@@ -227,99 +227,99 @@ App({
       }
     })
 
-  },  
- //for test
- /*
-  sendMsg: function (arg) {
-    let msg = arg.msg
-    let title = arg.title
-    let success = arg.success
-    let fail = arg.fail
+  },
+  //for test
+  /*
+   sendMsg: function (arg) {
+     let msg = arg.msg
+     let title = arg.title
+     let success = arg.success
+     let fail = arg.fail
+     
+ 
+ 
+ 
+     let wifiFail=(arg)=>
+     {
+       let success=arg.success
+       let fail=arg.fail
+       let msg=arg.msg
+       wx.cloud.callFunction({
+         name: "sendReceive",
+         data: msg,
+         success: (res) => {
+           wx.hideLoading({
+             success: (res) => { },
+           })
+           if (success != undefined && success != null) {
+             success(res)
+           }
+         },
+         fail: (err) => {
+           wx.hideLoading({
+             success: (res) => { },
+           })
+           if (err != null)
+             fail(err)
+         }
+       })
+ 
+     }
+ 
+     wx.showLoading({
+       title: title,
+     })
     
-
-
-
-    let wifiFail=(arg)=>
-    {
-      let success=arg.success
-      let fail=arg.fail
-      let msg=arg.msg
-      wx.cloud.callFunction({
-        name: "sendReceive",
-        data: msg,
-        success: (res) => {
-          wx.hideLoading({
-            success: (res) => { },
-          })
-          if (success != undefined && success != null) {
-            success(res)
-          }
-        },
-        fail: (err) => {
-          wx.hideLoading({
-            success: (res) => { },
-          })
-          if (err != null)
-            fail(err)
-        }
-      })
-
-    }
-
-    wx.showLoading({
-      title: title,
-    })
-   
-    this.getRequestUrl(
-      {
-        success:(res)=>
-      {
-        let url=res.url+'trulyasdwx'
-        console.log("ready local request! url:"+url)
-        wx.request({
-          url: url,
-          data:msg,
-          method:'POST',
-          success: (res) => {
-            console.log(res)
-            wx.hideLoading({
-              success: (res) => { },
-            })
-            if (success != undefined && success != null) {
-              success({result:res.data})
-            }
-          },
-          fail: (err) => {
-            wx.hideLoading({
-              success: (res) => { },
-            })
-            if (err != null)
-              fail(err)
-          }
-          
-        })
-        
-      },
-      fail:(err)=>
-      {
-        wifiFail(
-          {
-            success:success,
-            fail:fail,
-            msg:msg
-          }
-        )
-      }
-      }
-    )
-
-
-
-
-
-   
-
-  },  */  //for test
+     this.getRequestUrl(
+       {
+         success:(res)=>
+       {
+         let url=res.url+'trulyasdwx'
+         console.log("ready local request! url:"+url)
+         wx.request({
+           url: url,
+           data:msg,
+           method:'POST',
+           success: (res) => {
+             console.log(res)
+             wx.hideLoading({
+               success: (res) => { },
+             })
+             if (success != undefined && success != null) {
+               success({result:res.data})
+             }
+           },
+           fail: (err) => {
+             wx.hideLoading({
+               success: (res) => { },
+             })
+             if (err != null)
+               fail(err)
+           }
+           
+         })
+         
+       },
+       fail:(err)=>
+       {
+         wifiFail(
+           {
+             success:success,
+             fail:fail,
+             msg:msg
+           }
+         )
+       }
+       }
+     )
+ 
+ 
+ 
+ 
+ 
+    
+ 
+   },  */  //for test
 
   getWxUserinfo: function (systemmodule, resovle, reject) {
     wx.getStorage({
@@ -366,11 +366,19 @@ App({
     let nowtime = now.getTime()
     if (nowtime < lasttime) {
       if (ok != undefined && ok != null) {
-        ok(null);
+        ok({ errcode: '0', errmessage: 'ok' });
+      } else {
+        return new Promise(function (resolve, reject) {
+          resolve({ errcode: '0', errmessage: 'ok' })
+        })
       }
     } else {
       if (ng != undefined && ng != null) {
-        ng(null);
+        ng({ errcode: 'USR-1', errmessage: 'exprires timeout' });
+      } else {
+        return new Promise(function (resolve, reject) {
+          reject({ errcode: 'USR-1', errmessage: 'exprires timeout' })
+        })
       }
     }
 
@@ -387,13 +395,30 @@ App({
           this.pmsLogin(
             {
               env: user.env,
-              success: ok,
-              fail: ng,
+
               usergroup: user.usergroup,
               factory: user.factory,
               userid: user.userid,
               password: user.password,
-              division: user.division
+              division: user.division,
+              success: (res) => {
+                if (ok != undefined && ok != undefined) {
+                  ok(res)
+                } else {
+                  return new Promise(function (resolve, reject) {
+                    resolve(res)
+                  })
+                }
+              },
+              fail: (err) => {
+                if (ng != undefined && ng != undefined) {
+                  ng(err)
+                } else {
+                  return new Promise(function (resolve, reject) {
+                    reject(err)
+                  })
+                }
+              }
 
             }
           )
@@ -407,8 +432,24 @@ App({
               factory: user.factory,
               userid: user.userid,
               password: user.password,
-              success: ok,
-              fail: ng,
+              success: (res) => {
+                if (ok != undefined && ok != undefined) {
+                  ok(res)
+                } else {
+                  return new Promise(function (resolve, reject) {
+                    resolve(res)
+                  })
+                }
+              },
+              fail: (err) => {
+                if (ng != undefined && ng != undefined) {
+                  ng(err)
+                } else {
+                  return new Promise(function (resolve, reject) {
+                    reject(err)
+                  })
+                }
+              }
             }
           )
           break
@@ -740,104 +781,140 @@ App({
 
   },
   sendQueryMsg: function (arg) {
-    let queryid = arg.queryid
+    let queryid = (arg.queryid != undefined && arg.queryid != null) ? arg.queryid : null
     let env = arg.env
-    let map = arg.map
+    let map = (arg.map != undefined && arg.map != null) ? arg.map : null
     let userid = arg.userid
     let success = arg.success
-    let list = arg.list
+    let list = (arg.list != undefined && arg.list != null) ? arg.list : null
     let fail = arg.fail
     let msg = JSON.parse(JSON.stringify(this.globalData.msg))
-    let service = arg.service
-    let title = arg.title
-    let getQueryid = function (arg) {
-      let complete = arg.complete
-      if (queryid != undefined && queryid != null) {
-        complete(queryid)
-      } else {
-        complete(null)
-      }
-    }
-    let getService = function (arg) {
-      let complete = arg.complete
-      if (service != undefined && service != null) {
-        complete(service)
-      } else {
-       complete("asdquerysrv")
-      // complete("asdcommonquerysrv")
-      }
-    }
-
-    let getMap = function (arg) {
-      let complete = arg.complete
-      if (map != undefined && map != null) {
-        complete(map)
-      } else {
-        complete(null)
-      }
-    }
-
-    let getTitle = function (arg) {
-      let complete = arg.complete
-      if (title == undefined || title == null) {
-        complete("请求数据中")
-      } else {
-        complete(arg.title)
-      }
-    }
+    let service = (arg.service != undefined && arg.service != null) ? arg.service : "asdquerysrv"
+    let title = (arg.title != undefined && arg.title != null) ? arg.title : "请求数据中"
 
     msg.data.JsonMessage.Userinfo.ENV = env
     msg.data.JsonMessage.Userinfo.USERID = userid
     msg.data.JsonMessage.Message.MODULE = "qry"
     msg.data.JsonMessage.Message.PARAMLIST = list
-    getQueryid(
+    msg.data.JsonMessage.Message.QUERYID = queryid
+    msg.data.JsonMessage.Service = service
+    msg.data.JsonMessage.Message.PARAMMAP = map
+    this.sendMsg(
       {
-        arg: arg,
-        complete: (res) => {
-          msg.data.JsonMessage.Message.QUERYID = res
-          getService(
-            {
-              arg: arg,
-              complete: (res) => {
-                msg.data.JsonMessage.Service = res
-                getMap(
-                  {
-                    arg: arg,
-                    complete: (res) => {
-                      msg.data.JsonMessage.Message.PARAMMAP = res
-                      getTitle(
-                        {
-                          arg: arg,
-                          complete: (res) => {
-                            title = res
-                            console.log("send msg content")
-                            console.log(msg)
-                            this.sendMsg(
-                              {
-                                msg: msg,
-                                title: title,
-                                success: success,
-                                fail: fail
-                              }
-                            )
+        msg: msg,
+        title: title,
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
 
-                          }
-                        }
-                      )
-                    }
-                  }
-                )
+        },
 
-              }
-
-
-            }
-          )
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
         }
       }
     )
 
-
+    /*
+       let getQueryid = function (arg) {
+         let complete = arg.complete
+         if (queryid != undefined && queryid != null) {
+           complete(queryid)
+         } else {
+           complete(null)
+         }
+       }
+       let getService = function (arg) {
+         let complete = arg.complete
+         if (service != undefined && service != null) {
+           complete(service)
+         } else {
+          complete("asdquerysrv")
+         // complete("asdcommonquerysrv")
+         }
+       }
+   
+       let getMap = function (arg) {
+         let complete = arg.complete
+         if (map != undefined && map != null) {
+           complete(map)
+         } else {
+           complete(null)
+         }
+       }
+   
+       let getTitle = function (arg) {
+         let complete = arg.complete
+         if (title == undefined || title == null) {
+           complete("请求数据中")
+         } else {
+           complete(arg.title)
+         }
+       }
+   
+       msg.data.JsonMessage.Userinfo.ENV = env
+       msg.data.JsonMessage.Userinfo.USERID = userid
+       msg.data.JsonMessage.Message.MODULE = "qry"
+       msg.data.JsonMessage.Message.PARAMLIST = list
+       getQueryid(
+         {
+           arg: arg,
+           complete: (res) => {
+             msg.data.JsonMessage.Message.QUERYID = res
+             getService(
+               {
+                 arg: arg,
+                 complete: (res) => {
+                   msg.data.JsonMessage.Service = res
+                   getMap(
+                     {
+                       arg: arg,
+                       complete: (res) => {
+                         msg.data.JsonMessage.Message.PARAMMAP = res
+                         getTitle(
+                           {
+                             arg: arg,
+                             complete: (res) => {
+                               title = res
+                               console.log("send msg content")
+                               console.log(msg)
+                               this.sendMsg(
+                                 {
+                                   msg: msg,
+                                   title: title,
+                                   success: success,
+                                   fail: fail
+                                 }
+                               )
+   
+                             }
+                           }
+                         )
+                       }
+                     }
+                   )
+   
+                 }
+   
+   
+               }
+             )
+           }
+         }
+       )
+   
+       */
 
 
 
@@ -875,8 +952,24 @@ App({
       {
         msg: msg,
         title: "数据处理中",
-        success: success,
-        fail: fail
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
+        },
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
       }
     )
 
@@ -903,8 +996,24 @@ App({
       {
         msg: msg,
         title: "数据处理中",
-        success: success,
-        fail: fail
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
+        },
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
       }
     )
 
@@ -941,19 +1050,35 @@ App({
           let returncode = res.result.Message.Return.RETURNCODE
           if (returncode == '0') {
             console.log("verify user privilege success!")
-            if (success != null) {
-
+            if (success != undefined && success != null) {
               success(res)
+            } else {
+              return new Promise(function (resolve, reject) {
+                resolve(res)
+              })
             }
           } else {
             console.log("verify user privilege fail!")
+
             if (fail != undefined && fail != null) {
               fail(res.result.Message.Return)
+            } else {
+              return new Promise(function (resolve, reject) {
+                reject(res.result.Message.Return)
+              })
             }
           }
 
         },
-        fail: fail,
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
 
 
       })
@@ -1030,19 +1155,32 @@ App({
               //doSave(globalUser)
               if (success != undefined && success != null) {
                 success(userinfo)
+              } else {
+                return new Promise(new function (resolve, reject) {
+                  resolve(userinfo)
+                })
               }
 
             },
             fail: (err) => {
               if (fail != undefined && fail != null) {
-                fail(err)
+                fail({ errcode: 'USER-2', errmessage: 'User Verify Fail', errdetail: err })
+              } else {
+                return new Promise(function (resolve, reject) {
+                  reject({ errcode: 'USER-2', errmessage: 'User Verify Fail', errdetail: err })
+                })
               }
             }
           })
         },
         fail: (err) => {
           if (fail != undefined && fail != null) {
-            fail({ messge: "用户登陆过期" })
+            fail({ errcode: 'USER-1', errmessage: 'User Exprires Timeout', errdetail: err })
+          }
+          else {
+            return new Promise(function (resolve, reject) {
+              reject({ errcode: 'USER-1', errmessage: 'User Verify Fail', errdetail: err })
+            })
           }
         }
       })
@@ -1058,12 +1196,20 @@ App({
           //doSave(globalUser)
           if (success != undefined && success != null) {
             success(userinfo)
+          } else {
+            return new Promise(new function (resolve, reject) {
+              resolve(userinfo)
+            })
           }
 
         },
         fail: (err) => {
           if (fail != undefined && fail != null) {
-            fail(err)
+            fail({ errcode: 'USER-2', errmessage: 'User Verify Fail', errdetail: err })
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject({ errcode: 'USER-2', errmessage: 'User Verify Fail', errdetail: err })
+            })
           }
         }
       })
@@ -1147,7 +1293,7 @@ App({
     let userid = arg.userid
     let service = "querymachinelistbypmsgroup"
     let machinegroupname = arg.machinegroupname
-    let map = { PMS_MACHINEGROUPNAME: machinegroupname, USERID: userid,EVENTUSER:userid }
+    let map = { PMS_MACHINEGROUPNAME: machinegroupname, USERID: userid, EVENTUSER: userid }
     let machines = []
 
     //define function
@@ -1251,7 +1397,7 @@ App({
     let map = {}
     let queryid = ""
     if ((unitname == undefined || unitname == null) && (machinename == undefined || machinename == null)) {
-      map = { MACHINEGROUPNAME: groupname,EVENTUSER:userid }
+      map = { MACHINEGROUPNAME: groupname, EVENTUSER: userid }
       queryid = "GetInspectionListByGroup"
       this.sendQueryMsg(
         {
@@ -1267,7 +1413,7 @@ App({
     }
     else {
       if (unitname == undefined || unitname == null) {
-        map = { MACHINENAME: "%" + machinename + "%",EVENTUSER:userid }
+        map = { MACHINENAME: "%" + machinename + "%", EVENTUSER: userid }
         queryid = "GetInspectionListByMachine"
         console.log("app query inspetionlist map")
         console.log(map)
@@ -1283,7 +1429,7 @@ App({
           }
         )
       } else {
-        map = { MACHINENAME: "%" + machinename + "%", UNITNAME: "%" + unitname + "%" ,EVENTUSER:userid}
+        map = { MACHINENAME: "%" + machinename + "%", UNITNAME: "%" + unitname + "%", EVENTUSER: userid }
         queryid = "GetInspectionListByUnit"
         this.sendQueryMsg(
           {
@@ -1311,6 +1457,10 @@ App({
       console.log("checkReturnDATALIST Fail")
       if (fail != undefined && fail != null) {
         fail(list)
+      } else {
+        return new Promise(function (resolve, reject) {
+          reject(list)
+        })
       }
     }
     else {
@@ -1321,9 +1471,18 @@ App({
           if (success != undefined && success != null) {
             success(rtnlist)
           }
+          else {
+            return new Promise(function (resolve, reject) {
+              resolve(rtnlist)
+            })
+          }
         } else {
           if (fail != undefined && fail != null) {
             fail(list)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(list)
+            })
           }
         }
 
@@ -1335,12 +1494,25 @@ App({
               rtn.push(list[k].DATA)
             }
             success(rtn)
+          }else
+          {
+            return new Promise(function(resolve,reject)
+            {
+              resolve(rtn)
+            })
           }
 
         }
         else {
           if (fail != undefined && fail != null) {
             fail(list)
+          }
+          else
+          {
+            return new Promise(function(resolve,reject)
+            {
+              reject(list)
+            })
           }
 
         }
@@ -1387,18 +1559,36 @@ App({
       if (s > verifyaccuracy) {
 
         if (fail != undefined && fail != null) {
-          fail({ message: "位置信息验证失败" })
+          fail({errcode:'LCT-1', errmessage: "位置信息验证失败" })
+        }else
+        {
+          return new Promise(function(resolve,reject)
+          {
+            reject({errcode:'LCT-1', errmessage: "位置信息验证失败" })
+          })
         }
 
       } else {
         if (success != null && success != null) {
           success(userlocation)
+        }else
+        {
+          return new Promise(resolve,reject)
+          {
+            resolve(userlocation)
+          }
         }
       }
 
     } catch (e) {
       if (fail != undefined && fail != null) {
-        fail({ message: "位置信息验证失败" })
+        fail({errcode:'LCT-1', errmessage: "位置信息验证失败",errdetail:e })
+      }else
+      {
+        return new Promise(function(resolve,reject)
+        {
+          reject({errcode:'LCT-1', errmessage: "位置信息验证失败",errdetail:e  })
+        })
       }
     }
 
@@ -1415,7 +1605,7 @@ App({
         success(ssid)
       }
     } else {
-       
+
 
       wx.startWifi({
         success: (res) => {
@@ -1425,53 +1615,50 @@ App({
               console.log(result)
               this.globalData.wifissid = result.wifi.SSID
               let ssid = result.wifi.SSID
-              let bssid=result.wifi.BSSID
-              let global=this.globalData
-              let num= (global.wifissidverify? 1:0) + (global.wifibssidverify?2:0)
-              console.log("verifyssid:"+global.wifissidverify)
-              console.log("verifybssid:"+global.wifibssidverify)
-              console.log("verfiy num:"+num)
-              let chkrs=false
-              switch(num)
-              {
+              let bssid = result.wifi.BSSID
+              let global = this.globalData
+              let num = (global.wifissidverify ? 1 : 0) + (global.wifibssidverify ? 2 : 0)
+              console.log("verifyssid:" + global.wifissidverify)
+              console.log("verifybssid:" + global.wifibssidverify)
+              console.log("verfiy num:" + num)
+              let chkrs = false
+              switch (num) {
                 case 1:
                   {
                     console.log("start verify ssid")
-                    if (this.globalData.wifissidlist.length>0&&ssid != null&&this.globalData.wifissidlist.indexOf(ssid) >= 0) {
+                    if (this.globalData.wifissidlist.length > 0 && ssid != null && this.globalData.wifissidlist.indexOf(ssid) >= 0) {
                       console.log(" verify ssid ok")
-                      
+
                       if (success != undefined && success != null) {
-                        
-                     
+
+
                         success(ssid)
-                      }   
-                      chkrs=true
+                      }
+                      chkrs = true
                     } else {
-                     
+
                       console.log(" verify ssid ng")
-                       
-                      if(fail!=undefined&&fail!=null)
-                      {
-                        
+
+                      if (fail != undefined && fail != null) {
+
                         fail(null)
-                      } 
+                      }
                     }
                     break
                   }
                 case 2:
                   {
                     console.log("start verify bssid")
-                    if (this.globalData.wifibssidlist.length>0&&ssid != null&&(this.globalData.wifibssidlist.indexOf(bssid) >= 0||this.globalData.wifibssidlist.indexOf('CIM_WIFI') >= 0)) {
+                    if (this.globalData.wifibssidlist.length > 0 && ssid != null && (this.globalData.wifibssidlist.indexOf(bssid) >= 0 || this.globalData.wifibssidlist.indexOf('CIM_WIFI') >= 0)) {
                       console.log(" verify bssid ok")
-                      
+
                       if (success != undefined && success != null) {
                         success(ssid)
-                      } 
+                      }
                     } else {
                       console.log(" verify bssid ng")
-                      
-                      if(fail!=undefined&&fail!=null)
-                      {
+
+                      if (fail != undefined && fail != null) {
                         fail(null)
                       }
                     }
@@ -1480,31 +1667,30 @@ App({
                 case 3:
                   {
                     console.log("start verify bssid and ssid")
-                    if (this.globalData.wifibssidlist.length>0&&ssid != null&&this.globalData.wifibssidlist.indexOf(bssid) >= 0&&this.globalData.wifissidlist.length>0&&ssid != null&&this.globalData.wifissidlist.indexOf(ssid) >= 0) {
+                    if (this.globalData.wifibssidlist.length > 0 && ssid != null && this.globalData.wifibssidlist.indexOf(bssid) >= 0 && this.globalData.wifissidlist.length > 0 && ssid != null && this.globalData.wifissidlist.indexOf(ssid) >= 0) {
                       console.log(" verify bssid and ssid ok")
-                      
+
                       if (success != undefined && success != null) {
                         success(ssid)
                       }
                     } else {
                       console.log(" verify bssid and ssid ng")
-                      
-                      if(fail!=undefined&&fail!=null)
-                      {
+
+                      if (fail != undefined && fail != null) {
                         fail(null)
-                      } 
+                      }
                     }
                     break
                   }
-                  default:
-                    {
-                      console.log("default fail")
-                      
-                      if (fail != undefined && fail != null) {
-                        fail(null)
-                      } 
-                      break
+                default:
+                  {
+                    console.log("default fail")
+
+                    if (fail != undefined && fail != null) {
+                      fail(null)
                     }
+                    break
+                  }
               }
               /*
                if(chkrs)
@@ -1538,7 +1724,7 @@ App({
               }*/
             },
             fail: (err) => {
-              
+
               console.log("get Wifi connection fail")
               console.log(err)
               if (fail != undefined && fail != null) {
@@ -1565,55 +1751,47 @@ App({
     console.log("start setWxGlobalParam")
     console.log(arg)
     if (arg.ssidlist != undefined && arg.ssidlist != null) {
-      let list = arg.ssidlist.ssid==undefined? arg.ssidlist:[{ssid:arg.ssidlist.ssid}]
-      let ssids=[]
-      if(list.length!=undefined)
-      {
-        for(let i=0;i<list.length;i++)
-        {
+      let list = arg.ssidlist.ssid == undefined ? arg.ssidlist : [{ ssid: arg.ssidlist.ssid }]
+      let ssids = []
+      if (list.length != undefined) {
+        for (let i = 0; i < list.length; i++) {
           ssids.push(list[i].ssid)
         }
-        this.globalData.wifissidlist=ssids
-        console.log( this.globalData.wifissidlist)
+        this.globalData.wifissidlist = ssids
+        console.log(this.globalData.wifissidlist)
       }
     } //end set wifi ssid list
-    this.globalData.wifissidverify=  arg.ssidverify=='N'? false:true
-    this.globalData.wifibssidverify =arg.bssidverify=='Y'? true:false
-    if(arg.bssidlist != undefined && arg.bssidlist != null)
-    {
-      let blist=arg.bssidlist.bssid==undefined? arg.bssidlist :[{bssid:arg.bssidlist.bssid}]
+    this.globalData.wifissidverify = arg.ssidverify == 'N' ? false : true
+    this.globalData.wifibssidverify = arg.bssidverify == 'Y' ? true : false
+    if (arg.bssidlist != undefined && arg.bssidlist != null) {
+      let blist = arg.bssidlist.bssid == undefined ? arg.bssidlist : [{ bssid: arg.bssidlist.bssid }]
       console.log(blist)
-      let bssids=[]
-      if(blist.length!=undefined&&blist.length!=null)
-      {
-        for(let j=0;j<blist.length;j++)
-        {
+      let bssids = []
+      if (blist.length != undefined && blist.length != null) {
+        for (let j = 0; j < blist.length; j++) {
           bssids.push(blist[j].bssid)
         }
-        this.globalData.wifibssidlist=bssids
+        this.globalData.wifibssidlist = bssids
         console.log("bssid list:")
         console.log(this.globalData.wifibssidlist)
       }
 
     }
-    
-    if(arg.userperiod!=undefined&&arg.userperiod!=null)
-    {
-      let test =parseFloat(arg.userperiod.test)
+
+    if (arg.userperiod != undefined && arg.userperiod != null) {
+      let test = parseFloat(arg.userperiod.test)
       {
-        console.log("set userperiod test:"+test)
-        if(!isNaN(test))
-        {
-          
-          this.globalData.userperiod.test=test
+        console.log("set userperiod test:" + test)
+        if (!isNaN(test)) {
+
+          this.globalData.userperiod.test = test
         }
       }
 
-      let prod =parseFloat(arg.userperiod.prod)
+      let prod = parseFloat(arg.userperiod.prod)
       {
-        if(!isNaN(prod))
-        {
-          this.globalData.userperiod.prod=prod
+        if (!isNaN(prod)) {
+          this.globalData.userperiod.prod = prod
         }
       }
 
@@ -1622,7 +1800,7 @@ App({
     if (arg.asdlocation != undefined && arg.asdlocation != null) {
       let latitude = parseFloat(arg.asdlocation.latitude)
       if (!isNaN(latitude)) {
-        console.log("set asdlocation latitude:"+latitude)
+        console.log("set asdlocation latitude:" + latitude)
         this.globalData.asdlocation.latitude = latitude
       }
       let longitude = parseFloat(arg.asdlocation.longitude)
@@ -1663,126 +1841,176 @@ App({
 
   },//end function
 
-makeTableData:function(arg)
-{
-  let headers=arg.headers
-  let datalist=arg.datalist
-  let success=arg.success
-  let fail=arg.fail
-  let tablename= arg.tablename
-  let list= datalist.DATA==undefined? datalist: [{DATA:datalist.DATA}]
-  let rawlist=[]
-  let rows=[]
-  let header=[]
-  console.log("Start makeTableData")
-  console.log(headers)
-  console.log(headers.length)
- // console.log(list)
-  for(let k=0;k<headers.length;k++)
-  {
-   
-    header.push({header:headers[k].header.name,show:headers[k].header.show})
-  }
-  for(let i=0;i<list.length;i++)
-  {
-     let DATA={}
-     let row=[]
-     
-     for(let k=0;k<headers.length;k++)
-     {
-      
-       let show=headers[k].header.show
-       let data= list[i].DATA
-       
-       let key = headers[k].header.valuename.length >0 ? headers[k].header.valuename : headers[k].header.id
-       let value= data[key] ==undefined? headers[k].header.defaulvalue : data[key]
-       DATA[key]=value
-       row.push({name:key,value:value,oth1:null,oth2:null,oth3:null,unique:tablename+'cell-'+i+'-'+k,index:[i,k],show:show})
-       
-     }
-     rawlist.push(DATA)
-     rows.push({row:row,oth1:null,oth2:null,oth3:null,unique:tablename+'row'+i.toString(),index:i})
-  }
-  console.log(rawlist)
-  console.log(rows)
-  console.log(header)
+  makeTableData: function (arg) {
+    let headers = arg.headers
+    let datalist = arg.datalist
+    let success = arg.success
+    let fail = arg.fail
+    let tablename = arg.tablename
+    let list = datalist.DATA == undefined ? datalist : [{ DATA: datalist.DATA }]
+    let rawlist = []
+    let rows = []
+    let header = []
+    console.log("Start makeTableData")
+    console.log(headers)
+    console.log(headers.length)
+    // console.log(list)
+    for (let k = 0; k < headers.length; k++) {
 
-  if(success!=undefined&&success!=null)
-  {
-    success({rawdata:rawlist,header:header,rows:rows})
-  }
-
-
-},//end function
-
-checkWifiOutIp:function(arg)
-{
-  let success=arg.success
-  let fail=arg.fail
-  wx.request({
-    url: 'http://ip-api.com/json',
-    success:(res)=>
-    {
-      console.log(res)
-    },
-    fail:(err)=>
-    {
-      console.log(err)
+      header.push({ header: headers[k].header.name, show: headers[k].header.show })
     }
-  })
-},//end function
+    for (let i = 0; i < list.length; i++) {
+      let DATA = {}
+      let row = []
 
-getRequestUrl:function(arg)
-{
-  let fail=arg.fail
-  let success=arg.success
-  wx.getNetworkType({
-    success: (res) => {
-      console.log(res)
-      if(res.networkType =='wifi')
-      {
-        wx.startWifi({
-          success: (res) => {
-            console.log("start get conneted wifi")
-            wx.getConnectedWifi({
-              success: (res) => {
-                console.log("connected wifi info")
-                console.log(res)
-               let ssid= res.wifi.SSID
-               console.log("ssid:"+ssid)
-               let url= this.globalData.requesturls[ssid]
-               console.log("url:")
-               console.log(url)
-               if(url!=undefined&&url!=null&&url.length!=undefined&&url.length>0)
-               {
-                 if(success!=undefined&&success!=null)
-                 {
-                   console.log("get url success! url:"+url)
-                   success({ssid:ssid,url:url})
-                 }
-               }else
-               {
-                 fail(null)
-               }
+      for (let k = 0; k < headers.length; k++) {
 
-              },
-              fail:fail
-            })
+        let show = headers[k].header.show
+        let data = list[i].DATA
 
-          },
-          fail:fail
-        })
+        let key = headers[k].header.valuename.length > 0 ? headers[k].header.valuename : headers[k].header.id
+        let value = data[key] == undefined ? headers[k].header.defaulvalue : data[key]
+        DATA[key] = value
+        row.push({ name: key, value: value, oth1: null, oth2: null, oth3: null, unique: tablename + 'cell-' + i + '-' + k, index: [i, k], show: show })
 
-      }else
-      {
-        fail(null)
       }
-    },
-  })
+      rawlist.push(DATA)
+      rows.push({ row: row, oth1: null, oth2: null, oth3: null, unique: tablename + 'row' + i.toString(), index: i })
+    }
+    console.log(rawlist)
+    console.log(rows)
+    console.log(header)
 
-},//end function
+    if (success != undefined && success != null) {
+      success({ rawdata: rawlist, header: header, rows: rows })
+    }
 
 
+  },//end function
+
+  checkWifiOutIp: function (arg) {
+    let success = arg.success
+    let fail = arg.fail
+    wx.request({
+      url: 'http://ip-api.com/json',
+      success: (res) => {
+        console.log(res)
+      },
+      fail: (err) => {
+        console.log(err)
+      }
+    })
+  },//end function
+
+  getRequestUrl: function (arg) {
+    let fail = arg.fail
+    let success = arg.success
+    wx.getNetworkType({
+      success: (res) => {
+        console.log(res)
+        if (res.networkType == 'wifi') {
+          wx.startWifi({
+            success: (res) => {
+              console.log("start get conneted wifi")
+              wx.getConnectedWifi({
+                success: (res) => {
+                  console.log("connected wifi info")
+                  console.log(res)
+                  let ssid = res.wifi.SSID
+                  console.log("ssid:" + ssid)
+                  let url = this.globalData.requesturls[ssid]
+                  console.log("url:")
+                  console.log(url)
+                  if (url != undefined && url != null && url.length != undefined && url.length > 0) {
+                    if (success != undefined && success != null) {
+                      console.log("get url success! url:" + url)
+                      success({ ssid: ssid, url: url })
+                    }
+                  } else {
+                    fail(null)
+                  }
+
+                },
+                fail: fail
+              })
+
+            },
+            fail: fail
+          })
+
+        } else {
+          fail(null)
+        }
+      },
+    })
+
+  },//end function
+
+ queryWxPrivilege:function(arg)
+ {
+   let page=arg.page
+   let key=arg.key
+   let env='prod'
+   let userid=arg.userid
+   let map={PAGE:page,KEY:key,USERID:userid}
+   let success=arg.success
+   let fail=arg.fail
+   this.sendQueryMsg(
+     {
+      service:'querywxprivilegesetting',
+      map:map,
+      title:"权限验证中",
+      success:(res)=>
+      {
+         let errcode=(res.result.Message.Return.RETURNCODE!=undefined&&res.result.Message.Return.RETURNCODE!=null) ? res.result.Message.Return.RETURNCODE :'NODATA'
+         if(errcode=='0')
+         {
+           if(success!=undefined&&success!=null)
+           {
+             success({errcode:errcode})
+           }else
+           {
+             return new Promise(function(resolve,reject)
+             {
+               resolve({errcode:errcode})
+             })
+           }
+         }else
+         {
+           
+           let errmessage=(res.result.Message.Return.RETURNMESSAGE!=undefined&&res.result.Message.Return.RETURNMESSAGE!=null) ? res.result.Message.Return.RETURNMESSAGE :'NODATA'
+          if(fail!=undefined&&fail!=null)
+          {
+            fail({errcode:errcode,errmessage:errmessage})
+          }else
+          {
+            return new Promise(function(resolve,reject)
+            {
+              reject({errcode:errcode,errmessage:errmessage})
+            })
+          }
+         }
+      },
+      fail:(err)=>
+      {
+        console.log(err)
+        if(fail!=undefined&&fail!=null)
+        {
+          fail({errcode:'CLD-1',errmessage:'Query Reuest Error',errdetail:err})
+        }else
+        {
+          return new Promise(function(resolve,reject)
+          {
+            reject({errcode:'CLD-1',errmessage:'Query Reuest Error',errdetail:err})
+          })
+        }
+      }
+     }
+     
+
+   )
+
+ },//end function
 
 
 

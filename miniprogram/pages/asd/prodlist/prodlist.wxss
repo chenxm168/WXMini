@@ -1,0 +1,134 @@
+/* miniprogram/pages/asd/prodlist.wxss */
+@import "../../../style/asd.wxss";
+/* miniprogram/pages/asd/balance/cellBalanceReport.wxss */
+@import "../../../style/asd.wxss";
+.filter-cells
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  justify-items: center;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+}
+.filter-cell
+{
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  text-align: center;
+  font-size:13px;
+}
+.filter-picker
+{
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  width: 100px;
+  height: 22px;
+  text-align: left;
+  padding: 3px;
+}
+.landscape-font
+{
+  font-size:12px;
+}
+.memu-title
+{
+  margin-top:1px;
+  padding: 5px;
+  background-color: rgb(20, 126, 161);
+  color:white;
+  height: 13px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+.balance-picker
+{
+  height: 17px;
+}
+.main-col
+{
+  margin-left: 2px;
+}
+.table-cells
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ 
+  flex-grow: 1;
+  
+}
+.table-cell
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  justify-items: left;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+}
+.table-title
+{
+  padding-left: 3px;
+  margin-top: 5px;
+  font-size:13px;
+  font-weight: 700;
+  
+}
+.table-header
+{
+  padding-left: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  justify-items: left;
+  width: 960px;
+  
+}
+.table-header-item
+{
+  background-color: rgb(20, 126, 161);
+  color:white;
+  font-size:13px;
+  border-right-style: dotted;
+  border-right-width: 1px;
+  text-align: center;
+}
+.filter-ok
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  font-weight: 800;
+  font-size:25px;
+  background-color: rgb(20, 126, 161);
+  color: white;
+  align-self:center;
+  text-align: center;
+  margin-top: 1px;
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  font-size:14px;
+
+}
+
+.table-scroll
+{
+  display: inline-block;
+  width: 100%;
+}
+.table-item-default
+{
+  font-size: 12px;
+  text-align: center;
+}

@@ -429,4 +429,29 @@ Page({
     }
 
   },//end function
+
+  prodlistClick:function(arg)
+  {
+    wx.navigateTo({
+      url: '../prodlist/prodlist',
+    })
+    /*
+    app.queryWxPrivilege(
+      {
+        page:'prodlist',
+        key:'prodlist',
+        userid:app.globalData.userinfo.oic.userid,
+        success:(res)=>
+        {
+          console.log(res)
+        },
+        fail:(err)=>
+        {
+          console.log(err)
+        }
+      }
+    )*/
+
+  },//end function
+
 })
