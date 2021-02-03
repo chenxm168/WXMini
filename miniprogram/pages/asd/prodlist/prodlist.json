@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "tableview":"../../components/tableview"
+  },
   "pageOrientation": "landscape"
 }

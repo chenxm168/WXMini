@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "tableview":"../components/tableview"
+  }
 }

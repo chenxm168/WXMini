@@ -1857,7 +1857,7 @@ App({
     // console.log(list)
     for (let k = 0; k < headers.length; k++) {
 
-      header.push({ header: headers[k].header.name, show: headers[k].header.show })
+      header.push({ header: headers[k].header.name, show: headers[k].header.show ,headerindex:k,unique:'header'+k})
     }
     for (let i = 0; i < list.length; i++) {
       let DATA = {}

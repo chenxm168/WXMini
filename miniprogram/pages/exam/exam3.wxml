@@ -1,4 +1,14 @@
 <!--miniprogram/pages/exam/exam3.wxml-->
+<view class="container" style="min-height:{{wHeight-8}}px">
+  <view class="page-body">
+    <view class="asd-item-cell">
+      <tableview tableTitleContent="tableview-title">
+        <view>SLOT CONTENT1</view>
+        <view>SLOT CONTENT2</view>
+      </tableview>
+    </view>
+  </view>
+</view>
 <view bindtap="uploadClick"> Uploader</view>
 <view bindtap="test1Click"> Test1</view>
 <view bindtap="test2Click"> Test2</view>

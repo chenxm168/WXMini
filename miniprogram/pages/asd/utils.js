@@ -20,6 +20,12 @@ module.exports={
          resolve(rtnlist)
        })
      }
-   },
+   }, //end function
+   
+   getDistinctList:function(arg)
+   {
+     
+
+   },//end function
    
 }

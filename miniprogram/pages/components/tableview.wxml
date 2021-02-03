@@ -1,0 +1,34 @@
+<!--pages/components/tableview.wxml-->
+<view class="table-container">
+  <view class="table-title-container">
+    <view class="table-title" style="font-size:{{setting.tabletitlefontsize}}">{{setting.tabletitle}}</view>
+    <view class="table-title-oth-container">
+      <slot></slot>
+    </view>
+  </view>
+  <view class="table-cell-container">
+    <scroll-view class="table-scroll " scroll-x="true" style="width:100&">
+        <view class="table"
+          style="min-width:{{setting.tableminwidth}};max-width:2500px">
+          <view class="table-row table-header">
+            <block wx:for="{{header}}" wx:key="unique">
+              <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.header}}</view>
+            </block>
+          </view>
+          <block wx:for="{{rows}}" wx:for-item="row" wx:key="unique">
+            <view class="table-row table-content "
+              bindtap="rowClick" data-index="{{row.index}}">
+              <block wx:for="{{row.row}}" wx:key="unique">
+                <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.value}}</view>
+              </block>
+            </view>
+          </block>
+
+
+        </view>
+
+      </scroll-view>
+
+  </view>
+
+</view>

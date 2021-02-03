@@ -17,6 +17,7 @@ Page({
     products:[],
     operationlist:[],
     operation:'点我选择',
+    header:[]
     
   },
 
@@ -100,6 +101,63 @@ Page({
   onShareAppMessage: function () {
 
   },
+  productChange:function(res)
+  {
+    console.log(res)
+    let data=this.data
+    if(data.product!=data.products[res.detail.value])
+    {
+      data.product=data.products[res.detail.value]
+      this.setData(
+        {
+          product:data.product
+        }
+      )
+      this.getOperationList(
+        {
+          success:(res)=>
+          {
+
+          },
+          fail:(err)=>
+          {
+
+          }
+        }
+      )
+    }
+
+
+  },//end function
+
+  queryClick:function(res)
+  {
+    console.log(res)
+    if(this.data.product!=this.data.orgintext)
+    {
+      this.getLotList(
+        {
+          success:(res)=>
+          {
+
+          },
+          fail:(err)=>
+          {
+
+          }
+        }
+      )
+    
+    }else
+    {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        showCancel:false,
+        title:"选投生产型号",
+        content:"请先选择生产型号"
+      })
+    }
+  },//end function
 
   getProductList:function(arg)
   {
@@ -151,7 +209,11 @@ Page({
   {
     let that=this.data
     let product=that.product==that.product==that.orgintext? "": that.product
+   /*
     let map={FACTORYNAME:that.factory,PRODUCTIONTYPE:that.type,PRODUCTREQUESTNAME:product,USERID:app.globalData.userinfo.oic.userid}
+    */
+    let map={FACTORYNAME:that.factory,PRODUCTIONTYPE:that.type,USERID:app.globalData.userinfo.oic.userid}
+
     let queryid='GetOperationList'
     app.sendQueryMsg(
       {
@@ -170,6 +232,95 @@ Page({
         }
       }
     )
+
+  },//end function
+
+  getLotList:function(arg)
+  {
+    let factory=this.data.factory
+    let type=this.data.type
+    let env=app.globalData.userinfo.oic.env
+    let userid= app.globalData.userinfo.oic.userid
+    let product=this.data.product
+    let map={FACTORYNAME:factory,PRODUCTIONTYPE:type,PRODUCTSPECNAME:product,PAGE_NAME:'prodlist',TABLE_NAME:'lotlist',TABLE_SETTING:'Y',HEADER_SETTING:'Y'}
+    let success=arg.success
+    let fail=arg.fail
+    app.sendQueryMsg(
+       {
+         env:env,
+         userid:userid,
+         map:map,
+         queryid:'GetLotListForProduction',
+         service:'asdcommonquerysrv',
+         success:(res)=>
+         {
+           console.log(res)
+           let lotlist= res.result.Message.Body.lotlist
+           app.makeTableData(
+            {
+              datalist:lotlist.DATALIST,
+              headers:lotlist.headers,
+              tablename:"lotlist",
+              success:(res2)=>
+              {
+                console.log(res2)
+                this.data.header=res2.header
+                this.setData(
+                  {
+                    header:res2.header,
+                    setting:lotlist.setting,
+                    rows:res2.rows
+                  }
+                )
+                this.makeOpeData(
+                  {
+                    rawdata:res2.rawdata,
+                    complete:(res3)=>
+                    {
+                      console.log(res3)
+                    }
+                  }
+                )
+              }
+            }
+          )
+
+         },
+         fail:(err)=>
+         {
+           console.log(err)
+         }
+       }
+    )
+  },//end function
+
+  processRawData:function(arg)
+  {
+    let datalist= (arg.datalist.DATA==undefined&&arg.datalist.length>1)? arg.datalist:[{DATA:datalist.DATA}]
+    let complete=arg.complete
+
+
+  },//end function
+
+  makeOpeData:function(arg)
+  {
+    let complete=arg.complete
+    let rawdata=arg.rawsdata
+    let tempope=[]
+    let ope=[]
+    for(let i=0;i<rawdata.length;i++)
+    {
+      if(tempope.includes(rawdata[i].PROCESSOPERATIONNAME)>=0)
+      {
+        continue
+      }else
+      {
+        tempope.push(rawdata[i].PROCESSOPERATIONNAME)
+        ope.push({OPENAME:rawdata[i].PROCESSOPERATIONNAME,DESC:rawdata[i].DESCRIPTION,DISPLAY:rawdata[i].PROCESSOPERATIONNAME+"-"+rawdata[i].DESCRIPTION})
+      }
+    }
+    complete(ope)
+
 
   },//end function
 

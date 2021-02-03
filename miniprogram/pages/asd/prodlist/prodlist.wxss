@@ -132,3 +132,51 @@
   font-size: 12px;
   text-align: center;
 }
+
+.lotlist-table
+{
+  display: table;
+  flex-flow: 1;
+}
+.lotlist-table-row
+{
+  display: table-row;
+  margin-bottom: 2px;
+
+}
+
+.lotlist-table-cell
+{
+  display: table-cell;
+  
+  text-align: center;
+  border-left-style: dotted;
+  border-color: white;
+  border-width: 1px;
+}
+.lotlist-table-header
+{
+  background-color: #147ea1;
+  color:#ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.lotlist-table-content
+{
+  font-size:11px;
+}
+.warning-item
+{
+  background-color: #f08080;
+  color: white;
+}
+.checked-item
+{
+   background-color: #d660bd ;
+   color:white;
+}
+.select-item
+{
+  background-color: lightgreen
+  
+}

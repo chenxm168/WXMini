@@ -1,1 +1,2 @@
 /* miniprogram/pages/exam/exam3.wxss */
+@import "../../style/asd.wxss";
