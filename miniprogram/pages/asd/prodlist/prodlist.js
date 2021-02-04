@@ -17,7 +17,9 @@ Page({
     products:[],
     operationlist:[],
     operation:'点我选择',
-    header:[]
+    header:[],
+    tabledata:null,
+    rawdata:[]
     
   },
 
@@ -101,6 +103,107 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+  factoryChange:function(res)
+  {
+    console.log(res)
+    let idx=res.detail.value
+    
+    if(this.data.factory!=this.data.factories[idx])
+    {
+      this.data.factory=this.data.factories[idx]
+      this.data.products=null
+      this.data.product=this.data.orgintext
+      this.data.operationlist=null
+      this.data.operation=this.data.orgintext
+      this.getProductList(
+        {
+            success:(res)=>
+            {
+              this.setData
+              (
+                {
+                 operation:this.data.operation,
+                 product:this.data.product,
+                 products:this.data.products,
+                 operationlist:this.data.operationlist,
+                 factory:this.data.factory,
+                 tabledata:null
+                }
+         
+              )
+            }
+        }
+      )
+ 
+      
+    }
+    
+
+  },//end function
+  productionTypeChange:function(res)
+  {
+    let idx=res.detail.value
+    if(this.data.type!=this.data.productiontype[idx])
+    {
+      this.data.type=this.data.productiontype[idx]
+      this.data.products=null
+      this.data.product=this.data.orgintext
+      this.data.operationlist=null
+
+      this.data.operation=this.data.orgintext
+    }
+    this.getProductList(
+      {
+        success:(res)=>
+        {
+          this.setData(
+            {
+              operation:this.data.operation,
+              product:this.data.product,
+              products:this.data.products,
+              operationlist:this.data.operationlist,
+              type:this.data.type,
+              tabledata:null
+            }
+          )
+        }
+      }
+    )
+
+  },//end function
+  opeChange:function(res)
+  {
+    console.log(res)
+    let idx=res.detail.value
+    if(this.data.operation!=this.data.operationlist[idx].OPENAME)
+    {
+      this.data.operation=this.data.operationlist[idx].OPENAME
+      this.filterOpe(
+        {
+          targetope:{valuekey:'PROCESSOPERATIONNAME',value:this.data.operation},
+          rawdata:this.data.rawdata,
+          complete:(res2)=>
+          {
+            console.log("after filter rawdata")
+            console.log(res2)
+            this.data.tabledata.datalist=res2
+            this.setData(
+              {
+                operation:this.data.operation,
+                tabledata:this.data.tabledata
+              }
+            )
+          }
+        }
+      )
+
+      
+    }
+    
+
+  },//end function
+
   productChange:function(res)
   {
     console.log(res)
@@ -139,7 +242,47 @@ Page({
         {
           success:(res)=>
           {
-
+            console.log(res)
+            this.data.rawdata=res.DATALIST
+            this.data.tabledata={datalist:res.DATALIST,headers:res.headers,attachseq:true,sumrequest:[{valuekey:'PRODUCTQUANTITY',value:0,desc:'基板总数'}]}
+            this.setData
+            (
+              {
+                tabledata:this.data.tabledata,
+                setting:res.setting
+              }
+            )
+            this.makeOpeData(
+              {
+                rawdata:res.DATALIST,
+                complete:(res3)=>
+                {
+                  this.data.operationlist=res3
+                  console.log(res3)
+                  this.setData(
+                    {
+                      operationlist:res3
+                    }
+                  )
+                }
+              }
+            )
+            /*
+            this.makeOpeData(
+              {
+                rawdata:res.rawdata,
+                complete:(res3)=>
+                {
+                  this.data.operationlist=res3
+                  console.log(res3)
+                  this.setData(
+                    {
+                      operationlist:res3
+                    }
+                  )
+                }
+              }
+            )*/
           },
           fail:(err)=>
           {
@@ -193,6 +336,10 @@ Page({
                     products:list
                   }
                 )
+                if(success!=undefined&&success!=null)
+                {
+                  success(list)
+                }
               }
             }
           )
@@ -256,6 +403,8 @@ Page({
          {
            console.log(res)
            let lotlist= res.result.Message.Body.lotlist
+           success(lotlist)
+           /*
            app.makeTableData(
             {
               datalist:lotlist.DATALIST,
@@ -265,6 +414,7 @@ Page({
               {
                 console.log(res2)
                 this.data.header=res2.header
+                this.data.rawdata=res2.rawdata
                 this.setData(
                   {
                     header:res2.header,
@@ -272,18 +422,13 @@ Page({
                     rows:res2.rows
                   }
                 )
-                this.makeOpeData(
-                  {
-                    rawdata:res2.rawdata,
-                    complete:(res3)=>
-                    {
-                      console.log(res3)
-                    }
-                  }
-                )
+                if(success!=undefined&&success!=null)
+                {
+                  success(res2)
+                }
               }
             }
-          )
+          ) */
 
          },
          fail:(err)=>
@@ -305,23 +450,45 @@ Page({
   makeOpeData:function(arg)
   {
     let complete=arg.complete
-    let rawdata=arg.rawsdata
+    let rawdata=arg.rawdata
     let tempope=[]
     let ope=[]
     for(let i=0;i<rawdata.length;i++)
     {
-      if(tempope.includes(rawdata[i].PROCESSOPERATIONNAME)>=0)
+      let data = (rawdata[i].DATA!=undefined&&rawdata[i].DATA!=null)? rawdata[i].DATA:rawdata[i]
+      if(tempope.indexOf(data.PROCESSOPERATIONNAME)>=0)
       {
         continue
       }else
       {
-        tempope.push(rawdata[i].PROCESSOPERATIONNAME)
-        ope.push({OPENAME:rawdata[i].PROCESSOPERATIONNAME,DESC:rawdata[i].DESCRIPTION,DISPLAY:rawdata[i].PROCESSOPERATIONNAME+"-"+rawdata[i].DESCRIPTION})
+        tempope.push(data.PROCESSOPERATIONNAME)
+        ope.push({OPENAME:data.PROCESSOPERATIONNAME,DESC:data.DESCRIPTION,DISPLAY:data.PROCESSOPERATIONNAME+"-"+data.DESCRIPTION})
       }
     }
     complete(ope)
 
 
   },//end function
+
+  filterOpe:function(arg)
+  {
+    let targetope=arg.targetope
+    let rawdata=arg.rawdata
+    let complete=arg.complete
+    let rtn=[]
+    console.log("Start filter ope")
+    for(let i=0;i<rawdata.length;i++)
+    {
+      let data = (rawdata[i].DATA!=undefined&&rawdata[i].DATA!=null)? rawdata[i].DATA:rawdata[i]
+
+      if(data[targetope.valuekey]==targetope.value)
+      {
+        rtn.push(data)
+      }
+
+    }
+    complete(rtn)
+
+  },//end
 
 })

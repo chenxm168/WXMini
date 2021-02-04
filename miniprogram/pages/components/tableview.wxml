@@ -3,6 +3,9 @@
   <view class="table-title-container">
     <view class="table-title" style="font-size:{{setting.tabletitlefontsize}}">{{setting.tabletitle}}</view>
     <view class="table-title-oth-container">
+      <block wx:if="{{sums==null? false:true}}">
+        <view class="table-title " style="font-size:{{setting.tabletitlefontsize}}" wx:for="{{sums}}">{{item.desc}}:{{item.value}}</view>
+      </block>
       <slot></slot>
     </view>
   </view>
@@ -16,7 +19,7 @@
             </block>
           </view>
           <block wx:for="{{rows}}" wx:for-item="row" wx:key="unique">
-            <view class="table-row table-content "
+            <view class="table-row table-content {{selectidx==index? 'select-item':''}} "
               bindtap="rowClick" data-index="{{row.index}}">
               <block wx:for="{{row.row}}" wx:key="unique">
                 <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.value}}</view>

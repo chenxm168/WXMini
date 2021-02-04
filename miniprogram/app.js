@@ -1962,6 +1962,7 @@ App({
       title:"权限验证中",
       success:(res)=>
       {
+        console.log(res)
          let errcode=(res.result.Message.Return.RETURNCODE!=undefined&&res.result.Message.Return.RETURNCODE!=null) ? res.result.Message.Return.RETURNCODE :'NODATA'
          if(errcode=='0')
          {

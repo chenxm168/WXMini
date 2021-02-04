@@ -37,12 +37,12 @@
           </picker>
         </view>
       </view>
-      <view class="asd-col main-col">
+      <view class="asd-col main-col" wx:if="{{operationlist!=null&&operationlist.length>0}}">
         <view class="main-rows landscape-font">
           <view class="memu-title">生产制程</view>
 
-          <picker class="asd-picker " style="width:100px"  value="{{index}}" range="{{operationlist}}}"
-          range-key="TOPRODUCTSPECNAME"  bindchange="opeChange">
+          <picker class="asd-picker " style="width:100px"  value="{{index}}" range="{{operationlist}}"
+          range-key="DISPLAY"  bindchange="opeChange">
             <view class="picker">{{operation}}</view>
           </picker>
         </view>
@@ -52,7 +52,7 @@
       </view>
     </view>
 
-    <tableview rows="{{rows}}" header="{{header}}" setting="{{setting}}" tableTitleContent="{{}}"></tableview>
+    <tableview tabledata="{{tabledata}}" setting="{{setting}}" tableTitleContent="{{}}"></tableview>
     
   <!--
     <view class="table-cells">

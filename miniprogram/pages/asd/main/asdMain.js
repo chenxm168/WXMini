@@ -432,9 +432,100 @@ Page({
 
   prodlistClick:function(arg)
   {
-    wx.navigateTo({
-      url: '../prodlist/prodlist',
-    })
+    let userinfo = app.globalData.userinfo.oic
+    console.log("libraryClick")
+    console.log(userinfo)
+    let success = function (res) {
+      wx.navigateTo({
+        url: '../prodlist/prodlist',
+      })
+    }
+    let loginfail=function(res)
+    {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        showCancel:false,
+        title:"登陆过期",
+        content:"用户登陆过期，请重新登陆",
+        success:(res)=>
+        {
+          let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
+            wx.navigateTo({
+              url: url,
+            })
+        }
+      })
+    }
+    if (userinfo.userid == null || userinfo.userid.length < 1) {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        title: "未登陆OIC系统",
+        content: "继续将转至OIC登陆界面",
+        success(res) {
+          if (res.confirm) {
+            let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=你还未登陆OIC,请先登陆OIC！"
+            wx.navigateTo({
+              url: url,
+            })
+          }
+        }
+      })
+    } else {
+      app.verifyUserLoginTime(
+        {
+          systemmodule:'oic',
+          durationhour:app.globalData.userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
+          success:(res)=>
+          {
+            if(app.globalData.userinfo.oic.env=='test')
+            {
+              success(null)
+            }else
+            {
+            app.checkSsid({
+              env:app.globalData.userinfo.oic.env,
+              success:(res2)=>
+              {
+                 success(res2)
+              },
+              fail:(err)=>
+              {
+                app.queryWxPrivilege(
+                  {
+                    page:'prodlist',
+                    key:'prodlist',
+                    userid:app.globalData.userinfo.oic.userid,
+                    success:(re3s)=>
+                    {
+                      success(res)
+                    },
+                    fail:(err)=>
+                    {
+                      wx.showModal({
+                        cancelColor: 'cancelColor',
+                        showCancel:false,
+                        title:'权限验证失败',
+                        content:'权限验证失败，为生产数据保密，你无权在工厂之外查询此数据，如有需要请生产经理联系，申请开通权限！'
+                      })
+                    }
+                  }
+                )
+
+              }
+
+
+            })
+          }
+            
+          },
+          fail:(err)=>
+          {
+            loginfail(err)
+          }
+        }
+      )
+    }
+
     /*
     app.queryWxPrivilege(
       {
