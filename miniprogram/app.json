@@ -21,6 +21,15 @@
     "pages/asd/prodlist/prodlist"
     
   ],
+  "subpackages": [
+    {
+      "root": "chartpages",
+      "pages": [
+        "pages/productioninfo/prodinfo"
+      ]
+    }
+  ],
+
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

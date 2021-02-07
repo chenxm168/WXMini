@@ -491,4 +491,12 @@ Page({
 
   },//end
 
+  toGroupClick:function(res)
+  {
+    let param='?prodspec='+this.data.product+'&type='+this.data.type+'&factory='+this.data.factory
+     wx.navigateTo({
+       url: '/chartpages/pages/productioninfo/prodinfo'+param
+     })
+  }
+
 })
