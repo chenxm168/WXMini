@@ -1,2 +1,9 @@
 <!--chartpages/pages/productioninfo/prodinfo.wxml-->
-<text>chartpages/pages/productioninfo/prodinfo.wxml</text>
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <ec-canvas wx:if="{{!isDisposed}}" id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" ></ec-canvas>
+  <view class="page-header">
+  </view>
+  <view class="page-body">
+    <tableview tabledata="{{tabledata}}" setting="{{setting}}" tableTitleContent="{{}}"></tableview>
+  </view>
+</view>

@@ -1,0 +1,101 @@
+/* pages/components/tableview.wxss */
+
+.table-container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ 
+  flex-grow: 1;
+  
+}
+.table-title-container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 2px;
+}
+.table-title-oth-container
+{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+.table-cell-conatiner
+{
+
+}
+
+
+
+
+.table
+{
+  display: table;
+  flex-flow: 1;
+}
+.table-row
+{
+  display: table-row;
+  margin-bottom: 2px;
+
+}
+
+.table-cell
+{
+  display: table-cell;
+  
+  text-align: center;
+  border-left-style: dotted;
+  border-color: white;
+  border-width: 1px;
+}
+.table-header
+{
+  background-color: #147ea1;
+  color:#ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.table-content
+{
+  font-size:11px;
+}
+.warning-item
+{
+  background-color: #f08080;
+  color: white;
+}
+.checked-item
+{
+   background-color: #d660bd ;
+   color:white;
+}
+.select-item
+{
+  background-color: lightgreen
+  
+}
+.btn-cell
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: center;
+  width: 100%;
+  background-color: #faf4f4;
+  margin:2px
+}
+.btn-mini
+{
+  width:90px;
+  
+  
+}
+.btn-large
+{
+  width:95%
+}

@@ -1,6 +1,6 @@
 // miniprogram/pages/asd/prodlist.js
 const app=getApp()
-const utils=require("../utils")
+const utils=require("../utils.js")
 Page({
 
   /**
@@ -9,7 +9,7 @@ Page({
   data: {
     factory:(app.globalData.userinfo.factory==null||app.globalData.userinfo.factory.length<1)? 'ARRAY': app.globalData.userinfo.factory,
   // factory:'ARRAY',
-    productiontype:['P','E'],
+    productiontype:['P','E','T','D'],
     type:'P',
     factories:['ARRAY','CELL','CF'],
     orgintext:'点我选择',
@@ -152,6 +152,16 @@ Page({
       this.data.operationlist=null
 
       this.data.operation=this.data.orgintext
+      this.setData(
+        {
+          operation:this.data.operation,
+          product:this.data.product,
+          products:this.data.products,
+          operationlist:this.data.operationlist,
+          tabledata:null,
+          type:this.data.type
+        }
+      )
     }
     this.getProductList(
       {
@@ -162,9 +172,6 @@ Page({
               operation:this.data.operation,
               product:this.data.product,
               products:this.data.products,
-              operationlist:this.data.operationlist,
-              type:this.data.type,
-              tabledata:null
             }
           )
         }
@@ -208,7 +215,7 @@ Page({
   {
     console.log(res)
     let data=this.data
-    if(data.product!=data.products[res.detail.value])
+    if(data.products!=null&&data.products.length>0&& data.product!=data.products[res.detail.value])
     {
       data.product=data.products[res.detail.value]
       this.setData(
@@ -216,6 +223,7 @@ Page({
           product:data.product
         }
       )
+      /*
       this.getOperationList(
         {
           success:(res)=>
@@ -227,7 +235,7 @@ Page({
 
           }
         }
-      )
+      )*/
     }
 
 
@@ -323,6 +331,8 @@ Page({
           
           console.log(res)
           let datalist = res.result.Message.Body.DATALIST
+          if(datalist.DATA!=undefined||datalist.length>0)
+          {
           utils.DataList2List(
             {
               datalist:datalist,
@@ -343,6 +353,7 @@ Page({
               }
             }
           )
+        }
         },
         fail(err)
         {

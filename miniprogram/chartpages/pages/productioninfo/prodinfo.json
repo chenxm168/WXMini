@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "ec-canvas": "/chartpages/components/ec-canvas/ec-canvas"
+    "ec-canvas": "/chartpages/components/ec-canvas/ec-canvas",
+    "tableview":"/chartpages/components/tableview/tableview"
+
   }
 }
