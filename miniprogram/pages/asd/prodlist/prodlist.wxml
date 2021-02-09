@@ -37,7 +37,18 @@
           </picker>
         </view>
       </view>
-      <view class="asd-col main-col" wx:if="{{operationlist!=null&&operationlist.length>0}}">
+      <view class="asd-col main-col" wx:if="{{peplist!=null&&peplist.length>1}}" style="width:55px">
+        <view class="main-rows landscape-font">
+          <view class="memu-title">层次</view>
+
+          <picker class="asd-picker " style="width:100px"  value="{{index}}" range="{{peplist}}"
+            bindchange="pepChange">
+            <view class="picker">{{pep}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="asd-col main-col" wx:if="{{operationlist!=null&&operationlist.length>1}}">
         <view class="main-rows landscape-font">
           <view class="memu-title">生产制程</view>
 

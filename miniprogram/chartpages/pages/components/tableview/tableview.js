@@ -1,5 +1,5 @@
 // pages/components/tableview.js
-const util=require("../../pages/utils.js")
+const util=require("../../utils.js")
 Component({
   /**
    * 组件的属性列表

@@ -96,10 +96,34 @@ module.exports={
 
    },//end function
    
-   getDistinctList:function(arg)
+   getDistinctList:function(list,fn)
    {
+     let rtn=[]
+     list.forEach(el=>
+      {
+         let v=  fn(el)
+         if(rtn.indexOf(v)<0)
+         {
+           rtn.push(v)
+         }
+      })
+      return rtn
      
 
    },//end function
+
+   FileerListData:function(list,fn)
+   {
+     let rtn=[]
+     list.forEach(el=>
+      {
+        if(fn(el))
+        {
+          rtn.push(el)
+        }
+
+      })
+      return rtn
+   }
    
 }
