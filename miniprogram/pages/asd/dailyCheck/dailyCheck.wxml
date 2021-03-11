@@ -31,8 +31,8 @@
                     <view class="dianjianzhhi-cells" wx:if="{{!item.EQSTOP}}">
                       <view class="dianjianzhi-title">点检值: </view>
                       <input class="weui-input dianjianzhi-ipt" type="{{item.KEYBOARDTYPE}}" placeholder="输入点检值"
-                        maxlength="5" confirm-type="done" adjust-position="true" data-index="{{item.ITEMINDEX}}"
-                        value="{{item.INSPECTIONVALUE}}" maxlength='5' bindblur="dianjianzhiblur" />
+                        maxlength="6" confirm-type="done" adjust-position="true" data-index="{{item.ITEMINDEX}}"
+                        value="{{item.INSPECTIONVALUE}}" maxlength='6' bindblur="dianjianzhiblur" />
                     </view>
 
                   </block>

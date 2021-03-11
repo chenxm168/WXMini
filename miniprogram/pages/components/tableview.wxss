@@ -41,6 +41,7 @@
 {
   display: table-row;
   margin-bottom: 2px;
+  
 
 }
 
@@ -63,22 +64,21 @@
 .table-content
 {
   font-size:11px;
+  
 }
-.warning-item
+
+.white-background
 {
-  background-color: #f08080;
-  color: white;
+  background-color: white;
+  color: black;
 }
+
 .checked-item
 {
    background-color: #d660bd ;
    color:white;
 }
-.select-item
-{
-  background-color: lightgreen
-  
-}
+
 .btn-cell
 {
   display: flex;
@@ -98,4 +98,41 @@
 .btn-large
 {
   width:95%
+}
+
+
+.firebrick-item
+{
+
+ background-color: firebrick;
+  
+  color: white;
+}
+.slateblue-item
+{
+
+ 
+ background-color: slateblue;
+  
+  color: white;
+}
+
+.purple-item
+{
+   background-color: purple;
+   color: white;
+}
+
+
+.warning-item
+{
+  background-color: #f08080;
+  
+  color: white;
+}
+
+.select-item
+{
+  background-color: lightgreen
+  
 }

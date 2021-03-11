@@ -53,10 +53,11 @@ Page({
         factory: this.data.factory,
         success: (res) => {
           console.log("getlot success")
-          let datalist = res.result.Message.Body.lotlistsumary.DATALIST
+          let dl=res.result.Message.Body.lotlistsumary.DATALIST
+        //  let datalist = (dl.DATA!=undefined&&dl.DATA!=null)? [{DATA:dl.DATA}]:dl
           // console.log(datalist)
-          let list = util.MesDATALIST2List(datalist)
-          console.log(list)
+          let list = util.MesDATALIST2List(dl)
+          console.log('getlotlist list:',list)
           if (this.MakeChartData(list))
             this.initChart()
 
@@ -160,18 +161,31 @@ Page({
     })
 
   },//end function
-  MakeChartData: function (rawdata) {
+  MakeChartData: function (data) {
     let source = ['OPE', 'COUNT']
     // console.log('makeCHartData rawdata:',rawdata)
-    for (let i = 0; i < 10; i++) {
+    
+    let rawdata= JSON.parse(JSON.stringify(data))
+    rawdata.sort((a,b)=>
+    {
+      let aitem=(a.DATA!=undefined&&a.DATA!=null)?a.DATA:a
+      let bitem=(b.DATA!=undefined&&b.DATA!=null)?b.DATA:b
+      return parseFloat(bitem.GROUPCOUNT)- parseFloat(aitem.GROUPCOUNT)
+    })
+    console.log('MakeChartData rawdata:',rawdata)
+    chtopt.xAxis.data=[]
+      chtopt.series[0].data=[]
+      let cnt=rawdata.length>10? 10: rawdata.length
+    for (let i = 0; i<cnt; i++) {
       let el = rawdata[i]
       let data = (el.DATA != undefined && el.DATA != null) ? el.DATA : el
+      
       let d = []
-      chtopt.xAxis.data=[]
-      chtopt.series[0].data=[]
+      
 
-      chtopt.xAxis.data.push(data.PROCESSOPERATIONNAME)
+     chtopt.xAxis.data.push(data.PROCESSOPERATIONNAME)
       chtopt.series[0].data.push(parseFloat(data.GROUPCOUNT))
+    
     }
     /*
     rawdata.forEach(el => {
@@ -195,7 +209,7 @@ Page({
 })
 
 var chtopt = {
-  title: { text: 'TOP10' },
+  title: { text:'TOP10'},
   legend: {},
   tooltip: {},
   /*
@@ -208,16 +222,19 @@ var chtopt = {
   },  */
   // 声明一个 X 轴，类目轴（category）。默认情况下，类目轴对应到 dataset 第一列。
   xAxis: {
+    
     type: 'category',
-    data: []
+    data: [] 
   },
   // 声明一个 Y 轴，数值轴。
-  yAxis: {},
+  yAxis: {
+  
+  },
   // 声明多个 bar 系列，默认情况下，每个系列会自动对应到 dataset 的每一列。
   series: [
     {
       type: 'bar',
-      name: 'COUNT',
+      name: '基板总数',
       data: [],
       label: {
         show: true,
@@ -233,8 +250,8 @@ var chtopt = {
         verticalAlign: 'middle',
         position: 'insideBottom',
         distance: 5,
-        formatter:  ' {b}:  {c}',
-        fontSize: 13,
+        formatter:  ' {b} : {c}',
+        fontSize: 12,
         showBackground: true,
         backgroundStyle: {
             color: 'rgba(180, 180, 180, 0.2)'
@@ -247,7 +264,7 @@ var chtopt = {
     left: 5,
     right: 5,
     height: 300,
-    top: 30,
+    top: 35,
     containLabel: true
   },
 };

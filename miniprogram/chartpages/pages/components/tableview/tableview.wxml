@@ -19,7 +19,7 @@
             </block>
           </view>
           <block wx:for="{{rows}}" wx:for-item="row" wx:key="unique">
-            <view class="table-row table-content {{selectidx==index? 'select-item':''}} "
+            <view class="table-row table-content {{(index%2==0)? 'white-background':''}}  {{row.warningflag?'warning-item':''}} {{selectidx==index? 'select-item':''}} {{row.firebrickflag?'firebrick-item':''}} {{row.slateblueflag?'slateblue-item':''}}  {{row.purpleflag?'purple-item':''}}"
               bindtap="rowClick" data-index="{{row.index}}">
               <block wx:for="{{row.row}}" wx:key="unique">
                 <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.value}}</view>

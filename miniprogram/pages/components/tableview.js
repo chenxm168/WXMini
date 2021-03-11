@@ -32,39 +32,49 @@ Component({
     {
       console.log(res)
       this.data.selectidx=res.currentTarget.dataset.index
+      let idx=res.currentTarget.dataset.index
       this.setData(
         {
           selectidx:this.data.selectidx
         }
       )
+      let detail={rowdata:this.data.rawdata[idx]}
+      let option={bubbles: true}
+      this.triggerEvent('rowtap',detail,option)
     }
 
   },
   observers:
   {
+    
     'tabledata':function(tabledata)
     {
-     
+      this.data.selectidx=null
       if(tabledata!=undefined&&tabledata!=null)
       {
         let datalist= tabledata.datalist
         let headers=tabledata.headers
         let attachseq=tabledata.attachseq
+        let attachcolor=tabledata.attachcolor
+        
       util.MakeTableData(
         {
           datalist:datalist,
           headers:headers,
           attachseq:attachseq,
           sumrequest:tabledata.sumrequest,
+          attachcolor:tabledata.attachcolor,
           success:(res)=>
           {
+            
             console.log(res)
             this.data.rawdata=res.rawdata,
             this.setData(
               {
                 rows:res.rows,
                 header:res.header,
-                sums:res.sums
+                sums:res.sums,
+                selectidx:null
               }
             )
           }

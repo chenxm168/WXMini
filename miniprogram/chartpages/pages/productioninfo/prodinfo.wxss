@@ -1,9 +1,9 @@
 /* chartpages/pages/productioninfo/prodinfo.wxss */
 @import "../commom.wxss";
 ec-canvas {
-  width: 87%;
-  height: 400px;
+  width: 98%;
+  height: 350px;
   margin: 10px ;
-  border: 1px solid red;
+  
   display: block;
 }

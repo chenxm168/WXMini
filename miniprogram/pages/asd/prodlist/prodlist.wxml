@@ -62,13 +62,13 @@
        <view class="filter-ok" style="height:55px"  bindtap="queryClick">选 好 了 </view>
       </view>
 
-      <view class="asd-col main-col">
-       <view class="filter-ok" style="height:55px"  bindtap="toGroupClick">制程分组 </view>
+      <view class="asd-col main-col" wx:if="{{product!=orgintext}}">
+       <view class="filter-ok" style="height:55px"  bindtap="toGroupClick">按制程汇总 </view>
       </view>
 
     </view>
 
-    <tableview tabledata="{{tabledata}}" setting="{{setting}}" tableTitleContent="{{}}"></tableview>
+    <tableview tabledata="{{tabledata}}" setting="{{setting}}" tableTitleContent="{{}}" bindrowtap='rowClick'></tableview>
     
   <!--
     <view class="table-cells">

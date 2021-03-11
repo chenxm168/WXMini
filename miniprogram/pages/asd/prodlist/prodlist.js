@@ -332,7 +332,7 @@ Page({
           success: (res) => {
             console.log(res)
             this.data.rawdata = res.DATALIST
-            this.data.tabledata = { datalist: res.DATALIST, headers: res.headers, attachseq: true, sumrequest: [{ valuekey: 'PRODUCTQUANTITY', value: 0, desc: '基板总数' }] }
+            this.data.tabledata = { datalist: res.DATALIST, headers: res.headers, attachseq: true, sumrequest: [{ valuekey: 'PRODUCTQUANTITY', value: 0, desc: '基板总数' }],attachcolor:{warning:{valuekey:'LOTHOLDSTATE',op:'eq',value:'OnHold'}} }
             this.setData
               (
                 {
@@ -554,6 +554,11 @@ Page({
       url: '/chartpages/pages/productioninfo/prodinfo' + param
     })
   },//end
+
+  rowClick:function(res)
+  {
+    console.log('Row Click',res)
+  }
 
 
 

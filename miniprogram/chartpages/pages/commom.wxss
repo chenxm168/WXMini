@@ -8,6 +8,7 @@
   font-size: 30rpx;
   font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
   width: 100%;
+  background-color: #F8F8F8;
 }
 
 .pop-mask
