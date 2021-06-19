@@ -545,4 +545,150 @@ Page({
 
   },//end function
 
+  loginfailaction:function(systemmodule)
+  {
+    let txt=systemmodule=='pms'? '"PMS用户登陆过期，请重新登陆PMS':'"OIC用户登陆过期，请重新登陆OIC'
+    let url=systemmodule=='pms'? "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！":"../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
+    wx.showModal({
+      cancelColor: 'cancelColor',
+      showCancel:false,
+      title:"登陆过期",
+      content:txt,
+      success:(res)=>
+      {
+       // let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！"
+          wx.navigateTo({
+            url: url,
+          })
+      }
+    })
+  },// end function
+
+  /*************************************
+   * function: menuclick
+   * arg:
+   * url:  navigateTo url
+   * systemmodule: pms:oic
+   * igonepriv: true:false
+   * page:function page  if ingone=false ,it messesary
+   * key: function key
+   */  
+  menuclick:function(arg)
+  {
+   
+    let url=arg.url   
+    let systemmodle=arg.systemmodle
+    let userinfo=systemmodle=='pms'? app.globalData.userinfo.pms:app.globalData.userinfo.oic
+    let sysnum=systemmodle=='pms'?1:2
+    let title= systemmodle=='pms'?'未登陆PMS系统':'未登陆OIC系统'
+    let txt=systemmodle=='pms'?'继续将转至PMS登陆界面':'继续将转至OIC登陆界面'
+    let loginurl='../login/userLogin?CHANGEENV=Y&SYSTEMMODULE='+sysnum+'&LABELTEXT=你还未登陆'+systemmodle.toUpperCase()+',请先登陆'+systemmodle.toUpperCase()+'！'
+    let success=function(arg)
+   {
+     console.log(url)
+     wx.navigateTo({
+       url: url,
+     })
+   }
+    if(userinfo.userid==null||userinfo.userid.length<1)
+    {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        title:title,
+        content: txt,
+        success(res) {
+          if (res.confirm) {
+            let url = loginurl
+            wx.navigateTo({
+              url: url,
+            })
+          }
+        }
+      })
+      
+    }else
+    {
+      app.verifyUserLoginTime(
+        {
+          systemmodule:systemmodle,
+          durationhour:userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
+          success:(res)=>
+          {
+            if(userinfo.env=='test'||arg.igonepriv==true)
+            {
+              success(null)
+            }else
+            {
+            app.checkSsid({
+              env:userinfo.env,
+              success:(res2)=>
+              {
+                 success(res2)
+              },
+              fail:(err)=>
+              {
+                app.queryWxPrivilege(
+                  {
+                    page:arg.page,
+                    key:arg.key,
+                    userid:userinfo.userid,
+                    success:(re3s)=>
+                    {
+                      success(res)
+                    },
+                    fail:(err)=>
+                    {
+                      wx.showModal({
+                        cancelColor: 'cancelColor',
+                        showCancel:false,
+                        title:'权限验证失败',
+                        content:'权限验证失败，为生产数据保密，你无权在工厂之外使用此功能，如有需要请生产经理联系，申请开通权限！'
+                      })
+                    }
+                  }
+                )
+
+              }
+
+
+            })
+          }
+            
+          },
+          fail:(err)=>
+          {
+            loginfail(err)
+          }
+        }
+      )
+
+    }//end if
+
+   
+
+  },//end function
+
+  stoprecordClick:function(arg)
+  {
+    
+      this.menuclick(
+        {
+          url:'../stoprecord/startrecord',
+          systemmodle:'pms',
+          igonepriv:true
+        }
+      )
+
+
+  },//end function
+
+  materialClick:function(arg)
+  {
+    wx.navigateTo({
+      url: '../material/materialSelect',
+    })
+
+  },//end function
+
+
 })

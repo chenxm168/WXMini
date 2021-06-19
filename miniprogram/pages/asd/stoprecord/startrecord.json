@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "eqselect":"../../components/eqselect",
+    "tableview":"../../components/tableview",
+    "enddialogue":"enddialogue"
+
+  }
+}

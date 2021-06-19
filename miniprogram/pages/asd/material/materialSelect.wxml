@@ -1,0 +1,53 @@
+<!--materialtype select view-->
+<view class="container" style="min-height:{{wHeight-5}}px" wx:if="{{materialtypeselectshow}}">
+  <view class="page-header selecttitle">请选择物料类型</view>
+  <view class="page-body " style="background-color:white">
+    <radio-group bindchange="selectChange">
+      <view class="list-item-cell">
+        <view class="item-sp"></view>
+        <block wx:for="{{materialtypelist}}">
+          <!-- <view hover-class="item-hover">{{materialtypelist[index].DESCRIPTION}}</view> -->
+          <label class="radio">
+            <radio value="{{materialtypelist[index].TYPE}}" checked="{{index==0?true:false}}" />
+            {{materialtypelist[index].DESCRIPTION}}
+          </label>
+          <view class="item-sp"></view>
+        </block>
+
+      </view>
+    </radio-group>
+  </view>
+
+  <view class="page-foot">
+    <button class="gobtn" type="primary" bindtap="selectOK">确 定</button>
+  </view>
+</view>
+<!--end materialtype select view-->
+
+<!--material name scan view-->
+<view class="container" style="min-height:{{wHeight-5}}px" wx:if="{{scanshow}}">
+  <view class="page-body " style="background-color:white">
+    <view class="mlt-list-title" style="padding:5px">物料[ {{materialtype}} ]:扫码列表:</view>
+    <view class="mlt-list-item">
+    <block wx:for="{{materialnamelist}}" wx:key="index">
+      <label style="padding-right:8px">{{materialnamelist[index]}}</label>
+    </block> 
+      
+    </view>
+  </view>
+  <view class="page-foot">
+    <view class="scan-block">
+      <view class="mtl-btn-cell">
+        <button type="primary" size="mini">结束扫描</button>
+      </view>
+      <view class="scan-op-cell" catchtap="scanClick">
+        <view style="font-size:16px;font-weight:500">此区域任意点击扫码</view>
+        <view style="padding:10px">
+          <image style="height:70px;width:70px;align-items: center;" mode="aspectFit" src="../../images/scan.png" />
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>

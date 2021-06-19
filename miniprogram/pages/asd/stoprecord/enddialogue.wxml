@@ -1,0 +1,70 @@
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <view class="page-header"></view>
+  <view class="page-body ">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <view class="asd-condition-select-celss">
+        <view class="eqgroup-select asd-item-cell" wx:if="{{isended}}">
+          <view class="asd-picker-title">宕机ID</view>
+          <input name="edid" class="asd-picker" value="{{edinfo.edid}}" disabled="{{true}}" />
+        </view>
+      </view>
+
+      <view class="eqgroup-select asd-item-cell">
+        <view class="asd-picker-title">设备名称</view>
+        <input name="machinename" class="asd-picker" value="{{edinfo.machinename}}" disabled="{{true}}" />
+
+      </view>
+
+      <view class="eqgroup-select asd-item-cell">
+        <view class="asd-picker-title">单元名称</view>
+        <input name="unitname" class="asd-picker" value="{{edinfo.unitname}}" disabled="{{true}}" />
+
+      </view>
+
+      <view class="eqgroup-select asd-item-cell" wx:if="{{isended}}">
+        <view class="asd-picker-title">宕机开始时间</view>
+        <input name="edstarttime" class="asd-picker" value="{{edinfo.edstarttime}}" disabled="{{true}}" />
+
+      </view>
+
+      <view class="eqgroup-select asd-item-cell" wx:if="{{!isended}}">
+        <view class="asd-picker-title">宕机类型</view>
+        <picker name="edtypeidx" class="asd-picker" range="{{eddowntypelist}}" range-key="DESCRIPTION" value="{{index}}"
+          bindchange="eddowntypeChange">
+          <view class="picker">当前选择: {{eddowntypelist[edtypeidx].DESCRIPTION}}</view>
+        </picker>
+      </view>
+
+      <view class="eqgroup-select asd-item-cell" wx:if="{{!isended}}">
+        <view class="asd-picker-title">宕机原因</view>
+        <picker name="edreasonidx" class="asd-picker" range="{{downreasonlist}}" range-key="DESCRIPTION" value="{{index}}"
+          bindchange="downreasonChange">
+          <view class="picker">当前选择: {{downreasonlist[downreasonidx].DESCRIPTION}}</view>
+        </picker>
+      </view>
+
+
+      <view class="eqgroup-select asd-item-cell">
+        <view class="asd-picker-title">{{selectdatetitle}}</view>
+        <picker name="selectdate" class="asd-picker" mode="date" value="{{selectdate}}" bindchange="dateChange"
+          start="2021-1-1">
+          <view class="picker">当前选择: {{selectdate}}</view>
+        </picker>
+      </view>
+
+      <view class="eqgroup-select asd-item-cell">
+        <view class="asd-picker-title">{{selecttimetitle}}</view>
+        <picker name="selecttime" class="asd-picker" mode="time" value="{{selecttime}}" bindchange="timeChange">
+          <view class="picker">当前选择: {{selecttime}}</view>
+        </picker>
+      </view>
+
+      <view class="eqgroup-select asd-item-cell">
+        <view class="asd-picker-title">备注</view>
+        <input name="comment" class="asd-picker" value="{{comment}}" disabled="{{false}}" />
+      </view>
+
+      <button class="gobtn"   type="primary" formType="submit">{{btntext}}</button>
+    </form>
+  </view>
+</view>

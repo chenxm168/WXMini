@@ -1,0 +1,3 @@
+<!--miniprogram/pages/asd/material/material.wxml-->
+<mp-actionSheet bindactiontap="btnClick" show="{{showActionsheet}}" actions="{{groups}}" title="这是一个标题，可以为一行或者两行。">
+</mp-actionSheet>

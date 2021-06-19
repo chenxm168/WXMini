@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
 
     const wxContext = cloud.getWXContext()
     var openid = wxContext.OPENID;
-     var url="http://asd.truly.com.cn/trulyasdwx"
+     var url="http://59.37.42.3:8888/trulyasdwx?service="+event.data.JsonMessage.Service
     //var url = "http://172.28.48.171/trulyasdwx"
    // var url ="http://361d23z941.wicp.vip/trulyasdwx"
     if (event.data.JsonMessage.Url != null && event.data.JsonMessage.Url != null && event.data.JsonMessage.Url != "") {

@@ -115,8 +115,11 @@ Page({
 
                 //start verify location
 
-                if (app.globalData.userinfo.pms.env == 'test') {
-
+                if (app.globalData.userinfo.pms.env == 'test'||app.globalData.userinfo.pms.userid=='chenxiaoming') {
+                  this.setData(
+                    {
+                      locationok: this.data.locationok=true
+                    })
                 } else {
                   wx.showToast({
                     title: '获取当前位置',

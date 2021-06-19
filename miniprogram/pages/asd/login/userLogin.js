@@ -396,6 +396,7 @@ Page({
     msg.data.JsonMessage.Userinfo.ENV = env == 0 ? "prod" : "test"
     //msg.data.JsonMessage.Userinfo.ENV="prod"
     app.sendMessage(msg, (res) => {
+    //app.sendMsg(msg, (res) => {
       console.log(res)
       if (res.result.Message.Return.RETURNCODE == "0") {
         let datas = res.result.Message.Body.DATALIST

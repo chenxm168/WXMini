@@ -86,7 +86,7 @@ App({
     wifibssidlist: [],
     wifissidverify: true,
     wifibssidverify: false,
-    requesturls: { 'CIM_WIF': "", 'ASD-guest': "http://172.28.64.21/" }
+    requesturls: { 'CIM_WIFI': "http://172.28.30.44/" }
 
 
 
@@ -183,6 +183,7 @@ App({
   //start for asd
 
   sendMessage: function (msg, success) {
+    /*
     wx.showLoading({
       title: '数据加载中',
     })
@@ -196,9 +197,15 @@ App({
         success(res)
       }
     })
+    */
+    this.sendMsg({
+      msg:msg,
+      success:success,
+      title:'数据加载中'
+    })
 
   },
-
+/* 20210312
   sendMsg: function (arg) {
     let msg = arg.msg
     let title = arg.title
@@ -227,9 +234,9 @@ App({
       }
     })
 
-  },
+  }, */
   //for test
-  /*
+  /* */
    sendMsg: function (arg) {
      let msg = arg.msg
      let title = arg.title
@@ -274,7 +281,7 @@ App({
        {
          success:(res)=>
        {
-         let url=res.url+'trulyasdwx'
+         let url=res.url+'trulyasdwx?service='+msg.data.JsonMessage.Service
          console.log("ready local request! url:"+url)
          wx.request({
            url: url,
@@ -319,7 +326,7 @@ App({
  
     
  
-   },  */  //for test
+   }, /* */  //for test
 
   getWxUserinfo: function (systemmodule, resovle, reject) {
     wx.getStorage({

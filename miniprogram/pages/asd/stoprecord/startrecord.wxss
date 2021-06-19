@@ -1,0 +1,8 @@
+/* miniprogram/pages/asd/stoprecord/startrecord.wxss */
+@import "../../../style/asd.wxss";
+.gobtn
+{
+  width: 97%;
+  margin:5px;
+  padding:5px;
+}

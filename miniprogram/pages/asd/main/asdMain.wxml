@@ -19,6 +19,11 @@
           <view class="memu-title">CELL平衡表</view>
         </view>
 
+        <view class="main-rows" bind:touchstart="stoprecordClick">
+          <image class="weui-grid__icon " src="../../images/warning.png" />
+          <view class="memu-title">宕机记录</view>
+        </view>
+
 
 
       </view>
@@ -32,6 +37,12 @@
           <image class="weui-grid__icon " src="../../images/plantask.png" />
           <view class="memu-title">定期项目</view>
         </view>
+
+        <view class="main-rows" bind:touchstart="maskClick">
+          <image class="weui-grid__icon " src="../../images/icon_h5.png" />
+          <view class="memu-title">MASK管理</view>
+        </view>
+
       </view>
       <view class="asd-col main-col">
         <view class="main-rows" bind:touchstart="userChangeCick">
@@ -41,12 +52,17 @@
         </view>
 
         <view class="main-rows" bind:touchstart="prodlistClick">
-        <image class="weui-grid__icon " src="../../images/prodlist.png" />
-        <view class="memu-title">在制品信息</view>
-      </view>
+          <image class="weui-grid__icon " src="../../images/prodlist.png" />
+          <view class="memu-title">在制品信息</view>
+        </view>
+
+        <view class="main-rows" bind:touchstart="materialClick">
+          <image class="weui-grid__icon " src="../../images/material.png" />
+          <view class="memu-title">物料管理</view>
+        </view>
 
       </view>
-    
+
     </view>
   </view>
   <view class="page-foot">

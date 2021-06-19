@@ -361,7 +361,7 @@ Page({
   changeStorageArea: function (res) {
 
 
-    let map = { NEWSTORAGEAREANAME: this.data.machinename, NEWSUBAREANAME: this.data.libraryslot, EVENTCOMMENT: "WX" }
+    let map = { NEWSTORAGEAREANAME: this.data.machinename, NEWSUBAREANAME: this.data.libraryslot, EVENTCOMMENT: "WX",EVENTUSER:app.globalData.userinfo.oic.userid }
     let DURABLELIST = []
 
 

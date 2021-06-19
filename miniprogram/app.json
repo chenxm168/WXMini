@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/asd/login/userLogin",
     "pages/asd/task/task",
     "pages/asd/dailyCheck/selectPage",
@@ -18,8 +17,10 @@
     "pages/asd/dailyCheck/dailyCheck",
     "pages/exam/exam3",
     "pages/asd/balance/cellBalanceReport",
-    "pages/asd/prodlist/prodlist"
-    
+    "pages/asd/prodlist/prodlist",
+    "pages/asd/stoprecord/startrecord",
+    "pages/asd/material/material",
+    "pages/asd/material/materialSelect"
   ],
   "subpackages": [
     {
@@ -29,7 +30,6 @@
       ]
     }
   ],
-
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
@@ -42,5 +42,9 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于验证您是否位于工厂位置！"
     }
+  },
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
   }
 }

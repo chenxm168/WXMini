@@ -1,0 +1,16 @@
+<eqselect machineselectshow="{{true}}"  equnitselectshow="{{true}}" eqlevelselectshow="{{false}}" userinfo="{{userinfo}}"  bindselectok="selectok" wx:if="{{selectshow}}"/>
+<enddialogue  wx:if="{{enddialogueshow}}"   isended="{{isended}}" edinfo="{{edinfo}}" userinfo="{{userinfo}}" bindedsuccess="edsuccess" />
+
+
+
+<view class="container" style="height:{{height}}px" wx:if="{{edlistshow}}">
+<view class="page-header">
+</view>
+<view class="page-body">
+  <tableview  setting="{{setting}}" tabledata="{{tabledata}}" tableTitleContent="{{tableTitleContent}}" bindrowtap="rowClick"></tableview>
+</view>
+<view class="page-foot">
+  <button class="gobtn"  disabled="{{rowselectinfo==null}}" type="primary" bindtap="endClick">宕机结束</button>
+</view>
+
+</view>

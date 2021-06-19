@@ -1,5 +1,102 @@
 module.exports = {
+  globalData:{
+    requesturls: { 'CIM_WIFI': "http://172.28.30.44/" },
+  },
   msg: { data: { JsonMessage: { Url: "", Service: "asdquerysrv", Userinfo: { ENV: "prod", USERID: "", MOBILEMODE: "", SYSTEMMODULE: "", USERGROUP: "", LATITUDE: 0, LONGITUDE: 0, PRIVILEGEKEY: null, OPENID: null }, Message: { MODULE: "qry", MESSAGENAME: "GetQueryResult", QUERYID: "GetInspectionRecordList", VERSION: "", PARAMMAP: {}, PARAMLIST: [], Body: {} } } } },
+
+/* 20210504 */
+   sendMsg: function (arg) {
+     let msg = arg.msg
+     let title = arg.title
+     let success = arg.success
+     let fail = arg.fail
+     
+ 
+ 
+ 
+     let wifiFail=(arg)=>
+     {
+       let success=arg.success
+       let fail=arg.fail
+       let msg=arg.msg
+       wx.cloud.callFunction({
+         name: "sendReceive",
+         data: msg,
+         success: (res) => {
+           wx.hideLoading({
+             success: (res) => { },
+           })
+           if (success != undefined && success != null) {
+             success(res)
+           }
+         },
+         fail: (err) => {
+           wx.hideLoading({
+             success: (res) => { },
+           })
+           if (err != null)
+             fail(err)
+         }
+       })
+ 
+     }
+ 
+     wx.showLoading({
+       title: title,
+     })
+    
+     this.getRequestUrl(
+       {
+         success:(res)=>
+       {
+         let url=res.url+'trulyasdwx?service='+msg.data.JsonMessage.Service
+         console.log("ready local request! url:"+url)
+         wx.request({
+           url: url,
+           data:msg,
+           method:'POST',
+           success: (res) => {
+             console.log(res)
+             wx.hideLoading({
+               success: (res) => { },
+             })
+             if (success != undefined && success != null) {
+               success({result:res.data})
+             }
+           },
+           fail: (err) => {
+             wx.hideLoading({
+               success: (res) => { },
+             })
+             if (err != null)
+               fail(err)
+           }
+           
+         })
+         
+       },
+       fail:(err)=>
+       {
+         wifiFail(
+           {
+             success:success,
+             fail:fail,
+             msg:msg
+           }
+         )
+       }
+       }
+     )
+ 
+ 
+ 
+ 
+ 
+    
+ 
+   }, /* */  //for test
+
+  /*
   sendMsg: function (arg) {
     let msg = arg.msg
     let title = arg.title
@@ -28,7 +125,7 @@ module.exports = {
       }
     })
 
-  },
+  }, */
   sendQueryMsg: function (arg) {
     let queryid = (arg.queryid != undefined && arg.queryid != null) ? arg.queryid : null
     let env = arg.env
@@ -370,6 +467,139 @@ module.exports = {
       }//end switch 
     }
     return rtn;
+
+  },//end function
+
+  getRequestUrl: function (arg) {
+    let fail = arg.fail
+    let success = arg.success
+    wx.getNetworkType({
+      success: (res) => {
+        console.log(res)
+        if (res.networkType == 'wifi') {
+          wx.startWifi({
+            success: (res) => {
+              console.log("start get conneted wifi")
+              wx.getConnectedWifi({
+                success: (res) => {
+                  console.log("connected wifi info")
+                  console.log(res)
+                  let ssid = res.wifi.SSID
+                  console.log("ssid:" + ssid)
+                  let url = this.globalData.requesturls[ssid]
+                  console.log("url:")
+                  console.log(url)
+                  if (url != undefined && url != null && url.length != undefined && url.length > 0) {
+                    if (success != undefined && success != null) {
+                      console.log("get url success! url:" + url)
+                      success({ ssid: ssid, url: url })
+                    }
+                  } else {
+                    fail(null)
+                  }
+
+                },
+                fail: fail
+              })
+
+            },
+            fail: fail
+          })
+
+        } else {
+          fail(null)
+        }
+      },
+    })
+
+  },//end function
+  sendPmsEventMsg: function (arg) {
+    console.log("send Event Message")
+    let env = arg.env
+    let userid = arg.userid
+    let messagename = arg.messagename
+    let map = arg.map
+    let body = arg.body
+    let msg = JSON.parse(JSON.stringify(this.globalData.msg))
+    let success = arg.success
+    let fail = arg.fail
+    msg.data.JsonMessage.Message.MESSAGENAME = messagename
+    msg.data.JsonMessage.Service = "asdpmssrv"
+    msg.data.JsonMessage.Userinfo.LATITUDE = this.globalData.userlocation.latitude
+    msg.data.JsonMessage.Userinfo.LONGITUDE = this.globalData.userlocation.longitude
+    msg.data.JsonMessage.Message.MODULE = "oic"
+    msg.data.JsonMessage.Userinfo.ENV = env
+    msg.data.JsonMessage.Message.Body = body
+    msg.data.JsonMessage.Message.PARAMMAP = map
+    this.sendMsg(
+      {
+        msg: msg,
+        title: "数据处理中",
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
+        },
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
+      }
+    )
+
+  },//end function
+
+  sendEventMsg: function (arg) {
+    console.log("send Event Message")
+    let env = arg.env
+    let userid = arg.userid
+    let messagename = arg.messagename
+    let map = arg.map
+    let body = arg.body
+    let msg = JSON.parse(JSON.stringify(this.globalData.msg))
+    let success = arg.success
+    let fail = arg.fail
+    msg.data.JsonMessage.Message.MESSAGENAME = messagename
+    msg.data.JsonMessage.Service = "asdoicsrv"
+    msg.data.JsonMessage.Userinfo.LATITUDE = this.globalData.userlocation.latitude
+    msg.data.JsonMessage.Userinfo.LONGITUDE = this.globalData.userlocation.longitude
+    msg.data.JsonMessage.Message.MODULE = "oic"
+    msg.data.JsonMessage.Userinfo.ENV = env
+    msg.data.JsonMessage.Message.Body = body
+    msg.data.JsonMessage.Message.PARAMMAP = map
+    this.sendMsg(
+      {
+        msg: msg,
+        title: "数据处理中",
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
+        },
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
+      }
+    )
 
   },//end function
 }

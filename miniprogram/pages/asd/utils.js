@@ -1,4 +1,183 @@
 module.exports = {
+  globalData:{
+    requesturls: { 'CIM_WIFI': "http://172.28.30.44/"},
+  },
+
+  msg: { data: { JsonMessage: { Url: "", Service: "asdquerysrv", Userinfo: { ENV: "prod", USERID: "", MOBILEMODE: "", SYSTEMMODULE: "", USERGROUP: "", LATITUDE: 0, LONGITUDE: 0, PRIVILEGEKEY: null, OPENID: null }, Message: { MODULE: "qry", MESSAGENAME: "GetQueryResult", QUERYID: "GetInspectionRecordList", VERSION: "", PARAMMAP: {}, PARAMLIST: [], Body: {} } } } },
+
+  /* 20210504 */
+     sendMsg: function (arg) {
+       let msg = arg.msg
+       let title = arg.title
+       let success = arg.success
+       let fail = arg.fail
+       
+   
+   
+   
+       let wifiFail=(arg)=>
+       {
+         let success=arg.success
+         let fail=arg.fail
+         let msg=arg.msg
+         wx.cloud.callFunction({
+           name: "sendReceive",
+           data: msg,
+           success: (res) => {
+             wx.hideLoading({
+               success: (res) => { },
+             })
+             if (success != undefined && success != null) {
+               success(res)
+             }
+           },
+           fail: (err) => {
+             wx.hideLoading({
+               success: (res) => { },
+             })
+             if (err != null)
+               fail(err)
+           }
+         })
+   
+       }
+   
+       wx.showLoading({
+         title: title,
+       })
+      
+       this.getRequestUrl(
+         {
+           success:(res)=>
+         {
+           let url=res.url+'trulyasdwx?service='+msg.data.JsonMessage.Service
+           console.log("ready local request! url:"+url)
+           wx.request({
+             url: url,
+             data:msg,
+             method:'POST',
+             success: (res) => {
+               console.log(res)
+               wx.hideLoading({
+                 success: (res) => { },
+               })
+               if (success != undefined && success != null) {
+                 success({result:res.data})
+               }
+             },
+             fail: (err) => {
+               wx.hideLoading({
+                 success: (res) => { },
+               })
+               if (err != null)
+                 fail(err)
+             }
+             
+           })
+           
+         },
+         fail:(err)=>
+         {
+           wifiFail(
+             {
+               success:success,
+               fail:fail,
+               msg:msg
+             }
+           )
+         }
+         }
+       )
+   
+   
+   
+   
+   
+      
+   
+     }, /* */  //for test
+  
+    /*
+    sendMsg: function (arg) {
+      let msg = arg.msg
+      let title = arg.title
+      let success = arg.success
+      let fail = arg.fail
+      wx.showLoading({
+        title: title,
+      })
+      wx.cloud.callFunction({
+        name: "sendReceive",
+        data: msg,
+        success: (res) => {
+          wx.hideLoading({
+            success: (res) => { },
+          })
+          if (success != undefined && success != null) {
+            success(res)
+          }
+        },
+        fail: (err) => {
+          wx.hideLoading({
+            success: (res) => { },
+          })
+          if (err != null)
+            fail(err)
+        }
+      })
+  
+    }, */
+    sendQueryMsg: function (arg) {
+      let queryid = (arg.queryid != undefined && arg.queryid != null) ? arg.queryid : null
+      let env = arg.env
+      let map = (arg.map != undefined && arg.map != null) ? arg.map : null
+      let userid = arg.userid
+      let success = arg.success
+      let list = (arg.list != undefined && arg.list != null) ? arg.list : null
+      let fail = arg.fail
+      let msg = JSON.parse(JSON.stringify(this.msg))
+      let service = (arg.service != undefined && arg.service != null) ? arg.service : "asdquerysrv"
+      let title = (arg.title != undefined && arg.title != null) ? arg.title : "请求数据中"
+  
+      msg.data.JsonMessage.Userinfo.ENV = env
+      msg.data.JsonMessage.Userinfo.USERID = userid
+      msg.data.JsonMessage.Message.MODULE = "qry"
+      msg.data.JsonMessage.Message.PARAMLIST = list
+      msg.data.JsonMessage.Message.QUERYID = queryid
+      msg.data.JsonMessage.Service = service
+      msg.data.JsonMessage.Message.PARAMMAP = map
+      this.sendMsg(
+        {
+          msg: msg,
+          title: title,
+          success: (res) => {
+            if (success != undefined && success != null) {
+              success(res)
+            } else {
+              return new Promise(function (resolve, reject) {
+                resolve(res)
+              })
+            }
+  
+          },
+  
+          fail: (err) => {
+            if (fail != undefined && fail != null) {
+              fail(err)
+            } else {
+              return new Promise(function (resolve, reject) {
+                reject(err)
+              })
+            }
+          }
+        }
+      )
+    },//end function
+
+
+
+
+  
   DataList2List: function (arg) {
     let complete = arg.complete
     let datalist = arg.datalist
@@ -264,6 +443,241 @@ module.exports = {
       }//end switch 
     }
     return rtn;
+
+  },//end function
+
+  getRequestUrl: function (arg) {
+    let fail = arg.fail
+    let success = arg.success
+    wx.getNetworkType({
+      success: (res) => {
+        console.log(res)
+        if (res.networkType == 'wifi') {
+          wx.startWifi({
+            success: (res) => {
+              console.log("start get conneted wifi")
+              wx.getConnectedWifi({
+                success: (res) => {
+                  console.log("connected wifi info")
+                  console.log(res)
+                  let ssid = res.wifi.SSID
+                  console.log("ssid:" + ssid)
+                  let url = this.globalData.requesturls[ssid]
+                  console.log("url:")
+                  console.log(url)
+                  if (url != undefined && url != null && url.length != undefined && url.length > 0) {
+                    if (success != undefined && success != null) {
+                      console.log("get url success! url:" + url)
+                      success({ ssid: ssid, url: url })
+                    }
+                  } else {
+                    fail(null)
+                  }
+
+                },
+                fail: fail
+              })
+
+            },
+            fail: fail
+          })
+
+        } else {
+          fail(null)
+        }
+      },
+    })
+
+  },//end function
+
+  getPMSMachineListByGroup: function (arg) {
+
+    let success = arg.success
+    let fail = arg.fail
+    let env = arg.env
+    let userid = arg.userid
+    let service = "querymachinelistbypmsgroup"
+    let machinegroupname = arg.machinegroupname
+    let map = { PMS_MACHINEGROUPNAME: machinegroupname, USERID: userid, EVENTUSER: userid }
+    let machines = []
+
+    //define function
+    let makeunitlist = (arg) => {
+      let success = arg.success
+      let list = arg.list
+      if (list.length == undefined) {
+        let unit = { MACHINENAME: list.DATA.MACHINENAME, DESCRIPTION: list.DATA.MACHINENAME + "--" + list.DATA.DESCRIPTION }
+        let units = [unit]
+        success(units)
+
+      } else {
+        let units = []
+        for (let k = 0; k < list.length; k++) {
+
+          let unit = { MACHINENAME: list[k].DATA.MACHINENAME, DESCRIPTION: list[k].DATA.MACHINENAME + "--" + list[k].DATA.DESCRIPTION }
+          units.push(unit)
+
+        }
+        success(units)
+      }
+    }//end makeunnitlist function
+
+    this.sendQueryMsg(
+      {
+        map: map,
+        env: env,
+        service: service,
+        userid: userid,
+        success: (res) => {
+          console.log(res)
+          let mlist = res.result.Message.Body.DATALIST
+          console.log(mlist.length)
+          if (mlist.length == undefined) {
+            let machine = { MACHINENAME: mlist.DATA.MACHINENAME, DESCRIPTION: mlist.DATA.MACHINENAME + "--" + mlist.DATA.DESCRIPTION, UNIT: [] }
+            console.log(machine)
+            let ulist = mlist.DATA.UNITLIST.DATALIST
+            makeunitlist(
+              {
+                list: ulist,
+                success: (res) => {
+                  machine.UNIT = res
+                  machines.push(machine)
+                  console.log(machines)
+                  if (success != undefined && success != null) {
+                    success(machines)//return machines
+
+                  }
+
+                }
+
+              }
+            )
+
+          }
+          else {
+
+            for (let i = 0; i < mlist.length; i++) {
+              let machine = { MACHINENAME: mlist[i].DATA.MACHINENAME, DESCRIPTION: mlist[i].DATA.MACHINENAME + "--" + mlist[i].DATA.DESCRIPTION, UNIT: [] }
+
+              let ulist = mlist[i].DATA.UNITLIST.DATALIST
+              console.log("ulist")
+              console.log(ulist)
+              makeunitlist(
+                {
+                  list: ulist,
+                  success: (res) => {
+                    console.log(res)
+                    machine.UNIT = res;
+                    machines.push(machine)
+                  }
+                }
+              )
+
+            }//end for
+            if (success != undefined && success != null) {
+              success(machines)//return machines
+            }
+          }
+          console.log("machinelist")
+          console.log(machines)
+
+
+        },
+        fail: (err) => {
+
+        }
+      })
+
+
+  },   //end function
+
+  sendPmsEventMsg: function (arg) {
+    console.log("send Event Message")
+    let env = arg.env
+    let userid = arg.userid
+    let messagename = arg.messagename
+    let map = arg.map
+    let body = arg.body
+    let msg = JSON.parse(JSON.stringify(this.msg))
+    let success = arg.success
+    let fail = arg.fail
+    msg.data.JsonMessage.Message.MESSAGENAME = messagename
+    msg.data.JsonMessage.Service = "asdpmssrv"
+    msg.data.JsonMessage.Userinfo.LATITUDE = arg.latitude
+    msg.data.JsonMessage.Userinfo.LONGITUDE = arg.longitude
+    msg.data.JsonMessage.Message.MODULE = "oic"
+    msg.data.JsonMessage.Userinfo.ENV = env
+    msg.data.JsonMessage.Message.Body = body
+    msg.data.JsonMessage.Message.PARAMMAP = map
+    this.sendMsg(
+      {
+        msg: msg,
+        title: "数据处理中",
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
+        },
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
+      }
+    )
+
+  },//end function
+
+  sendEventMsg: function (arg) {
+    console.log("send Event Message")
+    let env = arg.env
+    let userid = arg.userid
+    let messagename = arg.messagename
+    let map = arg.map
+    let body = arg.body
+    let msg = JSON.parse(JSON.stringify(this.msg))
+    let success = arg.success
+    let fail = arg.fail
+    msg.data.JsonMessage.Message.MESSAGENAME = messagename
+    msg.data.JsonMessage.Service = "asdoicsrv"
+    msg.data.JsonMessage.Userinfo.LATITUDE = arg.latitude
+    msg.data.JsonMessage.Userinfo.LONGITUDE = arg.longitude
+    msg.data.JsonMessage.Message.MODULE = "oic"
+    msg.data.JsonMessage.Userinfo.ENV = env
+    msg.data.JsonMessage.Message.Body = body
+    msg.data.JsonMessage.Message.PARAMMAP = map
+    this.sendMsg(
+      {
+        msg: msg,
+        title: "数据处理中",
+        success: (res) => {
+          if (success != undefined && success != null) {
+            success(res)
+          } else {
+            return new Promise(function (resolve, reject) {
+              resolve(res)
+            })
+          }
+        },
+        fail: (err) => {
+          if (fail != undefined && fail != null) {
+            fail(err)
+          } else {
+            return new Promise(function (resolve, reject) {
+              reject(err)
+            })
+          }
+        }
+      }
+    )
 
   },//end function
 

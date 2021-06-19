@@ -1,0 +1,72 @@
+/* miniprogram/pages/asd/material/materailSelect.wxss */
+@import "../../../style/asd.wxss";
+.selecttitle
+{
+  font-size: 20px;
+  font-weight: 600;
+}
+.list-item-cell
+{
+  padding-left:10px;
+  padding-right: 10px;
+  font-weight: 520;
+  font-size: 18px;
+ 
+  
+}
+.mlt-list-item
+{
+  padding: 5px;
+  font-size:15px ;
+  font-weight: 540;
+  
+}
+.item-hover
+{
+  background-color: rgb(224, 217, 217);
+}
+.item-sp
+{
+  padding:3px ;
+  border-top-style: dotted;
+  border-top-width: 1px;
+  border-top-color: gray;
+  height: 10px;
+}
+.scan-block
+{
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-self: start;
+  
+}
+.mtl-btn-cell
+{
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-self:center;
+  justify-content: center;
+  width: 100%;
+}
+.scan-op-cell
+{
+  flex-grow: 1;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-self:center;
+  justify-content: center;
+  width: 100%;
+  align-self:center;
+  text-align: center;
+}
+.mlt-list-title
+{
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+  border-bottom-color: rgb(218, 212, 212);
+}
