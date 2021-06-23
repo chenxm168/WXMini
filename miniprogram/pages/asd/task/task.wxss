@@ -9,7 +9,7 @@
 {
   display: table-row;
   margin-bottom: 2px;
-
+  
 }
 
 .table-cell

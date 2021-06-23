@@ -20,9 +20,11 @@
           </view>
           <block wx:for="{{rows}}" wx:for-item="row" wx:key="unique">
             <view class="table-row table-content {{(index%2==0)? 'white-background':''}}  {{row.warningflag?'warning-item':''}} {{selectidx==index? 'select-item':''}} {{row.firebrickflag?'firebrick-item':''}} {{row.slateblueflag?'slateblue-item':''}}  {{row.purpleflag?'purple-item':''}}"
-              bindtap="rowClick" data-index="{{row.index}}">
+              bindtap="rowClick" data-index="{{row.index}}" style="color:{{selectidx==index?'':row.othercolor.fontcolor}};background-color:{{selectidx==index?'':row.othercolor.backcolor}};">
               <block wx:for="{{row.row}}" wx:key="unique">
-                <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.value}}</view>
+                <view class="table-cell" wx:if="{{item.show=='Y'}}">{{item.id=='CHECKBOX'?'':item.value}}
+                <checkbox size="mini" value="checkchange" bindchange="checkchange" wx:if="{{item.id=='CHECKBOX'}}" checked="{{item.value}}"/>
+                </view>
               </block>
             </view>
           </block>

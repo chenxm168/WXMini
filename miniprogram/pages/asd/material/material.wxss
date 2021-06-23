@@ -1,2 +1,26 @@
 /* miniprogram/pages/asd/material/material.wxss */
 @import "../../../style/asd.wxss";
+.btn-cell
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  
+  
+  
+}
+.mt-cell
+{
+  margin:5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(207, 197, 197);
+  border-radius: 3px;
+}
+.mask-page-body
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}

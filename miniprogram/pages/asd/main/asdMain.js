@@ -1,5 +1,6 @@
 // miniprogram/pages/asd/main/asdMain.js
 const app = getApp()
+const util = require("../utils.js")
 Page({
 
   /**
@@ -95,35 +96,32 @@ Page({
     let locationfail = function (err) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"位置验证失败",
-        content:"手机位置验证失败,您无法继续使用此功能"
-      })
-    }
-   
-    let privilegefail=function(res)
-    {
-      wx.showModal({
-        cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"权限验证失败",
-        content:"权限验证失败,您无法使用此功能"
+        showCancel: false,
+        title: "位置验证失败",
+        content: "手机位置验证失败,您无法继续使用此功能"
       })
     }
 
-    let loginfail=function(res)
-    {
+    let privilegefail = function (res) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"登陆过期",
-        content:"用户登陆过期，请重新登陆",
-        success:(res)=>
-        {
+        showCancel: false,
+        title: "权限验证失败",
+        content: "权限验证失败,您无法使用此功能"
+      })
+    }
+
+    let loginfail = function (res) {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        showCancel: false,
+        title: "登陆过期",
+        content: "用户登陆过期，请重新登陆",
+        success: (res) => {
           let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
-            wx.navigateTo({
-              url: url,
-            })
+          wx.navigateTo({
+            url: url,
+          })
         }
       })
     }
@@ -146,26 +144,24 @@ Page({
     } else {
       app.verifyUserLoginTime(
         {
-          systemmodule:'oic',
-          durationhour:app.globalData.userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
-          success:(res)=>
-          {
+          systemmodule: 'oic',
+          durationhour: app.globalData.userinfo.env == 'test' ? app.globalData.userperiod.test : app.globalData.userperiod.prod,
+          success: (res) => {
             console.log("Start verify user privilege")
             app.verifyUserPrivilege(
               {
-                
-                  env:app.globalData.userinfo.oic.env,
-                  userid:app.globalData.userinfo.oic.userid,
-                  password:app.globalData.userinfo.oic.password,
-                  privilegekey:'btnStorageIn',
-                  success:success,
-                  fail:privilegefail
+
+                env: app.globalData.userinfo.oic.env,
+                userid: app.globalData.userinfo.oic.userid,
+                password: app.globalData.userinfo.oic.password,
+                privilegekey: 'btnStorageIn',
+                success: success,
+                fail: privilegefail
               }
             )
-            
+
           },
-          fail:(err)=>
-          {
+          fail: (err) => {
             loginfail(err)
           }
         }
@@ -185,24 +181,22 @@ Page({
     let locationfail = function (err) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"位置验证失败",
-        content:"手机位置验证失败,您无法继续使用此功能"
+        showCancel: false,
+        title: "位置验证失败",
+        content: "手机位置验证失败,您无法继续使用此功能"
       })
     }
-    let loginfail=function(res)
-    {
+    let loginfail = function (res) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"登陆过期",
-        content:"PMS用户登陆过期，请重新登陆PMS",
-        success:(res)=>
-        {
+        showCancel: false,
+        title: "登陆过期",
+        content: "PMS用户登陆过期，请重新登陆PMS",
+        success: (res) => {
           let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！"
-            wx.navigateTo({
-              url: url,
-            })
+          wx.navigateTo({
+            url: url,
+          })
         }
       })
     }
@@ -223,20 +217,18 @@ Page({
     } else {
       app.verifyUserLoginTime(
         {
-          systemmodule:'pms',
-          durationhour:app.globalData.userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
-          success:(res)=>
-          {
+          systemmodule: 'pms',
+          durationhour: app.globalData.userinfo.env == 'test' ? app.globalData.userperiod.test : app.globalData.userperiod.prod,
+          success: (res) => {
             success(null)
-            
+
           },
-          fail:(err)=>
-          {
+          fail: (err) => {
             loginfail(err)
           }
         }
       )
-      
+
 
     }
 
@@ -279,8 +271,7 @@ Page({
 
     }*/
   },//end function
-  balanceClick:function(res)
-  {
+  balanceClick: function (res) {
     let userinfo = app.globalData.userinfo.oic
     console.log("libraryClick")
     console.log(userinfo)
@@ -293,35 +284,32 @@ Page({
     let locationfail = function (err) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"位置验证失败",
-        content:"手机位置验证失败,您无法继续使用此功能"
-      })
-    }
-   
-    let privilegefail=function(res)
-    {
-      wx.showModal({
-        cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"权限验证失败",
-        content:"权限验证失败,您无法使用此功能"
+        showCancel: false,
+        title: "位置验证失败",
+        content: "手机位置验证失败,您无法继续使用此功能"
       })
     }
 
-    let loginfail=function(res)
-    {
+    let privilegefail = function (res) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"登陆过期",
-        content:"用户登陆过期，请重新登陆",
-        success:(res)=>
-        {
+        showCancel: false,
+        title: "权限验证失败",
+        content: "权限验证失败,您无法使用此功能"
+      })
+    }
+
+    let loginfail = function (res) {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        showCancel: false,
+        title: "登陆过期",
+        content: "用户登陆过期，请重新登陆",
+        success: (res) => {
           let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
-            wx.navigateTo({
-              url: url,
-            })
+          wx.navigateTo({
+            url: url,
+          })
         }
       })
     }
@@ -344,15 +332,13 @@ Page({
     } else {
       app.verifyUserLoginTime(
         {
-          systemmodule:'oic',
-          durationhour:app.globalData.userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
-          success:(res)=>
-          {
-           success(null)
-            
+          systemmodule: 'oic',
+          durationhour: app.globalData.userinfo.env == 'test' ? app.globalData.userperiod.test : app.globalData.userperiod.prod,
+          success: (res) => {
+            success(null)
+
           },
-          fail:(err)=>
-          {
+          fail: (err) => {
             loginfail(err)
           }
         }
@@ -362,8 +348,7 @@ Page({
     console.log(app.globalData.userinfo)
 
   },//end function
-  plantaskClick:function(res)
-  {
+  plantaskClick: function (res) {
     let success = function (res) {
       wx.navigateTo({
         url: '../task/planTask',
@@ -373,24 +358,22 @@ Page({
     let locationfail = function (err) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"位置验证失败",
-        content:"手机位置验证失败,您无法继续使用此功能"
+        showCancel: false,
+        title: "位置验证失败",
+        content: "手机位置验证失败,您无法继续使用此功能"
       })
     }
-    let loginfail=function(res)
-    {
+    let loginfail = function (res) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"登陆过期",
-        content:"PMS用户登陆过期，请重新登陆PMS",
-        success:(res)=>
-        {
+        showCancel: false,
+        title: "登陆过期",
+        content: "PMS用户登陆过期，请重新登陆PMS",
+        success: (res) => {
           let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！"
-            wx.navigateTo({
-              url: url,
-            })
+          wx.navigateTo({
+            url: url,
+          })
         }
       })
     }
@@ -411,27 +394,24 @@ Page({
     } else {
       app.verifyUserLoginTime(
         {
-          systemmodule:'pms',
-          durationhour:app.globalData.userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
-          success:(res)=>
-          {
+          systemmodule: 'pms',
+          durationhour: app.globalData.userinfo.env == 'test' ? app.globalData.userperiod.test : app.globalData.userperiod.prod,
+          success: (res) => {
             success(null)
-            
+
           },
-          fail:(err)=>
-          {
+          fail: (err) => {
             loginfail(err)
           }
         }
       )
-      
+
 
     }
 
   },//end function
 
-  prodlistClick:function(arg)
-  {
+  prodlistClick: function (arg) {
     let userinfo = app.globalData.userinfo.oic
     console.log("libraryClick")
     console.log(userinfo)
@@ -440,19 +420,17 @@ Page({
         url: '../prodlist/prodlist',
       })
     }
-    let loginfail=function(res)
-    {
+    let loginfail = function (res) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        showCancel:false,
-        title:"登陆过期",
-        content:"用户登陆过期，请重新登陆",
-        success:(res)=>
-        {
+        showCancel: false,
+        title: "登陆过期",
+        content: "用户登陆过期，请重新登陆",
+        success: (res) => {
           let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
-            wx.navigateTo({
-              url: url,
-            })
+          wx.navigateTo({
+            url: url,
+          })
         }
       })
     }
@@ -473,53 +451,45 @@ Page({
     } else {
       app.verifyUserLoginTime(
         {
-          systemmodule:'oic',
-          durationhour:app.globalData.userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
-          success:(res)=>
-          {
-            if(app.globalData.userinfo.oic.env=='test')
-            {
+          systemmodule: 'oic',
+          durationhour: app.globalData.userinfo.env == 'test' ? app.globalData.userperiod.test : app.globalData.userperiod.prod,
+          success: (res) => {
+            if (app.globalData.userinfo.oic.env == 'test') {
               success(null)
-            }else
-            {
-            app.checkSsid({
-              env:app.globalData.userinfo.oic.env,
-              success:(res2)=>
-              {
-                 success(res2)
-              },
-              fail:(err)=>
-              {
-                app.queryWxPrivilege(
-                  {
-                    page:'prodlist',
-                    key:'prodlist',
-                    userid:app.globalData.userinfo.oic.userid,
-                    success:(re3s)=>
+            } else {
+              app.checkSsid({
+                env: app.globalData.userinfo.oic.env,
+                success: (res2) => {
+                  success(res2)
+                },
+                fail: (err) => {
+                  app.queryWxPrivilege(
                     {
-                      success(res)
-                    },
-                    fail:(err)=>
-                    {
-                      wx.showModal({
-                        cancelColor: 'cancelColor',
-                        showCancel:false,
-                        title:'权限验证失败',
-                        content:'权限验证失败，为生产数据保密，你无权在工厂之外查询此数据，如有需要请生产经理联系，申请开通权限！'
-                      })
+                      page: 'prodlist',
+                      key: 'prodlist',
+                      userid: app.globalData.userinfo.oic.userid,
+                      success: (re3s) => {
+                        success(res)
+                      },
+                      fail: (err) => {
+                        wx.showModal({
+                          cancelColor: 'cancelColor',
+                          showCancel: false,
+                          title: '权限验证失败',
+                          content: '权限验证失败，为生产数据保密，你无权在工厂之外查询此数据，如有需要请生产经理联系，申请开通权限！'
+                        })
+                      }
                     }
-                  }
-                )
+                  )
 
-              }
+                }
 
 
-            })
-          }
-            
+              })
+            }
+
           },
-          fail:(err)=>
-          {
+          fail: (err) => {
             loginfail(err)
           }
         }
@@ -545,21 +515,19 @@ Page({
 
   },//end function
 
-  loginfailaction:function(systemmodule)
-  {
-    let txt=systemmodule=='pms'? '"PMS用户登陆过期，请重新登陆PMS':'"OIC用户登陆过期，请重新登陆OIC'
-    let url=systemmodule=='pms'? "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！":"../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
+  loginfailaction: function (systemmodule) {
+    let txt = systemmodule == 'pms' ? '"PMS用户登陆过期，请重新登陆PMS' : '"OIC用户登陆过期，请重新登陆OIC'
+    let url = systemmodule == 'pms' ? "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！" : "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=2&LABELTEXT=OIC登陆过期,请重新登陆OIC！"
     wx.showModal({
       cancelColor: 'cancelColor',
-      showCancel:false,
-      title:"登陆过期",
-      content:txt,
-      success:(res)=>
-      {
-       // let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！"
-          wx.navigateTo({
-            url: url,
-          })
+      showCancel: false,
+      title: "登陆过期",
+      content: txt,
+      success: (res) => {
+        // let url = "../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=1&LABELTEXT=PMS登陆过期,请重新登陆PMS！"
+        wx.navigateTo({
+          url: url,
+        })
       }
     })
   },// end function
@@ -572,29 +540,26 @@ Page({
    * igonepriv: true:false
    * page:function page  if ingone=false ,it messesary
    * key: function key
-   */  
-  menuclick:function(arg)
-  {
-   
-    let url=arg.url   
-    let systemmodle=arg.systemmodle
-    let userinfo=systemmodle=='pms'? app.globalData.userinfo.pms:app.globalData.userinfo.oic
-    let sysnum=systemmodle=='pms'?1:2
-    let title= systemmodle=='pms'?'未登陆PMS系统':'未登陆OIC系统'
-    let txt=systemmodle=='pms'?'继续将转至PMS登陆界面':'继续将转至OIC登陆界面'
-    let loginurl='../login/userLogin?CHANGEENV=Y&SYSTEMMODULE='+sysnum+'&LABELTEXT=你还未登陆'+systemmodle.toUpperCase()+',请先登陆'+systemmodle.toUpperCase()+'！'
-    let success=function(arg)
-   {
-     console.log(url)
-     wx.navigateTo({
-       url: url,
-     })
-   }
-    if(userinfo.userid==null||userinfo.userid.length<1)
-    {
+   */
+  menuclick: function (arg) {
+
+    let url = arg.url
+    let systemmodle = arg.systemmodle
+    let userinfo = systemmodle == 'pms' ? app.globalData.userinfo.pms : app.globalData.userinfo.oic
+    let sysnum = systemmodle == 'pms' ? 1 : 2
+    let title = systemmodle == 'pms' ? '未登陆PMS系统' : '未登陆OIC系统'
+    let txt = systemmodle == 'pms' ? '继续将转至PMS登陆界面' : '继续将转至OIC登陆界面'
+    let loginurl = '../login/userLogin?CHANGEENV=Y&SYSTEMMODULE=' + sysnum + '&LABELTEXT=你还未登陆' + systemmodle.toUpperCase() + ',请先登陆' + systemmodle.toUpperCase() + '！'
+    let success = function (arg) {
+      console.log(url)
+      wx.navigateTo({
+        url: url,
+      })
+    }
+    if (userinfo.userid == null || userinfo.userid.length < 1) {
       wx.showModal({
         cancelColor: 'cancelColor',
-        title:title,
+        title: title,
         content: txt,
         success(res) {
           if (res.confirm) {
@@ -605,58 +570,49 @@ Page({
           }
         }
       })
-      
-    }else
-    {
+
+    } else {
       app.verifyUserLoginTime(
         {
-          systemmodule:systemmodle,
-          durationhour:userinfo.env=='test'? app.globalData.userperiod.test:app.globalData.userperiod.prod,
-          success:(res)=>
-          {
-            if(userinfo.env=='test'||arg.igonepriv==true)
-            {
+          systemmodule: systemmodle,
+          durationhour: userinfo.env == 'test' ? app.globalData.userperiod.test : app.globalData.userperiod.prod,
+          success: (res) => {
+            if (userinfo.env == 'test' || arg.igonepriv == true) {
               success(null)
-            }else
-            {
-            app.checkSsid({
-              env:userinfo.env,
-              success:(res2)=>
-              {
-                 success(res2)
-              },
-              fail:(err)=>
-              {
-                app.queryWxPrivilege(
-                  {
-                    page:arg.page,
-                    key:arg.key,
-                    userid:userinfo.userid,
-                    success:(re3s)=>
+            } else {
+              app.checkSsid({
+                env: userinfo.env,
+                success: (res2) => {
+                  success(res2)
+                },
+                fail: (err) => {
+                  app.queryWxPrivilege(
                     {
-                      success(res)
-                    },
-                    fail:(err)=>
-                    {
-                      wx.showModal({
-                        cancelColor: 'cancelColor',
-                        showCancel:false,
-                        title:'权限验证失败',
-                        content:'权限验证失败，为生产数据保密，你无权在工厂之外使用此功能，如有需要请生产经理联系，申请开通权限！'
-                      })
+                      page: arg.page,
+                      key: arg.key,
+                      userid: userinfo.userid,
+                      success: (re3s) => {
+                        success(res)
+                      },
+                      fail: (err) => {
+                        wx.showModal({
+                          cancelColor: 'cancelColor',
+                          showCancel: false,
+                          title: '权限验证失败',
+                          content: '权限验证失败，为生产数据保密，你无权在工厂之外使用此功能，如有需要请生产经理联系，申请开通权限！'
+                        })
+                      }
                     }
-                  }
-                )
+                  )
 
-              }
+                }
 
 
-            })
-          }
-            
+              })
+            }
+
           },
-          fail:(err)=>
-          {
+          fail: (err) => {
             loginfail(err)
           }
         }
@@ -664,29 +620,39 @@ Page({
 
     }//end if
 
-   
-
-  },//end function
-
-  stoprecordClick:function(arg)
-  {
-    
-      this.menuclick(
-        {
-          url:'../stoprecord/startrecord',
-          systemmodle:'pms',
-          igonepriv:true
-        }
-      )
 
 
   },//end function
 
-  materialClick:function(arg)
-  {
+  stoprecordClick: function (arg) {
+
+    this.menuclick(
+      {
+        url: '../stoprecord/startrecord',
+        systemmodle: 'pms',
+        igonepriv: true
+      }
+    )
+
+
+  },//end function
+
+  materialClick: function (arg) {
     wx.navigateTo({
       url: '../material/materialSelect',
     })
+
+  },//end function
+
+  maskClick: function (arg) {
+
+   // let testob = { e1: 'e1', e2: 'e2', e3: [{ e31: 'e31', e32: 'e32' }], e4: ['e41', 'e42'], e5: { e51: 'e51', e52: 'e52' } }
+    //let testob={e1:{e11:'e11',e12:'e12',e13:13,e14:true,e15:'',e16:null,e17:{e171:171,e172:false}}} 
+    let testob=[{ob1:'ob11'},{ob1:'ob12'}]
+   console.log('testob', testob)
+    
+  let xmlstr=util.parseObjectToXml(testob,'')
+    console.log('parseObjectToXml:', xmlstr)
 
   },//end function
 

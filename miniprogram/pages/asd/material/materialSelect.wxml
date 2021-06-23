@@ -24,7 +24,7 @@
 </view>
 <!--end materialtype select view-->
 
-<!--material name scan view-->
+<!--material name scan view -->
 <view class="container" style="min-height:{{wHeight-5}}px" wx:if="{{scanshow}}">
   <view class="page-body " style="background-color:white">
     <view class="mlt-list-title" style="padding:5px">物料[ {{materialtype}} ]:扫码列表:</view>
@@ -38,7 +38,8 @@
   <view class="page-foot">
     <view class="scan-block">
       <view class="mtl-btn-cell">
-        <button type="primary" size="mini">结束扫描</button>
+        <button type="primary" size="mini" bindtap="endScan">结束扫描</button>
+        <button type="primary" size="mini" bindtap="cleanClick">清  空</button>
       </view>
       <view class="scan-op-cell" catchtap="scanClick">
         <view style="font-size:16px;font-weight:500">此区域任意点击扫码</view>

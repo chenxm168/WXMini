@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
-  }
+    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
+    "tableview":"../../components/tableview"
+  },
+  "pageOrientation": "landscape"
 }

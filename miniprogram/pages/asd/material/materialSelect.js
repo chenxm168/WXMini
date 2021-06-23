@@ -187,9 +187,43 @@ Page({
       },
       fail:(err)=>
       {
-
+           
       }
     })
     
+  },//end function
+  endScan(arg)
+  {
+    let mts=this.data.materialnamelist
+    if(mts.length>0)
+    {
+      let mtstr='?materialtype='+this.data.materialtype+'&materiallist='
+      for(let i=0;i<mts.length;i++)
+      {
+        if(i==mts.length-1)
+        {
+          mtstr+=mts[i]
+        }else
+        {
+          mtstr=mtstr+mts[i]+';'
+        }
+      }
+      console.log('material list string:',mtstr)
+      wx.navigateTo({
+        url: 'material'+mtstr,
+      })
+    }
+  
+
+  },//end function
+  cleanClick(arg)
+  {
+    this.data.materialnamelist.length=0
+    this.setData(
+      {
+        materialnamelist:this.data.materialnamelist
+      }
+    )
+
   },//end function
 })
