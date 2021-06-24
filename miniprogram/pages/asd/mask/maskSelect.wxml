@@ -1,0 +1,37 @@
+<!--mask name scan view -->
+<view class="container" style="min-height:{{wHeight-5}}px">
+  <view class="page-body " style="background-color:white">
+    <form catchsubmit="addmasksubmit">
+      <view class="add-item-cell">
+
+        <input style="width:70%;padding-left:10px" class="mt-cell " name="maskname" placeholder="{{maskinputplaceholder}}"
+          maxlength="7" />
+        <button size="mini" type="primary" form-type="submit">添加</button>
+
+      </view>
+    </form>
+    <view class="mlt-list-title" style="padding:5px">PHOTO MASK列表:</view>
+    <view class="mlt-list-item">
+      <block wx:for="{{masknamelist}}" wx:key="index">
+        <label style="padding-right:8px">{{masknamelist[index]}}</label>
+      </block>
+
+    </view>
+  </view>
+  <view class="page-foot">
+    <view class="scan-block">
+      <view class="mtl-btn-cell">
+        <button type="primary" size="mini" bindtap="endScan">结束扫描</button>
+        <button type="primary" size="mini" bindtap="cleanClick">清 空</button>
+      </view>
+      <view class="scan-op-cell" catchtap="scanClick">
+        <view style="font-size:16px;font-weight:500">此区域任意点击扫码</view>
+        <view style="padding:10px">
+          <image style="height:70px;width:70px;align-items: center;" mode="aspectFit" src="../../images/scan.png" />
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>

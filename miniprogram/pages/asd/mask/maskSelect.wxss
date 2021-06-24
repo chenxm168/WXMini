@@ -1,4 +1,4 @@
-/* miniprogram/pages/asd/material/materailSelect.wxss */
+/* miniprogram/pages/asd/mask/maskSelect.wxss */
 @import "../../../style/asd.wxss";
 .selecttitle
 {
@@ -14,6 +14,7 @@
  
   
 }
+
 .mlt-list-item
 {
   padding: 5px;
@@ -66,11 +67,15 @@
   align-self:center;
   text-align: center;
 }
-.mlt-list-title
+.add-item-cell
 {
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom-style: dotted;
-  border-bottom-width: 1px;
-  border-bottom-color: rgb(218, 212, 212);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 2px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
 }

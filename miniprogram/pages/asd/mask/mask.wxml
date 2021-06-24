@@ -1,0 +1,8 @@
+<view class="container" style="height:{{height-5}}px">
+  <view class="page-header">
+  </view>
+  <view class="page-body">
+    <tableview setting="{{setting}}" tabledata="{{tabledata}}" tableTitleContent="{{tableTitleContent}}"
+      bindrowtap="rowClick"></tableview>
+  </view>
+</view>

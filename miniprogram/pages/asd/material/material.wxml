@@ -15,7 +15,8 @@
     <view class="btn-cell">
       <button type="primary" disabled="{{!menulist.StockIn}}" size="mini" bindtap="stockinClick">入库</button>
       <button type="primary" disabled="{{!menulist.StockOut}}" size="mini" bindtap="stockoutClick">出库</button>
-      <button type="primary" disabled="{{!menulist.ReleaseHoldMaterial}}" size="mini">解扣</button>
+      <button type="primary" disabled="{{!menulist.ReleaseHoldMaterial}}" size="mini"
+        bindtap="releaseholdClick">解扣</button>
       <button type="primary" disabled="{{!menulist.OpenMaterial}}" size="mini" bindtap="openClick">开封</button>
       <button type="primary" disabled="{{!menulist.DefoamingMaterial}}" size="mini" bindtap="defoamingClick">脱泡</button>
     </view>
@@ -40,12 +41,18 @@
               </block>
             </radio-group>
           </view>
+          <block wx:if="{{operation=='releaseholdope'}}">
+            <view > 物料名称：</view>
+            <view >{{selectrowinfo.MATERIALNAME}}</view>
+
+          </block>
+
           <input class="mt-cell " name="comment" placeholder="请输入备注" maxlength="70" />
 
         </view>
 
         <view class="btn-cell" style="font-size:20px">
-          <button  type="primary" size="mini" form-type="submit">{{operationtext}}</button>
+          <button type="primary" size="mini" form-type="submit">{{operationtext}}</button>
           <button type="primary" size="mini" bindtap="opecancelClick">取消</button>
         </view>
 

@@ -646,13 +646,9 @@ Page({
 
   maskClick: function (arg) {
 
-   // let testob = { e1: 'e1', e2: 'e2', e3: [{ e31: 'e31', e32: 'e32' }], e4: ['e41', 'e42'], e5: { e51: 'e51', e52: 'e52' } }
-    //let testob={e1:{e11:'e11',e12:'e12',e13:13,e14:true,e15:'',e16:null,e17:{e171:171,e172:false}}} 
-    let testob=[{ob1:'ob11'},{ob1:'ob12'}]
-   console.log('testob', testob)
-    
-  let xmlstr=util.parseObjectToXml(testob,'')
-    console.log('parseObjectToXml:', xmlstr)
+   wx.navigateTo({
+     url: '../mask/maskSelect',
+   })
 
   },//end function
 
