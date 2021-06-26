@@ -586,6 +586,8 @@ Page({
 
   refresh()
   {
+    this.data.selectrowinfo=null,
+    
      this.getmasklistinfo(
        {
          masklist:this.data.masknamelist
