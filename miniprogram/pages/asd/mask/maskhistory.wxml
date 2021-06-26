@@ -1,0 +1,21 @@
+<view class="container" style="height:{{height-5}}px">
+  <view class="page-header">
+  </view>
+  <view class="page-body">
+    <radio-group bindchange="duChange">
+      <view class="optype-cell" >
+        <label class="rd-item">
+          <radio  value="1"></radio>一个月前
+        </label>
+        <label class="rd-item" >
+          <radio checked="true" value="3"></radio>三个月前
+        </label>
+        <label class="rd-item">
+          <radio value="12"></radio>一年前前
+        </label>
+      </view>
+    </radio-group>
+    <tableview setting="{{setting}}" tabledata="{{tabledata}}" tableTitleContent="{{tableTitleContent}}"
+      bindrowtap="rowClick"></tableview>
+  </view>
+</view>

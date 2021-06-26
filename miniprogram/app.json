@@ -22,7 +22,8 @@
     "pages/asd/material/material",
     "pages/asd/material/materialSelect",
     "pages/asd/mask/mask",
-    "pages/asd/mask/maskSelect"
+    "pages/asd/mask/maskSelect",
+    "pages/asd/mask/maskhistory"
   ],
   "subpackages": [
     {

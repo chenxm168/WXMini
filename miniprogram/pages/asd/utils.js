@@ -878,4 +878,47 @@ module.exports = {
 
   },//end function
 
+  //20210625
+
+  getPrivilageInfo(arg) {
+    //let cdn = " AND SUPERMENUNAME LIKE 'Material_Operation%' OR SUPERMENUNAME LIKE 'Material_Hold%' "
+    let cdn=arg.cdn
+    let userinfo = arg.userinfo
+    let success=arg.success
+    let fail=arg.fail
+    this.sendQueryMsg({
+      env: userinfo.env,
+      userid: userinfo.userid,
+      queryid: 'GetMenuListByCondition',
+      map: { USERID: userinfo.userid, CONDITION: cdn },
+
+      success: (res) => {
+
+        console.log('getPrivilageInfo:', res)
+        let datalist = res.result.Message.Body.DATALIST
+        let list = (datalist.DATA == undefined || datalist.DATA == null) ? datalist : [{ DATA: datalist.DATA }]
+        let menulist = {}
+        if (list.length > 0) {
+          list.forEach(el => {
+            menulist[el.DATA.MENUNAME] = true
+          });
+        }
+        console.log('menulist:', menulist)
+        
+        if(success!=undefined&&success!=null)
+        {
+          success(menulist)
+        }
+
+      },
+      fail: (err) => {
+       if(fail!=undefined&&fail!=null)
+       {
+         fail(err)
+       }
+      }
+
+    })
+  },//end function
+
 }

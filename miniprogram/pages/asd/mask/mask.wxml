@@ -2,7 +2,79 @@
   <view class="page-header">
   </view>
   <view class="page-body">
+    <radio-group bindchange="opetypeChange">
+      <view class="optype-cell" wx:if="{{false}}">
+        <label class="rd-item">
+          <radio checked="true" value="1"></radio>全部数据一次性操作
+        </label>
+        <label class="rd-item">
+          <radio value="2"></radio>单选操作
+        </label>
+      </view>
+    </radio-group>
     <tableview setting="{{setting}}" tabledata="{{tabledata}}" tableTitleContent="{{tableTitleContent}}"
       bindrowtap="rowClick"></tableview>
+  </view>
+  <view class="page-foot">
+    <view class="btn-cell">
+      <button type="primary" disabled="{{(!menulist.StockInOutMask)||(!locationok)}}" size="mini" bindtap="stockinClick">入 库</button>
+      <button type="primary" disabled="{{(!menulist.StockInOutMask)||(!locationok)}}" size="mini" bindtap="stockoutClick">出 库</button>
+      <button type="primary" size="mini" bindtap="historyClick">历史记录</button>
+
+    </view>
+  </view>
+
+</view>
+
+
+
+<view class="pop-mask" wx:if="{{maskshow}}">
+  <view class="pop-container">
+    <form catchsubmit="{{operation}}">
+      <view class="mask-page-body" style="height:{{maskheight}}px;width:{{width}}px;justify-content: space-between;">
+
+
+        <view class="mt-ipt-cell">
+          <block wx:if="{{operation=='stockinope'}}">
+            <view style="margin-left:5px" wx:if="{{operation=='stockinope'}}">stock位置：</view>
+            <view class="radio-cell" style="margin:5px">
+              <radio-group name="stock" bindchange="maskstockChange">
+                <block wx:for="{{stocklist}}">
+                  <label style="margin-right:5px">
+                    <radio value="{{item.DATA.MACHINENAME}}" /> {{item.DATA.MACHINENAME}}
+                  </label>
+                </block>
+              </radio-group>
+            </view>
+          </block>
+          <block wx:if="{{operation=='stockinope'}}">
+            <view style="margin-left:5px">槽位：</view>
+            <!--
+          <view class="radio-cell" style="margin:5px">
+            <radio-group name="slotradio" >
+              <block wx:for="{{slotlist}}">
+                <label style="margin-right:5px">
+                  <radio  value="{{item.DATA.ENUMVALUE}}" /> {{item.DATA.ENUMVALUE}}
+                </label>
+              </block>
+            </radio-group>
+          </view> -->
+            <picker style="margin-bottom:5px" class="asd-picker" range="{{slotlist}}" range-key="ENUMVALUE"
+              value="{{index}}" name="slotno" bindchange="slotChange">
+              <view class="picker">当前选择: {{slotlist[slotidx].ENUMVALUE}}</view>
+            </picker>
+          </block>
+
+          <input class="mt-cell " name="comment" placeholder="请输入备注" maxlength="70" />
+
+        </view>
+
+        <view class="btn-cell" style="font-size:20px">
+          <button type="primary" size="mini" form-type="submit">{{operationtext}}</button>
+          <button type="primary" size="mini" bindtap="opecancelClick">取消</button>
+        </view>
+
+      </view>
+    </form>
   </view>
 </view>
