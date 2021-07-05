@@ -803,7 +803,8 @@ Page({
                     }
 
                   // 小于等于max  大于最小值  
-                  case 1:
+                  //20210705 case 1:
+                  case 2:
                     {
                       if (v <= max && v > min) {
                         this.data.checkdetail.subeqlist[i].itemlist[j].INSPECTIONRESULT = "OK"
@@ -818,7 +819,8 @@ Page({
                     }
 
                   //小于MAX 大于等于最小
-                  case 2:
+                 //20210705 case 2:
+                 case 1:
                     {
                       if (v < max && v >= min) {
                         this.data.checkdetail.subeqlist[i].itemlist[j].INSPECTIONRESULT = "OK"
