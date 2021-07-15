@@ -188,6 +188,17 @@ Component({
 
       let that = this.data
       let data = arg.detail.value
+      if((data.edreasontext==null||data.edreasontext.length<1)&&(data.edreasonidx==null)&&!that.isended)
+      {
+        wx.showToast({
+          title: '宕机原因未完善',
+          icon:'none',
+          duration:1500
+        })
+        return
+      }
+     
+
       let selecttime = (function (date, time) {
         let datetime = date + ' ' + time + ':00'
         let newdate = new Date(datetime)
@@ -199,9 +210,10 @@ Component({
         let newdate = new Date(time)
         return newdate.getFullYear().toString() + (newdate.getMonth() + 1).toString().padStart(2, '0') + newdate.getDate().toString().padStart(2, '0') + newdate.getHours().toString().padStart(2, '0') + newdate.getMinutes().toString().padStart(2, '0') + newdate.getSeconds().toString().padStart(2, '0')
       })(data.edstarttime) : ''
+      
+        let reasontext =that.isended ?'' :   ((data.edreasontext!=null&&data.edreasontext.length>0)?data.edreasontext:that.downreasonlist[data.edreasonidx].DESC )
 
-
-      let map = that.isended ? { EVENTUSER: that.userinfo.userid, EDID: data.edid, EVENTCOMMENT: 'WX:' + data.comment, EDSTARTTIME: flexdatetime, EDENDTIME: selecttime, USERID: that.userinfo.userid } : {EVENTUSER:that.userinfo.userid,EVENTCOMMENT: 'WX:' + data.comment,MACHINENAME:data.machinename,UNITNAME:data.unitname,USERID:that.userinfo.userid,EQDOWNTYPE:that.eddowntypelist[data.edtypeidx].TYPE,EQDOWNREASON:that.downreasonlist[data.edreasonidx].DESC,EDSTARTTIME:selecttime,MACHINEGROUPNAME:that.edinfo.machinegroup}
+      let map = that.isended ? { EVENTUSER: that.userinfo.userid, EDID: data.edid, EVENTCOMMENT: 'WX:' + data.comment, EDSTARTTIME: flexdatetime, EDENDTIME: selecttime, USERID: that.userinfo.userid } : {EVENTUSER:that.userinfo.userid,EVENTCOMMENT: 'WX:' + data.comment,MACHINENAME:data.machinename,UNITNAME:data.unitname,USERID:that.userinfo.userid,EQDOWNTYPE:that.eddowntypelist[data.edtypeidx].TYPE,EQDOWNREASON:reasontext,EDSTARTTIME:selecttime,MACHINEGROUPNAME:that.edinfo.machinegroup}
       console.log('map:', map)
 
      

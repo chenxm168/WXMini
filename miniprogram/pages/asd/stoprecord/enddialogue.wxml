@@ -31,16 +31,22 @@
         <view class="asd-picker-title">宕机类型</view>
         <picker name="edtypeidx" class="asd-picker" range="{{eddowntypelist}}" range-key="DESCRIPTION" value="{{index}}"
           bindchange="eddowntypeChange">
-          <view class="picker">当前选择: {{eddowntypelist[edtypeidx].DESCRIPTION}}</view>
+          <view class="picker"> 当前选择： {{eddowntypelist[edtypeidx].DESCRIPTION}}</view>
         </picker>
       </view>
 
-      <view class="eqgroup-select asd-item-cell" wx:if="{{!isended}}">
-        <view class="asd-picker-title">宕机原因</view>
+      <view class="eqgroup-select asd-item-cell" wx:if="{{edtypeidx!=null}}">
+        <view class="asd-picker-title">选择宕机原因</view>
         <picker name="edreasonidx" class="asd-picker" range="{{downreasonlist}}" range-key="DESCRIPTION" value="{{index}}"
           bindchange="downreasonChange">
-          <view class="picker">当前选择: {{downreasonlist[downreasonidx].DESCRIPTION}}</view>
+          <view class="picker"> {{downreasonlist[downreasonidx].DESCRIPTION==null?'可以不选，在下列填写':'当前选择: '}}{{downreasonlist[downreasonidx].DESCRIPTION}}</view>
         </picker>
+    
+        <view class="eqgroup-select asd-item-cell">
+        <view class="asd-picker-title">填写宕机原因</view>
+        <input name="edreasontext" class="asd-picker"  placeholder="请填写宕机原因"   />
+      </view>
+
       </view>
 
 
