@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "tableview":"../../components/tableview"
+  }
+}

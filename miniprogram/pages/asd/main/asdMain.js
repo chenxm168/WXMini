@@ -652,5 +652,24 @@ Page({
 
   },//end function
 
+  scanClick(arg)
+  {
+     wx.scanCode({
+       onlyFromCamera: true,
+       success:(res)=>
+       {
+         let code= res.result
+         if(code.indexOf("operation"))
+         {
+           let strs=code.split('?');
+           let url="../" +strs[0]+"?"+strs[1]
+           wx.navigateTo({
+             url: url,
+           })
+         }
+       }
+     })
+
+  },//end function
 
 })

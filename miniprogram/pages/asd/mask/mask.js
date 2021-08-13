@@ -217,7 +217,7 @@ Page({
     if (this.data.selectrowinfo == null) {
       wx.showToast({
         title: '未选择MASK',
-        icon: 'none',
+        icon: 'error',
         duration: 1500
       })
 
@@ -260,7 +260,7 @@ Page({
     if (this.data.selectrowinfo == null) {
       wx.showToast({
         title: '未选择MASK',
-        icon: 'none',
+        icon: 'error',
         duration: 1500
       })
 
@@ -292,7 +292,7 @@ Page({
     {
       wx.showToast({
         title: 'STOCK未选',
-        icon:'none',
+        icon:'error',
         duration:2000
       })
       return null
@@ -301,7 +301,7 @@ Page({
     {
       wx.showToast({
         title: '槽位未选',
-        icon:'none',
+        icon:'error',
         duration:2000
       })
       return null
@@ -310,7 +310,7 @@ Page({
     {
       wx.showToast({
         title: '备注未填写',
-        icon:'none',
+        icon:'error',
         duration:2000
       })
       return null
@@ -340,7 +340,8 @@ Page({
                   })
                   wx.showToast({
                     title: '入库操作成功',
-                    duration:2000
+                    duration:2000,
+                    
                   })
                   this.refresh()
                 }else
@@ -379,7 +380,7 @@ Page({
     {
       wx.showToast({
         title: '备注未填写',
-        icon:'none',
+        icon:'error',
         duration:2000
       })
       return null
@@ -408,7 +409,8 @@ Page({
                   })
                   wx.showToast({
                     title: '出库操作成功',
-                    duration:2000
+                    duration:2000,
+                    icon:'success'
                   })
                   this.refresh()
                 }else
@@ -602,7 +604,7 @@ Page({
     {
       wx.showToast({
         title: 'MASK未选',
-        icon:'none',
+        icon:'error',
         duration:1500
       })
       return null
@@ -650,6 +652,7 @@ Page({
           {
             wx.showToast({
               title: '验证位置失败',
+              icon:'error'
             })
             this.data.locationok=false
             this.setData({

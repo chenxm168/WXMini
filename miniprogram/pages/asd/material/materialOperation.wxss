@@ -1,0 +1,3 @@
+/* pages/asd/material/materialOperation.wxss */
+@import "materialSelect.wxss";
+@import "material.wxss";

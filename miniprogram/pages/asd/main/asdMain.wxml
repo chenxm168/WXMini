@@ -8,8 +8,13 @@
   <view class="page-body">
     <view class="asd-table">
       <view class="asd-col main-col">
-        <view class="main-rows" bind:touchstart="inspectionClick">
 
+        <view class="main-rows" bind:touchstart="scanClick">
+          <image class="weui-grid__icon " src="../../images/mainscan.png" />
+          <view class="memu-title">扫码操作</view>
+        </view>
+
+        <view class="main-rows" bind:touchstart="inspectionClick">
           <image class="weui-grid__icon " src="../../images/Inspetion.png" />
           <view class="memu-title">设备点检</view>
         </view>
@@ -24,7 +29,7 @@
           <view class="memu-title">宕机记录</view>
         </view>
 
-        <view class="main-rows" bind:touchstart="shippingClick">
+        <view class="main-rows" bind:touchstart="shippingClick" wx:if="{{false}}">
           <image class="weui-grid__icon " src="../../images/shipping.png" />
           <view class="memu-title">出货管理</view>
         </view>

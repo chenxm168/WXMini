@@ -108,7 +108,7 @@ Page({
           wx.showToast({
             title: '重复的MASK',
             duration:1000,
-            icon:'none'
+            icon:'error'
           })
         }else
         {
@@ -123,7 +123,8 @@ Page({
          {
           wx.showToast({
             title: '重复的MASK',
-            duration:1000
+            duration:1000,
+            icon:'error'
           })
 
          }else
@@ -162,7 +163,7 @@ Page({
           wx.showToast({
             title: '无效的条码',
             duration:1000,
-            icon:'none'
+            icon:'error'
           })
         }else
         {
@@ -172,7 +173,7 @@ Page({
               wx.showToast({
                 title: '重复的MASK',
                 duration:1000,
-                icon:'none'
+                icon:'error'
               })
           }
           else

@@ -252,7 +252,8 @@ module.exports = {
           }
         }else
         {
-          value=data[key] == undefined ?'':data[key]
+         //20210812 value=data[key] == undefined ?'':data[key]
+         value=data[key] == undefined ?headers[k].header.defaulvalue:data[key]
         }
 
         

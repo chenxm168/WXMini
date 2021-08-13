@@ -166,6 +166,14 @@ Page({
       {
          console.log('scan result:',res)
          let code=res.result
+         /*
+         if(code.indexOf("operation=materail"))
+         {
+           wx.navigateTo({
+             url: 'materialOperation?'+code,
+           })
+         } */
+
          if(mts.indexOf(code)<0)
          {
            mts.push(code)

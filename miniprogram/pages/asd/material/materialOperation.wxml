@@ -1,0 +1,77 @@
+<!--material name scan view -->
+<view class="container" style="min-height:{{wHeight-5}}px" wx:if="{{scanshow}}">
+  <view class="page-body " style="background-color:white">
+    <view class="mlt-list-title" style="padding:5px"> {{mountoperation?'上料操作 ':'下料操作 '}} 设备：{{machinename}}
+      位置：{{position}}</view>
+    <!--  <view class="mlt-list-title" style="padding:5px">物料[ {{materialtype}} ]:扫码列表:</view> -->
+
+
+    <tableview setting="{{setting}}" tabledata="{{tabledata}}" tableTitleContent="{{tableTitleContent}}"
+      bindrowtap="rowClick"></tableview>
+
+    <!--mount opreation-->
+    <block wx:if="{{mountoperation}}">
+      <view class="mlt-list">
+        <view class="mlt-list-item">
+          <radio-group bindchange="prodtypechange">
+            <label style="margin:5px">
+              <radio checked="{{true}}" value="P"></radio>P:量产
+            </label>
+            <label style="margin:5px">
+              <radio checked="{{false}}" value="E"></radio>E:试产
+            </label>
+            <label style="margin:5px">
+              <radio checked="{{false}}" value="T"></radio>T:试验
+            </label>
+            <label style="margin:5px">
+              <radio checked="{{false}}" value="D"></radio>D:DUMMY
+            </label>
+          </radio-group>
+        </view>
+       
+          <view style="margin-left:5px" class="memu-title">生产型号</view>
+
+          <picker class="asd-picker "  value="{{index}}" range="{{productspeclist}}"
+          range-key="DESC" bindchange="productspecChange">
+            <view class="picker"  style="margin-left:5px">{{productspecname}}</view>
+          </picker>
+        
+      </view>
+
+    </block>
+
+  </view>
+  <view class="page-foot">
+    <view class="scan-block">
+      <view class="mtl-btn-cell">
+        <button type="primary" size="mini" disabled="{{tabledata.datalist.length<1}}" bindtap="endScan">结束提交</button>
+        <button type="primary" size="mini" bindtap="cleanClick">清 空</button>
+      </view>
+      <view class="scan-op-cell" catchtap="scanClick">
+        <view style="font-size:16px;font-weight:500">此区域任意点击扫码</view>
+        <view style="padding:10px">
+          <image style="height:70px;width:70px;align-items: center;" mode="aspectFit" src="../../images/scan.png" />
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+</view>
+
+
+<view class="pop-mask" wx:if="{{maskshow}}">
+  <view class="pop-container">
+    <form catchsubmit="remainqtysubmit">
+      <view class="mask-page-body" style="height:{{maskheight}}px;width:{{width}}px;">
+        <view style="margin:5px">
+          <view> 物料名称：{{materialname}}</view>
+          <input class="mt-cell" type="number" name="remain" placeholder="请输入物料剩余量，默认剩余0" maxlength="70" />
+        </view>
+        <view style="width:width;margin-bottom:5px"><button type="primary" size="default" form-type="submit">确
+            定</button></view>
+
+      </view>
+    </form>
+  </view>
+</view>

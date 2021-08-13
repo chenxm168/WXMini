@@ -1150,6 +1150,12 @@ Page({
                 })
               }
             })
+            let key = app.globalData.userinfo.pms.env + this.data.storagemachinename + "dailyCheck"
+
+            //cxm add 20210811
+            wx.removeStorage({
+              key: key,
+            })
           } else {
             wx.showModal({
               cancelColor: 'cancelColor',

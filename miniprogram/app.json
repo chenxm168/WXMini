@@ -21,6 +21,7 @@
     "pages/asd/stoprecord/startrecord",
     "pages/asd/material/material",
     "pages/asd/material/materialSelect",
+    "pages/asd/material/materialOperation",
     "pages/asd/mask/mask",
     "pages/asd/mask/maskSelect",
     "pages/asd/mask/maskhistory"
